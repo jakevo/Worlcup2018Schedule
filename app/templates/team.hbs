@@ -1,87 +1,48 @@
 
-<div class="container-fluid" class="table-responsive">
-    <table id="flagImg" class="table table-bordered">  
-        <thead>
-            <tr>
-                <th>Group</th>
-                <th>Team 1</th>
-                <th>Team 2</th>
-                <th>Team 3</th>
-                <th>Team 4</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td> <font id="group" size="10">A</font></td>
-                {{#each model as |team|}}    
-                    {{#if team.isEqual}}
-                        <td align="center" ><img id="flag" src={{team.flag}} height="50" width="70"></td>              
-                    {{/if}}
-                {{/each}}
-            </tr>
-            <tr>
-                <td> <font id="group" size="10">B</font></td>
-                {{#each model as |team|}}    
-                    {{#if team.isEqualA}}
-                        <td align="center" ><img id="flag" src={{team.flag}} height="50" width="70"></td>              
-                    {{/if}}
-                {{/each}}
-            </tr>
-            <tr>
-                <td> <font id="group" size="10">C</font></td>
-                {{#each model as |team|}}    
-                    {{#if team.isEqualB}}
-                        <td align="center"><img id="flag" src={{team.flag}} height="50" width="70"></td>              
-                    {{/if}}
-                {{/each}}
-            </tr>
-            <tr>
-                <td> <font id="group" size="10">D</font></td>
-                {{#each model as |team|}}    
-                    {{#if team.isEqualC}}
-                        <td align="center"><img id="flag" src={{team.flag}} height="50" width="70"></td>              
-                    {{/if}}
-                {{/each}}
-            </tr>
-            <tr>
-                <td> <font id="group" size="10">E</font></td>
-                {{#each model as |team|}}    
-                    {{#if team.isEqualD}}
-                        <td align="center"><img id="flag" src={{team.flag}} height="50" width="70"></td>              
-                    {{/if}}
-                {{/each}}
-            </tr>
-            <tr>
-                <td> <font id="group" size="10">F</font></td>
-                {{#each model as |team|}}    
-                    {{#if team.isEqualE}}
-                        <td align="center"><img id="flag" src={{team.flag}} height="50" width="70"></td>              
-                    {{/if}}
-                {{/each}}
-            </tr>
-            <tr>
-                <td> <font id="group" size="10">G</font></td>
-                {{#each model as |team|}}    
-                    {{#if team.isEqualF}}
-                        <td align="center"><img id="flag" src={{team.flag}} height="50" width="70"></td>              
-                    {{/if}}
-                {{/each}}
-            </tr>
-            <tr>
-                <td> <font id="group" size="10">H</font></td>
-                {{#each model as |team|}}    
-                    {{#if team.isEqualG}}
-                        <td align="center"><img id="flag" src={{team.flag}} height="50" width="70"></td>              
-                    {{/if}}
-                {{/each}}
-            </tr>
-        </tbody>
-    </table>
 
+<div class="container">
+<div class="card card--group">
+<div style="font-size: 20px" class="card-header">Group A</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th  class="text-center"><abbr title="Matches Played">MP</abbr></th>
+            <th  class="text-center"><abbr title="Wins">W</abbr></th>
+            <th  class="text-center"><abbr title="Draw">D</abbr></th>
+            <th  class="text-center"><abbr title="Lost">L</abbr></th>
+            <th  class="text-center"><abbr title="Goal For">GF</abbr></th>
+            <th  class="text-center"><abbr title="Goal Against">GA</abbr></th>
+            <th  class="text-center"><abbr title="Goal Difference">GD</abbr></th>
+            <th  class="text-center"><abbr title="Points">Pts</abbr></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each model as |team|}}    
+            {{#if team.isEqual}}
+                       <!-- <td align="center" ><img id="flag" src={{team.flag}} height="50" width="70"></td>  -->
+            <tr class="table success"> 
+                <td>
+                    <div style="float:left"><img id="flag" src={{team.flag}} height="30" width="50"></div>
+                    <div style="padding-left:70px">{{team.name}}</div>
+                </td>
+                <td id="a">0</td>
+                <td id="a">0</td>
+                <td id="a">0</td>
+                <td id="a">0</td>
+                <td id="a">0</td>
+                <td id="a">0</td>
+                <td id="a">0</td>
+                <td id="a">0</td>
+               
+            </tr>
+            {{/if}}          
+        {{/each}} 
 
+        
+    </tbody>
+</table>
+</div>
 </div>
 
-
-
-
-
+        

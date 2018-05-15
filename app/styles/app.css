@@ -21,11 +21,22 @@ td img{
 }
 
 td {
-    text-align: center;
-    vertical-align: middle;
+    
+    vertical-align: bottom;
+    font-size: 25px;
+}
+#a{
+    padding: 8px 30px;
+    
+    color: #000000;
+    
+   
+    
+
 }
 
 th {
     text-align: center;
     vertical-align: middle;
 }
+
