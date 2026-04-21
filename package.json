@@ -1,8 +1,8 @@
 {
-  "name": "world-cup2018-schedule",
+  "name": "world-cup2026-schedule",
   "version": "0.0.0",
   "private": true,
-  "description": "Small description for world-cup2018-schedule goes here",
+  "description": "Groups, schedule and live scores for the 2026 FIFA World Cup",
   "license": "MIT",
   "author": "",
   "directories": {

@@ -1,27 +1,26 @@
-<nav class="navbar navbar-default">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/">WorlCup 2018</a>
-         
+<header class="wc-header">
+    <div class="wc-header__inner">
+        <div class="wc-brand">
+            <span class="wc-brand__mark">26</span>
+            <div class="wc-brand__text">
+                <span class="wc-brand__title">FIFA World Cup</span>
+                <span class="wc-brand__sub">Canada &middot; Mexico &middot; USA</span>
+            </div>
         </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li>{{#link-to 'team'}}GROUPS{{/link-to}}</li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
+        <nav class="wc-nav">
+            {{#link-to 'index' class='wc-nav__link'}}Home{{/link-to}}
+            {{#link-to 'groups' class='wc-nav__link'}}Groups{{/link-to}}
+            {{#link-to 'schedule' class='wc-nav__link'}}Schedule{{/link-to}}
+            {{#link-to 'news' class='wc-nav__link'}}News{{/link-to}}
+        </nav>
+    </div>
+</header>
 
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-            {{outlet}}
-        </div>
-      </div>
-    </div><!-- /.container -->
+<main class="wc-main">
+    {{outlet}}
+</main>
+
+<footer class="wc-footer">
+    <span>Scores update automatically from the open-source worldcup.json feed.</span>
+    <span>Kickoff: 11 June 2026 &middot; Final: 19 July 2026</span>
+</footer>
