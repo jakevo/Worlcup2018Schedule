@@ -7,7 +7,9 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
-  this.route('team');
+  this.route('groups');
+  this.route('schedule');
+  this.route('news');
 });
 
 export default Router;

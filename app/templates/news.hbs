@@ -1,0 +1,16 @@
+<section class="wc-page-head">
+    <div>
+        <h1>News &amp; coverage</h1>
+        <p>Jump straight to trusted desks covering every kickoff, controversy and celebration.</p>
+    </div>
+</section>
+
+<ul class="wc-news">
+    {{#each model as |feed|}}
+        <li class="wc-news__item">
+            <span class="wc-news__source">{{feed.source}}</span>
+            <a class="wc-news__title" href={{feed.url}} target="_blank" rel="noopener">{{feed.title}}</a>
+            <p class="wc-news__summary">{{feed.summary}}</p>
+        </li>
+    {{/each}}
+</ul>

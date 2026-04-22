@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   let ENV = {
-    modulePrefix: 'world-cup2018-schedule',
+    modulePrefix: 'world-cup2026-schedule',
     environment,
     rootURL: '/',
     locationType: 'auto',

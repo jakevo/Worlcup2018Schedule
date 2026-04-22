@@ -1,0 +1,50 @@
+<section class="wc-page-head">
+    <div>
+        <h1>Group stage standings</h1>
+        <p>Standings refresh whenever new match results land in the feed.</p>
+    </div>
+    <button type="button" class="wc-btn wc-btn--ghost" onclick={{action "refresh"}}>Refresh</button>
+</section>
+
+<div class="wc-groups">
+    {{#each model.groups as |group|}}
+        <article class="wc-group">
+            <header class="wc-group__head">
+                <span class="wc-group__badge">Group {{group.letter}}</span>
+            </header>
+            <table class="wc-table">
+                <thead>
+                    <tr>
+                        <th class="wc-table__team">Team</th>
+                        <th><abbr title="Matches Played">MP</abbr></th>
+                        <th><abbr title="Wins">W</abbr></th>
+                        <th><abbr title="Draws">D</abbr></th>
+                        <th><abbr title="Losses">L</abbr></th>
+                        <th><abbr title="Goals For">GF</abbr></th>
+                        <th><abbr title="Goals Against">GA</abbr></th>
+                        <th><abbr title="Goal Difference">GD</abbr></th>
+                        <th><abbr title="Points">Pts</abbr></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each group.teams as |team|}}
+                        <tr>
+                            <td class="wc-table__team">
+                                <img src={{team.flag}} alt="{{team.name}} flag">
+                                <span>{{team.name}}</span>
+                            </td>
+                            <td>{{team.mp}}</td>
+                            <td>{{team.w}}</td>
+                            <td>{{team.d}}</td>
+                            <td>{{team.l}}</td>
+                            <td>{{team.gf}}</td>
+                            <td>{{team.ga}}</td>
+                            <td>{{team.gd}}</td>
+                            <td class="wc-table__pts">{{team.pts}}</td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </article>
+    {{/each}}
+</div>
