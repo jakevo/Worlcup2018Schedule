@@ -1,0 +1,25 @@
+{
+    "name": "World Cup 2026",
+    "short_name": "WC 2026",
+    "description": "Groups, schedule, bracket and live scores for the 2026 FIFA World Cup in Canada, Mexico and the USA.",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#0a1128",
+    "theme_color": "#0a1128",
+    "icons": [
+        {
+            "src": "/favicon.svg",
+            "type": "image/svg+xml",
+            "sizes": "any",
+            "purpose": "any"
+        },
+        {
+            "src": "/apple-touch-icon.svg",
+            "type": "image/svg+xml",
+            "sizes": "180x180",
+            "purpose": "any maskable"
+        }
+    ]
+}
