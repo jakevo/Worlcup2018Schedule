@@ -1,0 +1,101 @@
+{{#if model.notFound}}
+    <section class="wc-empty">
+        <p>We couldn't find a team with code <strong>{{model.code}}</strong>.</p>
+        {{#link-to 'groups' class='wc-btn wc-btn--ghost'}}Back to groups{{/link-to}}
+    </section>
+{{else}}
+    <section class="wc-team-hero">
+        <img class="wc-team-hero__flag" src={{model.team.flag}} alt="{{model.team.name}} flag">
+        <div class="wc-team-hero__body">
+            <span class="wc-team-hero__eyebrow">
+                Group {{model.groupLetter}} &middot; {{model.team.confederation}}
+            </span>
+            <h1 class="wc-team-hero__name">{{model.team.name}}</h1>
+            <div class="wc-team-hero__meta">
+                <span class="wc-team-hero__chip">{{model.team.fifaCode}}</span>
+                <span class="wc-team-hero__chip">Pot {{model.team.pot}}</span>
+                <span class="wc-team-hero__chip">Position #{{model.positionInGroup}}</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="wc-section">
+        <div class="wc-section__head">
+            <h2 class="wc-section__title">Record</h2>
+        </div>
+        <dl class="wc-record">
+            <div><dt>Played</dt><dd>{{model.groupStanding.mp}}</dd></div>
+            <div><dt>Wins</dt><dd>{{model.groupStanding.w}}</dd></div>
+            <div><dt>Draws</dt><dd>{{model.groupStanding.d}}</dd></div>
+            <div><dt>Losses</dt><dd>{{model.groupStanding.l}}</dd></div>
+            <div><dt>Goals for</dt><dd>{{model.groupStanding.gf}}</dd></div>
+            <div><dt>Goals against</dt><dd>{{model.groupStanding.ga}}</dd></div>
+            <div><dt>Goal diff</dt><dd>{{model.groupStanding.gd}}</dd></div>
+            <div class="wc-record__pts"><dt>Points</dt><dd>{{model.groupStanding.pts}}</dd></div>
+        </dl>
+    </section>
+
+    <section class="wc-section">
+        <div class="wc-section__head">
+            <h2 class="wc-section__title">Fixtures</h2>
+            {{#link-to 'schedule' class='wc-section__link'}}Full schedule &rarr;{{/link-to}}
+        </div>
+        <ul class="wc-team-fixtures">
+            {{#each model.fixtures as |match|}}
+                <li class="wc-match {{if match.played 'is-played'}} {{if match.isLive 'is-live'}}">
+                    <div class="wc-match__time">
+                        <span class="wc-match__group">{{weekday match.date}} {{short-date match.date}}</span>
+                        {{#if match.isLive}}
+                            <span class="wc-live-badge"><span class="wc-live-badge__dot"></span>LIVE</span>
+                        {{else}}
+                            <span class="wc-match__kick">{{format-time match.time}}</span>
+                        {{/if}}
+                    </div>
+                    <div class="wc-match__body">
+                        <div class="wc-match__teams">
+                            <div class="wc-match__team">
+                                {{#if match.team1Flag}}<img src={{match.team1Flag}} alt="">{{/if}}
+                                <span class="wc-match__name">{{match.team1}}</span>
+                            </div>
+                            <div class="wc-match__score">
+                                {{#if match.played}}
+                                    <span>{{match.score1}}</span>
+                                    <span class="wc-match__dash">&ndash;</span>
+                                    <span>{{match.score2}}</span>
+                                {{else}}
+                                    <span class="wc-match__vs">vs</span>
+                                {{/if}}
+                            </div>
+                            <div class="wc-match__team wc-match__team--right">
+                                <span class="wc-match__name">{{match.team2}}</span>
+                                {{#if match.team2Flag}}<img src={{match.team2Flag}} alt="">{{/if}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wc-match__venue">{{match.venue}} &middot; {{match.city}}</div>
+                </li>
+            {{/each}}
+        </ul>
+    </section>
+
+    <section class="wc-section">
+        <div class="wc-section__head">
+            <h2 class="wc-section__title">Group {{model.groupLetter}}</h2>
+            {{#link-to 'groups' class='wc-section__link'}}All groups &rarr;{{/link-to}}
+        </div>
+        <ul class="wc-team-group">
+            {{#each model.groupTeams as |t index|}}
+                <li class="{{if (eq t.fifaCode model.team.fifaCode) 'is-self'}}">
+                    <span class="wc-team-group__pos">{{inc index}}</span>
+                    <img src={{t.flag}} alt="">
+                    {{#if t.fifaCode}}
+                        {{#link-to 'team' t.fifaCode class='wc-team-group__name'}}{{t.name}}{{/link-to}}
+                    {{else}}
+                        <span class="wc-team-group__name">{{t.name}}</span>
+                    {{/if}}
+                    <span class="wc-team-group__pts">{{t.pts}}</span>
+                </li>
+            {{/each}}
+        </ul>
+    </section>
+{{/if}}

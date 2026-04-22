@@ -9,6 +9,9 @@ const Router = EmberRouter.extend({
 Router.map(function() {
   this.route('groups');
   this.route('schedule');
+  this.route('bracket');
+  this.route('venues');
+  this.route('team', { path: '/team/:code' });
   this.route('news');
 });
 

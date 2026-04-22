@@ -72,8 +72,15 @@
             <h2 class="wc-section__title">Next kickoff</h2>
             {{#link-to 'schedule' class='wc-section__link'}}All matches &rarr;{{/link-to}}
         </div>
-        <article class="wc-next">
-            <span class="wc-next__label"><span class="wc-hero__dot"></span>Group {{model.nextMatch.group}}</span>
+        <article class="wc-next {{if model.nextMatch.isLive 'is-live'}}">
+            <span class="wc-next__label">
+                {{#if model.nextMatch.isLive}}
+                    <span class="wc-live-badge wc-live-badge--solid"><span class="wc-live-badge__dot"></span>LIVE NOW</span>
+                    <span class="wc-next__label-group">Group {{model.nextMatch.group}}</span>
+                {{else}}
+                    <span class="wc-hero__dot"></span>Group {{model.nextMatch.group}}
+                {{/if}}
+            </span>
             <div class="wc-next__teams">
                 <div class="wc-next__team">
                     {{#if model.nextMatch.team1Flag}}<img src={{model.nextMatch.team1Flag}} alt="">{{/if}}

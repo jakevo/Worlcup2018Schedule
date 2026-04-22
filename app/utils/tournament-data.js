@@ -2,8 +2,11 @@ import RSVP from 'rsvp';
 
 const TEAMS_URL = '/data.json';
 const SCHEDULE_URL = '/schedule.json';
+const POLL_INTERVAL_MS = 60 * 1000;
+const LIVE_WINDOW_MS = 115 * 60 * 1000; // ~kickoff + 115 min = still "live"
 
 let cachedPromise = null;
+let pollHandle = null;
 
 function fetchJson(url) {
     return fetch(url, { cache: 'no-store' }).then(r => {
@@ -57,13 +60,15 @@ function applyStandings(groups, matches) {
     }
 }
 
-function enrichMatches(matches, teams) {
+function enrichMatches(matches, teams, now) {
     const byName = new Map(teams.map(t => [t.name, t]));
     return matches
         .map(m => {
             const { s1, s2, played } = parseScore(m);
             const t1 = byName.get(m.team1);
             const t2 = byName.get(m.team2);
+            const kickoff = new Date(`${m.date}T${m.time || '00:00'}:00-04:00`).getTime();
+            const isLive = !played && kickoff <= now && (now - kickoff) <= LIVE_WINDOW_MS;
             return {
                 date: m.date,
                 time: m.time,
@@ -79,7 +84,8 @@ function enrichMatches(matches, teams) {
                 score1: s1,
                 score2: s2,
                 played,
-                kickoff: new Date(`${m.date}T${m.time || '00:00'}:00-04:00`).getTime(),
+                isLive,
+                kickoff,
                 dateKey: m.date || ''
             };
         })
@@ -104,11 +110,12 @@ export function loadTournament() {
         const matches = scheduleDoc.matches || [];
         const groups = buildGroups(teams);
         applyStandings(groups, matches);
-        const enriched = enrichMatches(matches, teams);
 
         const now = Date.now();
-        const upcoming = enriched.filter(m => !m.played && m.kickoff >= now);
-        const nextMatch = upcoming[0] || enriched[0] || null;
+        const enriched = enrichMatches(matches, teams, now);
+        const liveMatches = enriched.filter(m => m.isLive);
+        const upcoming = enriched.filter(m => !m.played && !m.isLive && m.kickoff >= now);
+        const nextMatch = liveMatches[0] || upcoming[0] || enriched[0] || null;
         const featured = upcoming.slice(0, 8);
 
         const byDate = [];
@@ -133,6 +140,7 @@ export function loadTournament() {
             matches: enriched,
             matchesByDate: byDate,
             nextMatch,
+            liveMatches,
             featured,
             daysUntilKickoff,
             kickoffMs,
@@ -144,4 +152,19 @@ export function loadTournament() {
 
 export function invalidateTournamentCache() {
     cachedPromise = null;
+}
+
+export function startPolling(onTick) {
+    stopPolling();
+    pollHandle = setInterval(() => {
+        invalidateTournamentCache();
+        if (typeof onTick === 'function') onTick();
+    }, POLL_INTERVAL_MS);
+}
+
+export function stopPolling() {
+    if (pollHandle) {
+        clearInterval(pollHandle);
+        pollHandle = null;
+    }
 }

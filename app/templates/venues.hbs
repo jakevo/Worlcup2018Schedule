@@ -1,0 +1,53 @@
+<section class="wc-page-head">
+    <div>
+        <h1>Host cities</h1>
+        <p>16 stadiums across three nations hosting the 104-match tournament.</p>
+    </div>
+</section>
+
+<div class="wc-venue-stats">
+    <div class="wc-venue-stat">
+        <span class="wc-venue-stat__num">{{model.venues.length}}</span>
+        <span class="wc-venue-stat__label">Stadiums</span>
+    </div>
+    <div class="wc-venue-stat">
+        <span class="wc-venue-stat__num">3</span>
+        <span class="wc-venue-stat__label">Host nations</span>
+    </div>
+    <div class="wc-venue-stat">
+        <span class="wc-venue-stat__num">104</span>
+        <span class="wc-venue-stat__label">Matches</span>
+    </div>
+</div>
+
+{{#each model.groupedByCountry as |country|}}
+    {{#if country.venues.length}}
+        <section class="wc-venue-country">
+            <header class="wc-venue-country__head">
+                <img src={{country.flag}} alt="{{country.country}} flag">
+                <h2>{{country.country}}</h2>
+                <span>{{country.venues.length}} {{if (eq country.venues.length 1) 'stadium' 'stadiums'}}</span>
+            </header>
+            <div class="wc-venue-grid">
+                {{#each country.venues as |venue|}}
+                    <article class="wc-venue-card">
+                        <div class="wc-venue-card__body">
+                            <h3 class="wc-venue-card__stadium">{{venue.stadium}}</h3>
+                            <p class="wc-venue-card__city">{{venue.city}}</p>
+                            <dl class="wc-venue-card__stats">
+                                <div>
+                                    <dt>Capacity</dt>
+                                    <dd>{{venue.capacityFmt}}</dd>
+                                </div>
+                                <div>
+                                    <dt>Matches</dt>
+                                    <dd>{{venue.matches}}</dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </article>
+                {{/each}}
+            </div>
+        </section>
+    {{/if}}
+{{/each}}

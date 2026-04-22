@@ -6,8 +6,44 @@
     <button type="button" class="wc-btn wc-btn--ghost" onclick={{action "refresh"}}>Refresh</button>
 </section>
 
+<div class="wc-filters">
+    <div class="wc-filters__row">
+        <label class="wc-search">
+            <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
+                <circle cx="9" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="2"></circle>
+                <line x1="13.5" y1="13.5" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+            </svg>
+            {{input
+                type="search"
+                value=searchQuery
+                placeholder="Search team, city or venue"
+                class="wc-search__input"}}
+        </label>
+        <label class="wc-toggle">
+            {{input type="checkbox" checked=showPlayedOnly}}
+            <span>Played only</span>
+        </label>
+        {{#if (or (not-eq groupFilter 'all') searchQuery showPlayedOnly)}}
+            <button type="button" class="wc-btn wc-btn--ghost wc-btn--sm" onclick={{action "clearFilters"}}>Clear</button>
+        {{/if}}
+    </div>
+    <div class="wc-chips">
+        <button type="button"
+                class="wc-chip {{if (eq groupFilter 'all') 'is-active'}}"
+                onclick={{action "setGroupFilter" "all"}}>All</button>
+        {{#each allGroups as |letter|}}
+            <button type="button"
+                    class="wc-chip {{if (eq groupFilter letter) 'is-active'}}"
+                    onclick={{action "setGroupFilter" letter}}>{{letter}}</button>
+        {{/each}}
+    </div>
+    <div class="wc-filters__summary">
+        Showing <strong>{{totalFiltered}}</strong> of {{model.matches.length}} matches
+    </div>
+</div>
+
 <div class="wc-schedule">
-    {{#each model.matchesByDate as |day|}}
+    {{#each filteredDays as |day|}}
         <section class="wc-day">
             <header class="wc-day__head">
                 <span class="wc-day__weekday">{{weekday day.date}}</span>
@@ -16,16 +52,24 @@
             </header>
             <ul class="wc-day__matches">
                 {{#each day.matches as |match|}}
-                    <li class="wc-match {{if match.played 'is-played'}}">
+                    <li class="wc-match {{if match.played 'is-played'}} {{if match.isLive 'is-live'}}">
                         <div class="wc-match__time">
                             <span class="wc-match__group">{{match.group}}</span>
-                            <span class="wc-match__kick">{{format-time match.time}}</span>
+                            {{#if match.isLive}}
+                                <span class="wc-live-badge"><span class="wc-live-badge__dot"></span>LIVE</span>
+                            {{else}}
+                                <span class="wc-match__kick">{{format-time match.time}}</span>
+                            {{/if}}
                         </div>
                         <div class="wc-match__body">
                             <div class="wc-match__teams">
                                 <div class="wc-match__team">
                                     {{#if match.team1Flag}}<img src={{match.team1Flag}} alt="">{{/if}}
-                                    <span class="wc-match__name">{{match.team1}}</span>
+                                    {{#if match.team1Code}}
+                                        {{#link-to 'team' match.team1Code class='wc-match__name wc-match__name--link'}}{{match.team1}}{{/link-to}}
+                                    {{else}}
+                                        <span class="wc-match__name">{{match.team1}}</span>
+                                    {{/if}}
                                 </div>
                                 <div class="wc-match__score">
                                     {{#if match.played}}
@@ -37,7 +81,11 @@
                                     {{/if}}
                                 </div>
                                 <div class="wc-match__team wc-match__team--right">
-                                    <span class="wc-match__name">{{match.team2}}</span>
+                                    {{#if match.team2Code}}
+                                        {{#link-to 'team' match.team2Code class='wc-match__name wc-match__name--link'}}{{match.team2}}{{/link-to}}
+                                    {{else}}
+                                        <span class="wc-match__name">{{match.team2}}</span>
+                                    {{/if}}
                                     {{#if match.team2Flag}}<img src={{match.team2Flag}} alt="">{{/if}}
                                 </div>
                             </div>
@@ -47,5 +95,10 @@
                 {{/each}}
             </ul>
         </section>
+    {{else}}
+        <div class="wc-empty">
+            <p>No matches match those filters.</p>
+            <button type="button" class="wc-btn wc-btn--ghost" onclick={{action "clearFilters"}}>Clear filters</button>
+        </div>
     {{/each}}
 </div>

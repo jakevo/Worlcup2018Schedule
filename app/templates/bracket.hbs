@@ -1,0 +1,39 @@
+<section class="wc-page-head">
+    <div>
+        <h1>Knockout bracket</h1>
+        <p>32 teams from the group stage: 12 group winners, 12 runners-up and the 8 best third-placed teams.</p>
+    </div>
+</section>
+
+<div class="wc-bracket">
+    {{#each model.rounds as |round|}}
+        <section class="wc-bracket__round wc-bracket__round--{{round.key}}">
+            <h2 class="wc-bracket__title">{{round.title}}</h2>
+            <div class="wc-bracket__matches">
+                {{#each round.matches as |match|}}
+                    <article class="wc-bracket-match">
+                        <div class="wc-bracket-match__id">{{match.id}}</div>
+                        <div class="wc-bracket-match__slot {{if match.top.resolved 'is-resolved'}}">
+                            {{#if match.top.team}}
+                                {{#if match.top.team.flag}}<img src={{match.top.team.flag}} alt="">{{/if}}
+                                <span class="wc-bracket-match__team">{{match.top.team.name}}</span>
+                                <span class="wc-bracket-match__seed">{{match.top.label}}</span>
+                            {{else}}
+                                <span class="wc-bracket-match__placeholder">{{match.top.label}}</span>
+                            {{/if}}
+                        </div>
+                        <div class="wc-bracket-match__slot {{if match.bot.resolved 'is-resolved'}}">
+                            {{#if match.bot.team}}
+                                {{#if match.bot.team.flag}}<img src={{match.bot.team.flag}} alt="">{{/if}}
+                                <span class="wc-bracket-match__team">{{match.bot.team.name}}</span>
+                                <span class="wc-bracket-match__seed">{{match.bot.label}}</span>
+                            {{else}}
+                                <span class="wc-bracket-match__placeholder">{{match.bot.label}}</span>
+                            {{/if}}
+                        </div>
+                    </article>
+                {{/each}}
+            </div>
+        </section>
+    {{/each}}
+</div>
