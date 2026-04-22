@@ -1,0 +1,93 @@
+{
+  "timezone": "America/New_York",
+  "matches": [
+    { "date": "2026-06-11", "time": "15:00", "group": "A", "team1": "Mexico", "team2": "South Africa", "venue": "Estadio Azteca", "city": "Mexico City" },
+    { "date": "2026-06-11", "time": "22:00", "group": "A", "team1": "South Korea", "team2": "Czechia", "venue": "Estadio Akron", "city": "Guadalajara" },
+
+    { "date": "2026-06-12", "time": "15:00", "group": "B", "team1": "Canada", "team2": "Bosnia & Herzegovina", "venue": "BMO Field", "city": "Toronto" },
+    { "date": "2026-06-12", "time": "21:00", "group": "D", "team1": "USA", "team2": "Paraguay", "venue": "SoFi Stadium", "city": "Inglewood" },
+
+    { "date": "2026-06-13", "time": "15:00", "group": "B", "team1": "Qatar", "team2": "Switzerland", "venue": "Levi's Stadium", "city": "Santa Clara" },
+    { "date": "2026-06-13", "time": "18:00", "group": "C", "team1": "Brazil", "team2": "Morocco", "venue": "MetLife Stadium", "city": "East Rutherford" },
+    { "date": "2026-06-13", "time": "21:00", "group": "C", "team1": "Haiti", "team2": "Scotland", "venue": "Gillette Stadium", "city": "Foxborough" },
+    { "date": "2026-06-14", "time": "00:00", "group": "D", "team1": "Australia", "team2": "Türkiye", "venue": "BC Place", "city": "Vancouver" },
+
+    { "date": "2026-06-14", "time": "13:00", "group": "E", "team1": "Germany", "team2": "Curaçao", "venue": "NRG Stadium", "city": "Houston" },
+    { "date": "2026-06-14", "time": "16:00", "group": "F", "team1": "Netherlands", "team2": "Japan", "venue": "AT&T Stadium", "city": "Arlington" },
+    { "date": "2026-06-14", "time": "19:00", "group": "E", "team1": "Ivory Coast", "team2": "Ecuador", "venue": "Lincoln Financial Field", "city": "Philadelphia" },
+    { "date": "2026-06-14", "time": "22:00", "group": "F", "team1": "Sweden", "team2": "Tunisia", "venue": "Estadio BBVA", "city": "Monterrey" },
+
+    { "date": "2026-06-15", "time": "13:00", "group": "H", "team1": "Spain", "team2": "Cape Verde", "venue": "Mercedes-Benz Stadium", "city": "Atlanta" },
+    { "date": "2026-06-15", "time": "18:00", "group": "G", "team1": "Belgium", "team2": "Egypt", "venue": "Lumen Field", "city": "Seattle" },
+    { "date": "2026-06-15", "time": "18:00", "group": "H", "team1": "Saudi Arabia", "team2": "Uruguay", "venue": "Hard Rock Stadium", "city": "Miami Gardens" },
+    { "date": "2026-06-16", "time": "00:00", "group": "G", "team1": "Iran", "team2": "New Zealand", "venue": "SoFi Stadium", "city": "Inglewood" },
+
+    { "date": "2026-06-16", "time": "15:00", "group": "I", "team1": "France", "team2": "Senegal", "venue": "MetLife Stadium", "city": "East Rutherford" },
+    { "date": "2026-06-16", "time": "18:00", "group": "I", "team1": "Iraq", "team2": "Norway", "venue": "Gillette Stadium", "city": "Foxborough" },
+    { "date": "2026-06-16", "time": "21:00", "group": "J", "team1": "Argentina", "team2": "Algeria", "venue": "Arrowhead Stadium", "city": "Kansas City" },
+    { "date": "2026-06-17", "time": "00:00", "group": "J", "team1": "Austria", "team2": "Jordan", "venue": "Levi's Stadium", "city": "Santa Clara" },
+
+    { "date": "2026-06-17", "time": "13:00", "group": "K", "team1": "Portugal", "team2": "DR Congo", "venue": "NRG Stadium", "city": "Houston" },
+    { "date": "2026-06-17", "time": "16:00", "group": "L", "team1": "England", "team2": "Croatia", "venue": "AT&T Stadium", "city": "Arlington" },
+    { "date": "2026-06-17", "time": "19:00", "group": "L", "team1": "Ghana", "team2": "Panama", "venue": "BMO Field", "city": "Toronto" },
+    { "date": "2026-06-17", "time": "22:00", "group": "K", "team1": "Uzbekistan", "team2": "Colombia", "venue": "Estadio Azteca", "city": "Mexico City" },
+
+    { "date": "2026-06-18", "time": "12:00", "group": "A", "team1": "Czechia", "team2": "South Africa", "venue": "Mercedes-Benz Stadium", "city": "Atlanta" },
+    { "date": "2026-06-18", "time": "15:00", "group": "B", "team1": "Switzerland", "team2": "Bosnia & Herzegovina", "venue": "SoFi Stadium", "city": "Inglewood" },
+    { "date": "2026-06-18", "time": "18:00", "group": "B", "team1": "Canada", "team2": "Qatar", "venue": "BC Place", "city": "Vancouver" },
+    { "date": "2026-06-18", "time": "23:00", "group": "A", "team1": "Mexico", "team2": "South Korea", "venue": "Estadio BBVA", "city": "Monterrey" },
+
+    { "date": "2026-06-19", "time": "15:00", "group": "D", "team1": "USA", "team2": "Australia", "venue": "Lumen Field", "city": "Seattle" },
+    { "date": "2026-06-19", "time": "18:00", "group": "C", "team1": "Scotland", "team2": "Morocco", "venue": "Gillette Stadium", "city": "Foxborough" },
+    { "date": "2026-06-19", "time": "21:00", "group": "C", "team1": "Brazil", "team2": "Haiti", "venue": "Lincoln Financial Field", "city": "Philadelphia" },
+    { "date": "2026-06-20", "time": "00:00", "group": "D", "team1": "Türkiye", "team2": "Paraguay", "venue": "Levi's Stadium", "city": "Santa Clara" },
+
+    { "date": "2026-06-20", "time": "13:00", "group": "F", "team1": "Netherlands", "team2": "Sweden", "venue": "NRG Stadium", "city": "Houston" },
+    { "date": "2026-06-20", "time": "16:00", "group": "E", "team1": "Germany", "team2": "Ivory Coast", "venue": "BMO Field", "city": "Toronto" },
+    { "date": "2026-06-20", "time": "20:00", "group": "E", "team1": "Ecuador", "team2": "Curaçao", "venue": "Arrowhead Stadium", "city": "Kansas City" },
+    { "date": "2026-06-21", "time": "00:00", "group": "F", "team1": "Tunisia", "team2": "Japan", "venue": "Estadio BBVA", "city": "Monterrey" },
+
+    { "date": "2026-06-21", "time": "12:00", "group": "H", "team1": "Spain", "team2": "Saudi Arabia", "venue": "Mercedes-Benz Stadium", "city": "Atlanta" },
+    { "date": "2026-06-21", "time": "15:00", "group": "G", "team1": "Belgium", "team2": "Iran", "venue": "SoFi Stadium", "city": "Inglewood" },
+    { "date": "2026-06-21", "time": "18:00", "group": "H", "team1": "Uruguay", "team2": "Cape Verde", "venue": "Hard Rock Stadium", "city": "Miami Gardens" },
+    { "date": "2026-06-21", "time": "21:00", "group": "G", "team1": "New Zealand", "team2": "Egypt", "venue": "BC Place", "city": "Vancouver" },
+
+    { "date": "2026-06-22", "time": "13:00", "group": "J", "team1": "Argentina", "team2": "Austria", "venue": "AT&T Stadium", "city": "Arlington" },
+    { "date": "2026-06-22", "time": "17:00", "group": "I", "team1": "France", "team2": "Iraq", "venue": "Lincoln Financial Field", "city": "Philadelphia" },
+    { "date": "2026-06-22", "time": "20:00", "group": "I", "team1": "Norway", "team2": "Senegal", "venue": "MetLife Stadium", "city": "East Rutherford" },
+    { "date": "2026-06-22", "time": "23:00", "group": "J", "team1": "Jordan", "team2": "Algeria", "venue": "Levi's Stadium", "city": "Santa Clara" },
+
+    { "date": "2026-06-23", "time": "13:00", "group": "K", "team1": "Portugal", "team2": "Uzbekistan", "venue": "NRG Stadium", "city": "Houston" },
+    { "date": "2026-06-23", "time": "16:00", "group": "L", "team1": "England", "team2": "Ghana", "venue": "Gillette Stadium", "city": "Foxborough" },
+    { "date": "2026-06-23", "time": "19:00", "group": "L", "team1": "Panama", "team2": "Croatia", "venue": "BMO Field", "city": "Toronto" },
+    { "date": "2026-06-23", "time": "22:00", "group": "K", "team1": "Colombia", "team2": "DR Congo", "venue": "Estadio Akron", "city": "Guadalajara" },
+
+    { "date": "2026-06-24", "time": "15:00", "group": "B", "team1": "Switzerland", "team2": "Canada", "venue": "BC Place", "city": "Vancouver" },
+    { "date": "2026-06-24", "time": "15:00", "group": "B", "team1": "Bosnia & Herzegovina", "team2": "Qatar", "venue": "Lumen Field", "city": "Seattle" },
+    { "date": "2026-06-24", "time": "18:00", "group": "C", "team1": "Scotland", "team2": "Brazil", "venue": "Hard Rock Stadium", "city": "Miami Gardens" },
+    { "date": "2026-06-24", "time": "18:00", "group": "C", "team1": "Morocco", "team2": "Haiti", "venue": "Mercedes-Benz Stadium", "city": "Atlanta" },
+    { "date": "2026-06-24", "time": "21:00", "group": "A", "team1": "Czechia", "team2": "Mexico", "venue": "Estadio Azteca", "city": "Mexico City" },
+    { "date": "2026-06-24", "time": "21:00", "group": "A", "team1": "South Africa", "team2": "South Korea", "venue": "Estadio BBVA", "city": "Monterrey" },
+
+    { "date": "2026-06-25", "time": "16:00", "group": "E", "team1": "Ecuador", "team2": "Germany", "venue": "MetLife Stadium", "city": "East Rutherford" },
+    { "date": "2026-06-25", "time": "16:00", "group": "E", "team1": "Curaçao", "team2": "Ivory Coast", "venue": "Lincoln Financial Field", "city": "Philadelphia" },
+    { "date": "2026-06-25", "time": "19:00", "group": "F", "team1": "Japan", "team2": "Sweden", "venue": "AT&T Stadium", "city": "Arlington" },
+    { "date": "2026-06-25", "time": "19:00", "group": "F", "team1": "Tunisia", "team2": "Netherlands", "venue": "Arrowhead Stadium", "city": "Kansas City" },
+    { "date": "2026-06-25", "time": "22:00", "group": "D", "team1": "Türkiye", "team2": "USA", "venue": "SoFi Stadium", "city": "Inglewood" },
+    { "date": "2026-06-25", "time": "22:00", "group": "D", "team1": "Paraguay", "team2": "Australia", "venue": "Levi's Stadium", "city": "Santa Clara" },
+
+    { "date": "2026-06-26", "time": "15:00", "group": "I", "team1": "Norway", "team2": "France", "venue": "Gillette Stadium", "city": "Foxborough" },
+    { "date": "2026-06-26", "time": "15:00", "group": "I", "team1": "Senegal", "team2": "Iraq", "venue": "BMO Field", "city": "Toronto" },
+    { "date": "2026-06-26", "time": "20:00", "group": "H", "team1": "Cape Verde", "team2": "Saudi Arabia", "venue": "NRG Stadium", "city": "Houston" },
+    { "date": "2026-06-26", "time": "20:00", "group": "H", "team1": "Uruguay", "team2": "Spain", "venue": "Estadio Akron", "city": "Guadalajara" },
+    { "date": "2026-06-26", "time": "23:00", "group": "G", "team1": "Egypt", "team2": "Iran", "venue": "Lumen Field", "city": "Seattle" },
+    { "date": "2026-06-26", "time": "23:00", "group": "G", "team1": "New Zealand", "team2": "Belgium", "venue": "BC Place", "city": "Vancouver" },
+
+    { "date": "2026-06-27", "time": "17:00", "group": "L", "team1": "Panama", "team2": "England", "venue": "MetLife Stadium", "city": "East Rutherford" },
+    { "date": "2026-06-27", "time": "17:00", "group": "L", "team1": "Croatia", "team2": "Ghana", "venue": "Lincoln Financial Field", "city": "Philadelphia" },
+    { "date": "2026-06-27", "time": "19:30", "group": "K", "team1": "Colombia", "team2": "Portugal", "venue": "Hard Rock Stadium", "city": "Miami Gardens" },
+    { "date": "2026-06-27", "time": "19:30", "group": "K", "team1": "DR Congo", "team2": "Uzbekistan", "venue": "Mercedes-Benz Stadium", "city": "Atlanta" },
+    { "date": "2026-06-27", "time": "22:00", "group": "J", "team1": "Algeria", "team2": "Austria", "venue": "Arrowhead Stadium", "city": "Kansas City" },
+    { "date": "2026-06-27", "time": "22:00", "group": "J", "team1": "Jordan", "team2": "Argentina", "venue": "AT&T Stadium", "city": "Arlington" }
+  ]
+}

@@ -1,7 +1,7 @@
 <section class="wc-page-head">
     <div>
         <h1>Match schedule</h1>
-        <p>All 104 fixtures in kickoff order. Final scores appear as soon as each match finishes.</p>
+        <p>Every group-stage kickoff, in order. Times shown in US Eastern (ET).</p>
     </div>
     <button type="button" class="wc-btn wc-btn--ghost" onclick={{action "refresh"}}>Refresh</button>
 </section>
@@ -9,35 +9,40 @@
 <div class="wc-schedule">
     {{#each model.matchesByDate as |day|}}
         <section class="wc-day">
-            <h2 class="wc-day__date">{{day.date}}</h2>
+            <header class="wc-day__head">
+                <span class="wc-day__weekday">{{weekday day.date}}</span>
+                <h2 class="wc-day__date">{{day.label}}</h2>
+                <span class="wc-day__count">{{day.matches.length}} matches</span>
+            </header>
             <ul class="wc-day__matches">
                 {{#each day.matches as |match|}}
                     <li class="wc-match {{if match.played 'is-played'}}">
-                        <div class="wc-match__meta">
+                        <div class="wc-match__time">
                             <span class="wc-match__group">{{match.group}}</span>
-                            <span class="wc-match__time">{{match.time}}</span>
-                            <span class="wc-match__ground">{{match.ground}}</span>
+                            <span class="wc-match__kick">{{format-time match.time}}</span>
                         </div>
-                        <div class="wc-match__teams">
-                            <div class="wc-match__team">
-                                {{#if match.team1Flag}}<img src={{match.team1Flag}} alt="">{{/if}}
-                                <span>{{match.team1}}</span>
-                            </div>
-                            <div class="wc-match__score">
-                                {{#if match.played}}
-                                    <span>{{match.score1}}</span>
-                                    <span class="wc-match__dash">&ndash;</span>
-                                    <span>{{match.score2}}</span>
-                                {{else}}
-                                    <span class="wc-match__vs">vs</span>
-                                {{/if}}
-                            </div>
-                            <div class="wc-match__team wc-match__team--right">
-                                <span>{{match.team2}}</span>
-                                {{#if match.team2Flag}}<img src={{match.team2Flag}} alt="">{{/if}}
+                        <div class="wc-match__body">
+                            <div class="wc-match__teams">
+                                <div class="wc-match__team">
+                                    {{#if match.team1Flag}}<img src={{match.team1Flag}} alt="">{{/if}}
+                                    <span class="wc-match__name">{{match.team1}}</span>
+                                </div>
+                                <div class="wc-match__score">
+                                    {{#if match.played}}
+                                        <span>{{match.score1}}</span>
+                                        <span class="wc-match__dash">&ndash;</span>
+                                        <span>{{match.score2}}</span>
+                                    {{else}}
+                                        <span class="wc-match__vs">vs</span>
+                                    {{/if}}
+                                </div>
+                                <div class="wc-match__team wc-match__team--right">
+                                    <span class="wc-match__name">{{match.team2}}</span>
+                                    {{#if match.team2Flag}}<img src={{match.team2Flag}} alt="">{{/if}}
+                                </div>
                             </div>
                         </div>
-                        <div class="wc-match__round">{{match.round}}</div>
+                        <div class="wc-match__venue">{{match.venue}} &middot; {{match.city}}</div>
                     </li>
                 {{/each}}
             </ul>
