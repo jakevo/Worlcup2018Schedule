@@ -75,7 +75,11 @@ function enrichMatches(matches, teams, now) {
             const t2 = byName.get(m.team2);
             const kickoff = new Date(`${m.date}T${m.time || '00:00'}:00-04:00`).getTime();
             const isLive = !played && kickoff <= now && (now - kickoff) <= LIVE_WINDOW_MS;
+            const t1Code = (t1 && t1.fifaCode) || slug(m.team1);
+            const t2Code = (t2 && t2.fifaCode) || slug(m.team2);
+            const id = m.id != null ? String(m.id) : `${m.date}-${t1Code}-${t2Code}`;
             return {
+                id,
                 date: m.date,
                 time: m.time,
                 group: m.group,
@@ -96,6 +100,10 @@ function enrichMatches(matches, teams, now) {
             };
         })
         .sort((a, b) => a.kickoff - b.kickoff);
+}
+
+function slug(s) {
+    return String(s || '').toUpperCase().replace(/[^A-Z0-9]+/g, '').slice(0, 6) || 'TBD';
 }
 
 function formatLongDate(iso) {

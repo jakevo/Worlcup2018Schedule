@@ -31,6 +31,7 @@
             {{#link-to 'groups' class='wc-nav__link'}}{{t 'nav.groups'}}{{/link-to}}
             {{#link-to 'schedule' class='wc-nav__link'}}{{t 'nav.schedule'}}{{/link-to}}
             {{#link-to 'bracket' class='wc-nav__link'}}{{t 'nav.bracket'}}{{/link-to}}
+            {{#link-to 'top-scorers' class='wc-nav__link'}}{{t 'nav.scorers'}}{{/link-to}}
             {{#link-to 'venues' class='wc-nav__link'}}{{t 'nav.venues'}}{{/link-to}}
             {{#link-to 'news' class='wc-nav__link'}}{{t 'nav.news'}}{{/link-to}}
         </nav>
@@ -118,6 +119,13 @@
     <div class="wc-more-sheet" role="menu" aria-label={{t 'more.title'}}>
         <div class="wc-more-sheet__handle" aria-hidden="true"></div>
         <div class="wc-more-sheet__grid">
+            {{#link-to 'top-scorers' class='wc-more-item'}}
+                <svg class="wc-more-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <polygon points="12,7 15,9.2 13.8,13 10.2,13 9,9.2" fill="currentColor" stroke="none"></polygon>
+                </svg>
+                <span>{{t 'nav.scorers'}}</span>
+            {{/link-to}}
             {{#link-to 'venues' class='wc-more-item'}}
                 <svg class="wc-more-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M12 21 C8 16 5 13 5 10 a7 7 0 1 1 14 0 c0 3 -3 6 -7 11 z"></path>

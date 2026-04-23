@@ -53,14 +53,14 @@
             <ul class="wc-day__matches">
                 {{#each day.matches as |match|}}
                     <li class="wc-match {{if match.played 'is-played'}} {{if match.isLive 'is-live'}}">
-                        <div class="wc-match__time">
+                        {{#link-to 'match' match.id class='wc-match__time' title=(t 'match.details')}}
                             <span class="wc-match__group">{{match.group}}</span>
                             {{#if match.isLive}}
                                 <span class="wc-live-badge"><span class="wc-live-badge__dot"></span>{{t 'live'}}</span>
                             {{else}}
                                 <span class="wc-match__kick">{{format-time match.time}}</span>
                             {{/if}}
-                        </div>
+                        {{/link-to}}
                         <div class="wc-match__body">
                             <div class="wc-match__teams">
                                 {{#if match.team1Code}}

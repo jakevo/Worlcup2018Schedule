@@ -13,6 +13,8 @@ Router.map(function() {
   this.route('venues');
   this.route('team', { path: '/team/:code' });
   this.route('news');
+  this.route('top-scorers');
+  this.route('match', { path: '/match/:id' });
 });
 
 export default Router;

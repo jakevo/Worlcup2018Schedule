@@ -1,0 +1,98 @@
+{{#if model.notFound}}
+    <section class="wc-empty">
+        <p>{{t 'match.notFound.prefix'}} <strong>{{model.id}}</strong>.</p>
+        {{#link-to 'schedule' class='wc-btn wc-btn--ghost'}}{{t 'match.backToSchedule'}}{{/link-to}}
+    </section>
+{{else}}
+    <section class="wc-match-hero {{if model.match.isLive 'is-live'}} {{if model.match.played 'is-played'}}">
+        <div class="wc-match-hero__top">
+            {{#if model.match.isLive}}
+                <span class="wc-live-badge wc-live-badge--solid"><span class="wc-live-badge__dot"></span>{{t 'live.now'}}</span>
+            {{else if model.match.group}}
+                <span class="wc-match-hero__tag">{{t 'group.prefix'}} {{model.match.group}}</span>
+            {{else}}
+                <span class="wc-match-hero__tag">{{t 'bracket.title'}}</span>
+            {{/if}}
+            <span class="wc-match-hero__when">{{long-date model.match.date}} · {{format-time model.match.time}}</span>
+        </div>
+
+        <div class="wc-match-hero__teams">
+            {{#if model.match.team1Code}}
+                {{#link-to 'team' model.match.team1Code class='wc-match-hero__team'}}
+                    {{#if model.match.team1Flag}}<img src={{model.match.team1Flag}} alt="">{{/if}}
+                    <span class="wc-match-hero__team-name">{{model.match.team1}}</span>
+                {{/link-to}}
+            {{else}}
+                <div class="wc-match-hero__team">
+                    {{#if model.match.team1Flag}}<img src={{model.match.team1Flag}} alt="">{{/if}}
+                    <span class="wc-match-hero__team-name">{{model.match.team1}}</span>
+                </div>
+            {{/if}}
+
+            <div class="wc-match-hero__score">
+                {{#if model.match.played}}
+                    <span class="wc-match-hero__num">{{model.match.score1}}</span>
+                    <span class="wc-match-hero__dash">&ndash;</span>
+                    <span class="wc-match-hero__num">{{model.match.score2}}</span>
+                {{else if model.match.isLive}}
+                    <span class="wc-match-hero__num">{{if model.match.score1 model.match.score1 0}}</span>
+                    <span class="wc-match-hero__dash">&ndash;</span>
+                    <span class="wc-match-hero__num">{{if model.match.score2 model.match.score2 0}}</span>
+                {{else}}
+                    <span class="wc-match-hero__vs">{{t 'match.vs'}}</span>
+                {{/if}}
+            </div>
+
+            {{#if model.match.team2Code}}
+                {{#link-to 'team' model.match.team2Code class='wc-match-hero__team wc-match-hero__team--right'}}
+                    <span class="wc-match-hero__team-name">{{model.match.team2}}</span>
+                    {{#if model.match.team2Flag}}<img src={{model.match.team2Flag}} alt="">{{/if}}
+                {{/link-to}}
+            {{else}}
+                <div class="wc-match-hero__team wc-match-hero__team--right">
+                    <span class="wc-match-hero__team-name">{{model.match.team2}}</span>
+                    {{#if model.match.team2Flag}}<img src={{model.match.team2Flag}} alt="">{{/if}}
+                </div>
+            {{/if}}
+        </div>
+
+        <div class="wc-match-hero__venue">
+            <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                <path d="M12 21 C8 16 5 13 5 10 a7 7 0 1 1 14 0 c0 3 -3 6 -7 11 z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+                <circle cx="12" cy="10" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            </svg>
+            {{model.match.venue}} · {{model.match.city}}
+        </div>
+
+        <div class="wc-match-hero__actions">
+            {{add-to-calendar match=model.match}}
+        </div>
+    </section>
+
+    <section class="wc-section">
+        <div class="wc-section__head">
+            <h2 class="wc-section__title">{{t 'match.events'}}</h2>
+        </div>
+        <div class="wc-placeholder">
+            <p>{{t 'match.events.empty'}}</p>
+        </div>
+    </section>
+
+    <section class="wc-section">
+        <div class="wc-section__head">
+            <h2 class="wc-section__title">{{t 'match.lineups'}}</h2>
+        </div>
+        <div class="wc-placeholder">
+            <p>{{t 'match.lineups.empty'}}</p>
+        </div>
+    </section>
+
+    <section class="wc-section">
+        <div class="wc-section__head">
+            <h2 class="wc-section__title">{{t 'match.statistics'}}</h2>
+        </div>
+        <div class="wc-placeholder">
+            <p>{{t 'match.statistics.empty'}}</p>
+        </div>
+    </section>
+{{/if}}
