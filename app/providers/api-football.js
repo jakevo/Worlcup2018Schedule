@@ -166,7 +166,8 @@ export default class ApiFootballProvider {
                 name: t.name || '',
                 fifaCode: (t.code || '').toUpperCase() || (t.name || '').slice(0, 3).toUpperCase(),
                 iso2: '',
-                flag: t.logo || '',
+                flag: '',              // country flag — filled in by static meta
+                logo: t.logo || '',    // federation crest from api-football
                 confederation: null
             };
         });

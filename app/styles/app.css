@@ -2677,12 +2677,11 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
 .wc-xi__list { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
 .wc-xi__list-head {
     display: flex;
-    align-items: center;
-    gap: 10px;
+    flex-direction: column;
+    gap: 2px;
     padding-bottom: 10px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.16);
 }
-.wc-xi__list-head > .wc-crest { flex-shrink: 0; filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35)); }
 .wc-crest__img {
     display: block;
     width: 100%;
