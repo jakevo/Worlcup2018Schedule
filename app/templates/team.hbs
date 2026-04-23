@@ -52,10 +52,34 @@
         <div class="wc-section__head">
             <h2 class="wc-section__title">{{t 'team.squad'}}</h2>
         </div>
-        {{pitch-lineup
-            formation=(if model.formation model.formation "4-3-3")
-            players=model.startingXI
-            fifaCode=model.team.fifaCode}}
+
+        <div class="wc-xi">
+            <aside class="wc-xi__list">
+                <header class="wc-xi__list-head">
+                    {{team-crest fifaCode=model.team.fifaCode size=42}}
+                    <div>
+                        <span class="wc-xi__eyebrow">{{t 'team.startingXI'}}</span>
+                        <strong class="wc-xi__formation">{{if model.formation model.formation "4-3-3"}}</strong>
+                    </div>
+                </header>
+                <ol class="wc-xi__players">
+                    {{#each model.startingXIRows as |p|}}
+                        <li>
+                            <span class="wc-xi__num">{{if p.number p.number "—"}}</span>
+                            <span class="wc-xi__name">{{if p.name p.name "Player"}}</span>
+                        </li>
+                    {{/each}}
+                </ol>
+            </aside>
+            <div class="wc-xi__pitch">
+                {{pitch-lineup
+                    formation=(if model.formation model.formation "4-3-3")
+                    players=model.startingXI
+                    teamCode=model.team.fifaCode
+                    orientation="landscape"}}
+            </div>
+        </div>
+
         {{#unless model.squad.length}}
             <p class="wc-pitch__caption">{{t 'team.startingXI.preview'}}</p>
         {{/unless}}

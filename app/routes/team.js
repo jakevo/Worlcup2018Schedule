@@ -51,6 +51,8 @@ export default Route.extend({
             const lineup = (data.lineups && data.lineups[code]) || null;
             const formation = (lineup && lineup.formation) || '4-3-3';
             const startingXI = (lineup && lineup.startXI) || [];
+            const startingXIRows = [];
+            for (let i = 0; i < 11; i++) startingXIRows.push(startingXI[i] || {});
 
             return {
                 team,
@@ -63,7 +65,8 @@ export default Route.extend({
                 squad: squadSource,
                 squadByPosition: bucketize(squadSource),
                 formation,
-                startingXI
+                startingXI,
+                startingXIRows
             };
         });
     }
