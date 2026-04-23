@@ -2673,18 +2673,6 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
             var(--team-primary, #1a3a6e) 0%,
             rgba(10, 17, 40, 0) 55%);
 }
-.wc-team-hero__banner::after {
-    content: '';
-    position: absolute;
-    right: -80px;
-    top: -80px;
-    width: 260px;
-    height: 260px;
-    border-radius: 50%;
-    background: var(--team-secondary, #e5174a);
-    opacity: 0.22;
-    pointer-events: none;
-}
 .wc-team-hero__content {
     position: relative;
     z-index: 1;
