@@ -2585,12 +2585,14 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto 12px;
 }
 .wc-pitch__shell {
     position: relative;
     width: 100%;
-    max-width: 420px;
-    aspect-ratio: 100 / 140;
+    padding-bottom: 140%;   /* 100:140 aspect ratio, broader support than aspect-ratio */
     border-radius: 14px;
     overflow: hidden;
     box-shadow: 0 10px 24px rgba(10, 17, 40, 0.28);
@@ -2615,16 +2617,16 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 34px;
-    height: 34px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
     background: var(--team-primary, #1a3a6e);
     color: var(--team-secondary, #ffffff);
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 900;
     font-variant-numeric: tabular-nums;
-    border: 2px solid var(--team-secondary, #ffffff);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+    border: 1.5px solid var(--team-secondary, #ffffff);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
     letter-spacing: -0.02em;
 }
 .wc-pitch__name {
