@@ -315,7 +315,8 @@ img { max-width: 100%; display: block; }
     display: flex;
     flex-direction: column;
     gap: 10px;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
     padding: 16px 18px;
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(8px);
@@ -380,6 +381,25 @@ img { max-width: 100%; display: block; }
 }
 .wc-countdown__meta { font-size: 12px; line-height: 1.4; opacity: 0.85; }
 .wc-countdown__meta strong { display: block; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; }
+.wc-countdown__opener {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    margin-top: 2px;
+}
+.wc-countdown__matchup {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: #ffd561;
+}
+.wc-countdown__place {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: rgba(255, 255, 255, 0.55);
+}
 
 .wc-stats {
     list-style: none;
@@ -1767,6 +1787,8 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
     .wc-countdown__sep { font-size: 20px; padding-bottom: 16px; font-weight: 500; }
     .wc-countdown__label { font-size: 10px; letter-spacing: 0.1em; }
     .wc-countdown__meta { font-size: 11px; }
+    .wc-countdown__matchup { font-size: 13px; }
+    .wc-countdown__place { font-size: 10px; }
 
     /* Hero: compact padding, let stats shrink so "Cities" doesn't clip. */
     .wc-hero { padding: 22px 18px; }
