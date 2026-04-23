@@ -1,0 +1,106 @@
+{{#if isPre}}
+    <div class="wc-tlive__label">{{t 'countdown.label'}}</div>
+    <div class="wc-tlive__countdown">
+        <div class="wc-tlive__unit"><span class="wc-tlive__num">{{preDays}}</span><span class="wc-tlive__ulabel">{{t 'countdown.days'}}</span></div>
+        <span class="wc-tlive__sep">:</span>
+        <div class="wc-tlive__unit"><span class="wc-tlive__num">{{preHours}}</span><span class="wc-tlive__ulabel">{{t 'countdown.hours'}}</span></div>
+        <span class="wc-tlive__sep">:</span>
+        <div class="wc-tlive__unit"><span class="wc-tlive__num">{{preMins}}</span><span class="wc-tlive__ulabel">{{t 'countdown.mins'}}</span></div>
+        <span class="wc-tlive__sep">:</span>
+        <div class="wc-tlive__unit"><span class="wc-tlive__num">{{preSecs}}</span><span class="wc-tlive__ulabel">{{t 'countdown.secs'}}</span></div>
+    </div>
+    <div class="wc-tlive__opener">
+        <div class="wc-tlive__matchup">
+            <span class="wc-tlive__team">
+                <img src="https://flagcdn.com/w40/mx.png" alt="">
+                {{t 'countdown.opener.team1'}}
+            </span>
+            <span class="wc-tlive__vs">{{t 'countdown.opener.vs'}}</span>
+            <span class="wc-tlive__team">
+                <img src="https://flagcdn.com/w40/za.png" alt="">
+                {{t 'countdown.opener.team2'}}
+            </span>
+        </div>
+        <div class="wc-tlive__place">{{t 'countdown.opener.place'}}</div>
+    </div>
+{{else if isLive}}
+    <div class="wc-tlive__label wc-tlive__label--live">
+        <span class="wc-tlive__pulse"></span>{{t 'live.now'}}
+    </div>
+    <div class="wc-tlive__grid wc-tlive__grid--{{liveMatches.length}}">
+        {{#each liveMatches as |match|}}
+            {{#link-to 'schedule' class='wc-tlive-card'}}
+                <div class="wc-tlive-card__team">
+                    {{#if match.team1Flag}}<img src={{match.team1Flag}} alt="">{{/if}}
+                    <span class="wc-tlive-card__code">{{match.team1Code}}</span>
+                </div>
+                <div class="wc-tlive-card__score">
+                    <span>{{if match.score1 match.score1 "0"}}</span>
+                    <span class="wc-tlive-card__dash">&ndash;</span>
+                    <span>{{if match.score2 match.score2 "0"}}</span>
+                </div>
+                <div class="wc-tlive-card__team wc-tlive-card__team--right">
+                    <span class="wc-tlive-card__code">{{match.team2Code}}</span>
+                    {{#if match.team2Flag}}<img src={{match.team2Flag}} alt="">{{/if}}
+                </div>
+                <div class="wc-tlive-card__minute">{{match.minute}}</div>
+            {{/link-to}}
+        {{/each}}
+    </div>
+{{else if isToday}}
+    <div class="wc-tlive__label">{{t 'today.title'}}</div>
+    <div class="wc-tlive__grid wc-tlive__grid--{{todayMatches.length}}">
+        {{#each todayMatches as |match|}}
+            {{#link-to 'schedule' class='wc-tlive-card wc-tlive-card--upcoming'}}
+                <div class="wc-tlive-card__team">
+                    {{#if match.team1Flag}}<img src={{match.team1Flag}} alt="">{{/if}}
+                    <span class="wc-tlive-card__code">{{match.team1Code}}</span>
+                </div>
+                <div class="wc-tlive-card__time">{{format-time match.time}}</div>
+                <div class="wc-tlive-card__team wc-tlive-card__team--right">
+                    <span class="wc-tlive-card__code">{{match.team2Code}}</span>
+                    {{#if match.team2Flag}}<img src={{match.team2Flag}} alt="">{{/if}}
+                </div>
+            {{/link-to}}
+        {{/each}}
+    </div>
+{{else if isMotd}}
+    <div class="wc-tlive__label">{{t 'motd.title'}}</div>
+    {{#link-to 'schedule' class='wc-tlive__motd'}}
+        <div class="wc-tlive-card__team">
+            {{#if motdMatch.team1Flag}}<img src={{motdMatch.team1Flag}} alt="">{{/if}}
+            <span class="wc-tlive__motd-name">{{motdMatch.team1}}</span>
+        </div>
+        <div class="wc-tlive__motd-vs">{{t 'match.vs'}}</div>
+        <div class="wc-tlive-card__team wc-tlive-card__team--right">
+            <span class="wc-tlive__motd-name">{{motdMatch.team2}}</span>
+            {{#if motdMatch.team2Flag}}<img src={{motdMatch.team2Flag}} alt="">{{/if}}
+        </div>
+        <div class="wc-tlive__motd-meta">
+            <span>{{weekday motdMatch.date}}, {{short-date motdMatch.date}}</span>
+            <span>{{format-time motdMatch.time}}</span>
+            {{#if motdMatch.venue}}<span>{{motdMatch.venue}}</span>{{/if}}
+        </div>
+    {{/link-to}}
+{{else if isEnded}}
+    <div class="wc-tlive__label">{{t 'tournament.ended'}}</div>
+    {{#if finalMatch}}
+        <div class="wc-tlive__motd">
+            <div class="wc-tlive-card__team">
+                {{#if finalMatch.team1Flag}}<img src={{finalMatch.team1Flag}} alt="">{{/if}}
+                <span class="wc-tlive__motd-name">{{finalMatch.team1}}</span>
+            </div>
+            <div class="wc-tlive-card__score">
+                <span>{{finalMatch.score1}}</span>
+                <span class="wc-tlive-card__dash">&ndash;</span>
+                <span>{{finalMatch.score2}}</span>
+            </div>
+            <div class="wc-tlive-card__team wc-tlive-card__team--right">
+                <span class="wc-tlive__motd-name">{{finalMatch.team2}}</span>
+                {{#if finalMatch.team2Flag}}<img src={{finalMatch.team2Flag}} alt="">{{/if}}
+            </div>
+        </div>
+    {{/if}}
+{{else}}
+    <div class="wc-tlive__label">{{t 'tournament.quiet'}}</div>
+{{/if}}

@@ -330,7 +330,9 @@ img { max-width: 100%; display: block; }
     margin-bottom: 26px;
 }
 
-.wc-countdown {
+/* Tournament-live widget: one block that morphs through pre-kickoff
+   countdown → live strip → today's matches → match of the day. */
+.wc-tlive {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -342,27 +344,47 @@ img { max-width: 100%; display: block; }
     -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.16);
     border-radius: 18px;
+    color: #fff;
 }
-.wc-countdown__label {
+.wc-tlive__label {
     font-size: 11px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.12em;
     color: rgba(255, 255, 255, 0.72);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 }
-.wc-countdown__grid {
+.wc-tlive__label--live { color: var(--accent); }
+.wc-tlive__pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--accent);
+    box-shadow: 0 0 0 0 rgba(229, 23, 74, 0.7);
+    animation: wc-tlive-pulse 1.4s infinite;
+}
+@keyframes wc-tlive-pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(229, 23, 74, 0.7); }
+    70%  { box-shadow: 0 0 0 10px rgba(229, 23, 74, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(229, 23, 74, 0); }
+}
+
+/* Pre-tournament countdown */
+.wc-tlive__countdown {
     display: flex;
     align-items: flex-end;
     gap: 8px;
     font-variant-numeric: tabular-nums;
 }
-.wc-countdown__unit {
+.wc-tlive__unit {
     display: flex;
     flex-direction: column;
     align-items: center;
     min-width: 48px;
 }
-.wc-countdown__num {
+.wc-tlive__num {
     font-size: 36px;
     font-weight: 900;
     line-height: 1;
@@ -373,7 +395,7 @@ img { max-width: 100%; display: block; }
     -webkit-text-fill-color: transparent;
     color: #ffb627;
 }
-.wc-countdown__unit-label {
+.wc-tlive__ulabel {
     margin-top: 4px;
     font-size: 10px;
     font-weight: 700;
@@ -381,65 +403,172 @@ img { max-width: 100%; display: block; }
     letter-spacing: 0.1em;
     color: rgba(255, 255, 255, 0.62);
 }
-.wc-countdown__sep {
+.wc-tlive__sep {
     font-size: 28px;
     font-weight: 900;
     line-height: 1;
     color: rgba(255, 255, 255, 0.35);
     padding-bottom: 22px;
 }
-.wc-countdown__big {
-    font-size: 54px;
-    font-weight: 900;
-    line-height: 1;
-    letter-spacing: -0.03em;
-    background: var(--grad-gold);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-.wc-countdown__meta { font-size: 12px; line-height: 1.4; opacity: 0.85; }
-.wc-countdown__meta strong { display: block; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; }
-.wc-countdown__opener {
+.wc-tlive__opener {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 2px;
     margin-top: 2px;
 }
-.wc-countdown__matchup {
+.wc-tlive__matchup {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     font-size: 14px;
     font-weight: 700;
-    letter-spacing: 0.01em;
     color: #ffd561;
 }
-.wc-countdown__team {
+.wc-tlive__team {
     display: inline-flex;
     align-items: center;
     gap: 6px;
 }
-.wc-countdown__team img {
+.wc-tlive__team img {
     width: 20px;
     height: auto;
     border-radius: 3px;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
 }
-.wc-countdown__vs {
+.wc-tlive__vs {
     font-size: 11px;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.55);
-    text-transform: lowercase;
 }
-.wc-countdown__place {
+.wc-tlive__place {
     font-size: 11px;
     font-weight: 500;
-    letter-spacing: 0.02em;
     color: rgba(255, 255, 255, 0.55);
 }
 
+/* Live / today grid of fixture cards */
+.wc-tlive__grid {
+    display: grid;
+    gap: 10px;
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.wc-tlive__grid--1 { grid-template-columns: minmax(0, 1fr); max-width: 340px; }
+.wc-tlive__grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.wc-tlive__grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.wc-tlive__grid--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.wc-tlive__grid--5,
+.wc-tlive__grid--6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+.wc-tlive-card {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    background: rgba(0, 0, 0, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    color: #fff;
+    text-decoration: none;
+    transition: border-color 0.15s, background 0.15s;
+    position: relative;
+}
+.wc-tlive-card:hover {
+    text-decoration: none;
+    border-color: rgba(255, 255, 255, 0.28);
+    background: rgba(0, 0, 0, 0.32);
+    color: #fff;
+}
+.wc-tlive-card__team {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    font-size: 12px;
+    font-weight: 700;
+}
+.wc-tlive-card__team--right { justify-content: flex-end; }
+.wc-tlive-card__team img {
+    width: 22px;
+    height: 15px;
+    object-fit: cover;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+    flex-shrink: 0;
+}
+.wc-tlive-card__code {
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    font-size: 13px;
+}
+.wc-tlive-card__score {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 18px;
+    font-weight: 900;
+    font-variant-numeric: tabular-nums;
+    color: #ffd561;
+}
+.wc-tlive-card__dash { color: rgba(255, 255, 255, 0.35); font-weight: 600; }
+.wc-tlive-card__minute {
+    position: absolute;
+    top: 4px;
+    right: 8px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+}
+.wc-tlive-card__time {
+    font-size: 12px;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.78);
+    font-variant-numeric: tabular-nums;
+}
+
+/* Match of the day */
+.wc-tlive__motd {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-rows: auto auto;
+    gap: 8px 12px;
+    align-items: center;
+    padding: 12px 16px;
+    background: rgba(0, 0, 0, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    color: #fff;
+    text-decoration: none;
+    width: 100%;
+    max-width: 380px;
+}
+.wc-tlive__motd:hover { text-decoration: none; border-color: rgba(255, 255, 255, 0.28); color: #fff; }
+.wc-tlive__motd-vs {
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.55);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+.wc-tlive__motd-name {
+    font-size: 14px;
+    font-weight: 800;
+}
+.wc-tlive__motd-meta {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.58);
+    font-weight: 500;
+    padding-top: 6px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.12);
+}
 .wc-stats {
     list-style: none;
     margin: 0;
@@ -479,13 +608,10 @@ img { max-width: 100%; display: block; }
     .wc-hero { padding: 44px 40px; }
     .wc-hero__title { font-size: 48px; }
     .wc-hero__lede { font-size: 17px; }
-    .wc-countdown { padding: 20px 24px; }
-    .wc-countdown__num { font-size: 44px; }
-    .wc-countdown__unit { min-width: 62px; }
-    .wc-countdown__sep { font-size: 34px; padding-bottom: 24px; }
-    .wc-countdown__big { font-size: 68px; }
-    .wc-countdown__meta { font-size: 13px; }
-    .wc-countdown__meta strong { font-size: 15px; }
+    .wc-tlive { padding: 20px 24px; }
+    .wc-tlive__num { font-size: 44px; }
+    .wc-tlive__unit { min-width: 62px; }
+    .wc-tlive__sep { font-size: 34px; padding-bottom: 24px; }
     .wc-hero__footer {
         grid-template-columns: auto 1fr;
         gap: 24px;
@@ -1937,16 +2063,23 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
     .wc-header__tools { gap: 8px; }
 
     /* Countdown: lighter + smaller so four units fit comfortably. */
-    .wc-countdown { padding: 14px 16px; gap: 8px; }
-    .wc-countdown__num { font-size: 26px; font-weight: 600; letter-spacing: -0.01em; }
-    .wc-countdown__unit { min-width: 40px; }
-    .wc-countdown__unit-label { font-size: 9px; letter-spacing: 0.08em; }
-    .wc-countdown__sep { font-size: 20px; padding-bottom: 16px; font-weight: 500; }
-    .wc-countdown__label { font-size: 10px; letter-spacing: 0.1em; }
-    .wc-countdown__meta { font-size: 11px; }
-    .wc-countdown__matchup { font-size: 13px; gap: 6px; }
-    .wc-countdown__team img { width: 18px; }
-    .wc-countdown__place { font-size: 10px; }
+    .wc-tlive { padding: 14px 16px; gap: 8px; }
+    .wc-tlive__num { font-size: 26px; font-weight: 600; letter-spacing: -0.01em; }
+    .wc-tlive__unit { min-width: 40px; }
+    .wc-tlive__ulabel { font-size: 9px; letter-spacing: 0.08em; }
+    .wc-tlive__sep { font-size: 20px; padding-bottom: 16px; font-weight: 500; }
+    .wc-tlive__label { font-size: 10px; letter-spacing: 0.1em; }
+    .wc-tlive__matchup { font-size: 13px; gap: 6px; }
+    .wc-tlive__team img { width: 18px; }
+    .wc-tlive__place { font-size: 10px; }
+    .wc-tlive__grid { gap: 6px; }
+    .wc-tlive__grid--3,
+    .wc-tlive__grid--5,
+    .wc-tlive__grid--6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .wc-tlive-card { padding: 8px 10px; }
+    .wc-tlive-card__code { font-size: 12px; }
+    .wc-tlive-card__score { font-size: 16px; }
+    .wc-tlive-card__team img { width: 20px; height: 13px; }
 
     /* Hero: compact padding, let stats shrink so "Cities" doesn't clip. */
     .wc-hero { padding: 22px 18px; }

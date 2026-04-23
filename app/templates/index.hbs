@@ -50,7 +50,7 @@
     </div>
 
     <div class="wc-hero__footer">
-        {{wc-countdown targetMs=model.kickoffMs}}
+        {{tournament-live matches=model.matches kickoffMs=model.kickoffMs endMs=model.endMs}}
         <ul class="wc-stats">
             <li><span class="wc-stats__num">48</span><span class="wc-stats__label">{{t 'stats.teams'}}</span></li>
             <li><span class="wc-stats__num">12</span><span class="wc-stats__label">{{t 'stats.groups'}}</span></li>

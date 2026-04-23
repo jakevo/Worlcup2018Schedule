@@ -130,6 +130,7 @@ export function loadTournament() {
         }
 
         const kickoffMs = new Date(`${tournament.startDate || '2026-06-11'}T18:00:00-05:00`).getTime();
+        const endMs = new Date(`${tournament.endDate || '2026-07-19'}T23:59:59-04:00`).getTime();
         const daysUntilKickoff = Math.max(0, Math.ceil((kickoffMs - now) / (1000 * 60 * 60 * 24)));
 
         return {
@@ -144,6 +145,7 @@ export function loadTournament() {
             featured,
             daysUntilKickoff,
             kickoffMs,
+            endMs,
             updatedAt: new Date().toISOString()
         };
     });
