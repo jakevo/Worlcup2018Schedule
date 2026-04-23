@@ -1452,6 +1452,18 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
 .wc-add-cal.is-open {
     z-index: 60;
 }
+/* Lift the ancestor row + day card above their siblings so the open menu
+   is not covered by the next .wc-match or clipped by .wc-day's overflow. */
+.wc-match:has(.wc-add-cal.is-open) {
+    position: relative;
+    z-index: 60;
+    overflow: visible;
+}
+.wc-day:has(.wc-add-cal.is-open) {
+    position: relative;
+    z-index: 60;
+    overflow: visible;
+}
 .wc-add-cal__btn {
     width: 34px;
     height: 34px;
@@ -1628,7 +1640,6 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
         right: 8px;
         transform: translateY(-50%);
     }
-    .wc-match.is-open .wc-add-cal { z-index: 60; }
     .wc-match > .wc-match__venue {
         flex: 1 1 100%;
         order: 4;
