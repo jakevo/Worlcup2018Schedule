@@ -1,22 +1,22 @@
 <section class="wc-page-head">
     <div>
-        <h1>Host cities</h1>
-        <p>16 stadiums across three nations hosting the 104-match tournament.</p>
+        <h1>{{t 'venues.title'}}</h1>
+        <p>{{t 'venues.subtitle'}}</p>
     </div>
 </section>
 
 <div class="wc-venue-stats">
     <div class="wc-venue-stat">
         <span class="wc-venue-stat__num">{{model.venues.length}}</span>
-        <span class="wc-venue-stat__label">Stadiums</span>
+        <span class="wc-venue-stat__label">{{t 'venues.stat.stadiums'}}</span>
     </div>
     <div class="wc-venue-stat">
         <span class="wc-venue-stat__num">3</span>
-        <span class="wc-venue-stat__label">Host nations</span>
+        <span class="wc-venue-stat__label">{{t 'venues.stat.nations'}}</span>
     </div>
     <div class="wc-venue-stat">
         <span class="wc-venue-stat__num">104</span>
-        <span class="wc-venue-stat__label">Matches</span>
+        <span class="wc-venue-stat__label">{{t 'venues.stat.matches'}}</span>
     </div>
 </div>
 
@@ -26,7 +26,7 @@
             <header class="wc-venue-country__head">
                 <img src={{country.flag}} alt="{{country.country}} flag">
                 <h2>{{country.country}}</h2>
-                <span>{{country.venues.length}} {{if (eq country.venues.length 1) 'stadium' 'stadiums'}}</span>
+                <span>{{country.venues.length}} {{if (eq country.venues.length 1) (t 'venues.stadium.one') (t 'venues.stadium.many')}}</span>
             </header>
             <div class="wc-venue-grid">
                 {{#each country.venues as |venue|}}
@@ -36,11 +36,11 @@
                             <p class="wc-venue-card__city">{{venue.city}}</p>
                             <dl class="wc-venue-card__stats">
                                 <div>
-                                    <dt>Capacity</dt>
+                                    <dt>{{t 'venues.card.capacity'}}</dt>
                                     <dd>{{venue.capacityFmt}}</dd>
                                 </div>
                                 <div>
-                                    <dt>Matches</dt>
+                                    <dt>{{t 'venues.card.matches'}}</dt>
                                     <dd>{{venue.matches}}</dd>
                                 </div>
                             </dl>

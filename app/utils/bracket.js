@@ -52,8 +52,8 @@ function buildNextRound(prefix, prev) {
     for (let i = 0; i < prev.length; i += 2) {
         out.push({
             id: `${prefix}-${i / 2 + 1}`,
-            top: { label: `Winner ${prev[i].id}`, team: null, resolved: false },
-            bot: { label: `Winner ${prev[i + 1].id}`, team: null, resolved: false }
+            top: { label: '', winnerOf: prev[i].id, team: null, resolved: false },
+            bot: { label: '', winnerOf: prev[i + 1].id, team: null, resolved: false }
         });
     }
     return out;
@@ -66,10 +66,10 @@ export function buildBracket(groups) {
     const sf = buildNextRound('SF', qf);
     const final = buildNextRound('F', sf);
     return [
-        { key: 'r32', title: 'Round of 32', matches: r32 },
-        { key: 'r16', title: 'Round of 16', matches: r16 },
-        { key: 'qf', title: 'Quarter-finals', matches: qf },
-        { key: 'sf', title: 'Semi-finals', matches: sf },
-        { key: 'final', title: 'Final', matches: final }
+        { key: 'r32', matches: r32 },
+        { key: 'r16', matches: r16 },
+        { key: 'qf', matches: qf },
+        { key: 'sf', matches: sf },
+        { key: 'final', matches: final }
     ];
 }

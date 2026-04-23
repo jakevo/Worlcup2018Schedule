@@ -8,8 +8,13 @@ export default Helper.extend({
     compute([iso]) {
         if (!iso) return '';
         const d = new Date(`${iso}T12:00:00Z`);
-        const dow = d.getUTCDay();
-        return this.get('locale').t(`weekday.${dow}`);
+        const t = this.get('locale').t.bind(this.get('locale'));
+        const weekday = t(`weekday.full.${d.getUTCDay()}`);
+        const month = t(`month.full.${d.getUTCMonth() + 1}`);
+        const day = d.getUTCDate();
+        const monthFirst = t('date.monthFirst');
+        const datePart = monthFirst === true ? `${month} ${day}` : `${day} ${month}`;
+        return `${weekday}, ${datePart}`;
     },
 
     _onLocaleChange: observer('locale.current', function () {

@@ -14,12 +14,12 @@
 
     <div class="wc-hero__inner">
         <div class="wc-hero__copy">
-            <p class="wc-hero__eyebrow"><span class="wc-hero__dot"></span>11 June &ndash; 19 July 2026</p>
-            <h1 class="wc-hero__title">48 nations. 16 cities. <em>One trophy.</em></h1>
-            <p class="wc-hero__lede">The biggest World Cup ever kicks off across Canada, Mexico and the United States. Follow every group, every kickoff and every goal.</p>
+            <p class="wc-hero__eyebrow"><span class="wc-hero__dot"></span>{{t 'home.dates'}}</p>
+            <h1 class="wc-hero__title">{{t 'home.hero.titlePre'}} <em>{{t 'home.hero.titleEm'}}</em></h1>
+            <p class="wc-hero__lede">{{t 'home.hero.lede'}}</p>
             <div class="wc-hero__cta">
-                {{#link-to 'groups' class='wc-btn wc-btn--light'}}View groups{{/link-to}}
-                {{#link-to 'schedule' class='wc-btn wc-btn--outline'}}Full schedule{{/link-to}}
+                {{#link-to 'groups' class='wc-btn wc-btn--light'}}{{t 'home.cta.groups'}}{{/link-to}}
+                {{#link-to 'schedule' class='wc-btn wc-btn--outline'}}{{t 'home.cta.schedule'}}{{/link-to}}
             </div>
         </div>
 
@@ -50,18 +50,12 @@
     </div>
 
     <div class="wc-hero__footer">
-        <div class="wc-countdown">
-            <div class="wc-countdown__big">{{model.daysUntilKickoff}}</div>
-            <div class="wc-countdown__meta">
-                <strong>Days to kickoff</strong>
-                Mexico v South Africa<br>Estadio Azteca &middot; Mexico City
-            </div>
-        </div>
+        {{wc-countdown targetMs=model.kickoffMs}}
         <ul class="wc-stats">
-            <li><span class="wc-stats__num">48</span><span class="wc-stats__label">Teams</span></li>
-            <li><span class="wc-stats__num">12</span><span class="wc-stats__label">Groups</span></li>
-            <li><span class="wc-stats__num">104</span><span class="wc-stats__label">Matches</span></li>
-            <li><span class="wc-stats__num">16</span><span class="wc-stats__label">Cities</span></li>
+            <li><span class="wc-stats__num">48</span><span class="wc-stats__label">{{t 'stats.teams'}}</span></li>
+            <li><span class="wc-stats__num">12</span><span class="wc-stats__label">{{t 'stats.groups'}}</span></li>
+            <li><span class="wc-stats__num">104</span><span class="wc-stats__label">{{t 'stats.matches'}}</span></li>
+            <li><span class="wc-stats__num">16</span><span class="wc-stats__label">{{t 'stats.cities'}}</span></li>
         </ul>
     </div>
 </section>
@@ -69,17 +63,17 @@
 {{#if model.nextMatch}}
     <section class="wc-section">
         <div class="wc-section__head">
-            <h2 class="wc-section__title">Next kickoff</h2>
-            {{#link-to 'schedule' class='wc-section__link'}}All matches &rarr;{{/link-to}}
+            <h2 class="wc-section__title">{{t 'home.next.title'}}</h2>
+            {{#link-to 'schedule' class='wc-section__link'}}{{t 'home.next.all'}}{{/link-to}}
         </div>
         <article class="wc-next {{if model.nextMatch.isLive 'is-live'}}">
             {{add-to-calendar match=model.nextMatch}}
             <span class="wc-next__label">
                 {{#if model.nextMatch.isLive}}
-                    <span class="wc-live-badge wc-live-badge--solid"><span class="wc-live-badge__dot"></span>LIVE NOW</span>
-                    <span class="wc-next__label-group">Group {{model.nextMatch.group}}</span>
+                    <span class="wc-live-badge wc-live-badge--solid"><span class="wc-live-badge__dot"></span>{{t 'live.now'}}</span>
+                    <span class="wc-next__label-group">{{t 'group.prefix'}} {{model.nextMatch.group}}</span>
                 {{else}}
-                    <span class="wc-hero__dot"></span>Group {{model.nextMatch.group}}
+                    <span class="wc-hero__dot"></span>{{t 'group.prefix'}} {{model.nextMatch.group}}
                 {{/if}}
             </span>
             <div class="wc-next__teams">
@@ -128,55 +122,55 @@
 
 <section class="wc-section">
     <div class="wc-section__head">
-        <h2 class="wc-section__title">Legends' nations</h2>
+        <h2 class="wc-section__title">{{t 'home.legends.title'}}</h2>
     </div>
     <ul class="wc-legends">
         <li class="wc-legend" style="--tint:#009c3b;">
             <img src="https://flagcdn.com/w320/br.png" alt="Brazil flag">
             <div class="wc-legend__body">
-                <span class="wc-legend__nation">Brazil</span>
+                <span class="wc-legend__nation">{{t 'home.legends.brazil'}}</span>
                 <strong class="wc-legend__names">Pelé &middot; Ronaldo &middot; Neymar</strong>
-                <span class="wc-legend__cups">5 titles</span>
+                <span class="wc-legend__cups">{{t 'home.legends.brazilCups'}}</span>
             </div>
         </li>
         <li class="wc-legend" style="--tint:#74acdf;">
             <img src="https://flagcdn.com/w320/ar.png" alt="Argentina flag">
             <div class="wc-legend__body">
-                <span class="wc-legend__nation">Argentina</span>
+                <span class="wc-legend__nation">{{t 'home.legends.argentina'}}</span>
                 <strong class="wc-legend__names">Messi &middot; Maradona &middot; Di María</strong>
-                <span class="wc-legend__cups">3 titles &middot; Holders</span>
+                <span class="wc-legend__cups">{{t 'home.legends.argentinaCups'}}</span>
             </div>
         </li>
         <li class="wc-legend" style="--tint:#da020e;">
             <img src="https://flagcdn.com/w320/pt.png" alt="Portugal flag">
             <div class="wc-legend__body">
-                <span class="wc-legend__nation">Portugal</span>
+                <span class="wc-legend__nation">{{t 'home.legends.portugal'}}</span>
                 <strong class="wc-legend__names">Ronaldo &middot; Eusébio &middot; Figo</strong>
-                <span class="wc-legend__cups">Euro 2016 champs</span>
+                <span class="wc-legend__cups">{{t 'home.legends.portugalCups'}}</span>
             </div>
         </li>
         <li class="wc-legend" style="--tint:#002395;">
             <img src="https://flagcdn.com/w320/fr.png" alt="France flag">
             <div class="wc-legend__body">
-                <span class="wc-legend__nation">France</span>
+                <span class="wc-legend__nation">{{t 'home.legends.france'}}</span>
                 <strong class="wc-legend__names">Mbappé &middot; Zidane &middot; Platini</strong>
-                <span class="wc-legend__cups">2 titles</span>
+                <span class="wc-legend__cups">{{t 'home.legends.franceCups'}}</span>
             </div>
         </li>
         <li class="wc-legend" style="--tint:#012169;">
             <img src="https://flagcdn.com/w320/gb-eng.png" alt="England flag">
             <div class="wc-legend__body">
-                <span class="wc-legend__nation">England</span>
+                <span class="wc-legend__nation">{{t 'home.legends.england'}}</span>
                 <strong class="wc-legend__names">Bellingham &middot; Kane &middot; Beckham</strong>
-                <span class="wc-legend__cups">1966 champions</span>
+                <span class="wc-legend__cups">{{t 'home.legends.englandCups'}}</span>
             </div>
         </li>
         <li class="wc-legend" style="--tint:#000000;">
             <img src="https://flagcdn.com/w320/de.png" alt="Germany flag">
             <div class="wc-legend__body">
-                <span class="wc-legend__nation">Germany</span>
+                <span class="wc-legend__nation">{{t 'home.legends.germany'}}</span>
                 <strong class="wc-legend__names">Müller &middot; Beckenbauer &middot; Klose</strong>
-                <span class="wc-legend__cups">4 titles</span>
+                <span class="wc-legend__cups">{{t 'home.legends.germanyCups'}}</span>
             </div>
         </li>
     </ul>
@@ -184,14 +178,14 @@
 
 <section class="wc-section">
     <div class="wc-section__head">
-        <h2 class="wc-section__title">Featured fixtures</h2>
-        {{#link-to 'schedule' class='wc-section__link'}}See all &rarr;{{/link-to}}
+        <h2 class="wc-section__title">{{t 'home.featured.title'}}</h2>
+        {{#link-to 'schedule' class='wc-section__link'}}{{t 'home.featured.seeAll'}}{{/link-to}}
     </div>
     <div class="wc-featured">
         {{#each model.featured as |match|}}
             <article class="wc-card">
                 <div class="wc-card__top">
-                    <span class="wc-card__group">Group {{match.group}}</span>
+                    <span class="wc-card__group">{{t 'group.prefix'}} {{match.group}}</span>
                     <span>{{weekday match.date}} &middot; {{short-date match.date}}</span>
                 </div>
                 <div class="wc-card__teams">
@@ -227,23 +221,23 @@
 
 <section class="wc-section">
     <div class="wc-section__head">
-        <h2 class="wc-section__title">Host nations</h2>
+        <h2 class="wc-section__title">{{t 'home.hosts.title'}}</h2>
     </div>
     <ul class="wc-hosts-strip">
         <li>
             <img src="https://flagcdn.com/w160/ca.png" alt="Canada flag">
-            <strong>Canada</strong>
-            <span>Toronto &middot; Vancouver</span>
+            <strong>{{t 'home.hosts.canada'}}</strong>
+            <span>{{t 'home.hosts.canadaCities'}}</span>
         </li>
         <li>
             <img src="https://flagcdn.com/w160/mx.png" alt="Mexico flag">
-            <strong>Mexico</strong>
-            <span>CDMX &middot; Guadalajara &middot; Monterrey</span>
+            <strong>{{t 'home.hosts.mexico'}}</strong>
+            <span>{{t 'home.hosts.mexicoCities'}}</span>
         </li>
         <li>
             <img src="https://flagcdn.com/w160/us.png" alt="USA flag">
-            <strong>United States</strong>
-            <span>11 host cities</span>
+            <strong>{{t 'home.hosts.usa'}}</strong>
+            <span>{{t 'home.hosts.usaCities'}}</span>
         </li>
     </ul>
 </section>

@@ -1,9 +1,9 @@
 <section class="wc-page-head">
     <div>
-        <h1>Match schedule</h1>
-        <p>Every group-stage kickoff, in order. Times shown in US Eastern (ET).</p>
+        <h1>{{t 'schedule.title'}}</h1>
+        <p>{{t 'schedule.subtitle'}}</p>
     </div>
-    <button type="button" class="wc-btn wc-btn--ghost" onclick={{action "refresh"}}>Refresh</button>
+    <button type="button" class="wc-btn wc-btn--ghost" onclick={{action "refresh"}}>{{t 'action.refresh'}}</button>
 </section>
 
 <div class="wc-filters">
@@ -16,21 +16,21 @@
             {{input
                 type="search"
                 value=searchQuery
-                placeholder="Search team, city or venue"
+                placeholder=(t 'schedule.search.placeholder')
                 class="wc-search__input"}}
         </label>
         <label class="wc-toggle">
             {{input type="checkbox" checked=showPlayedOnly}}
-            <span>Played only</span>
+            <span>{{t 'schedule.filter.playedOnly'}}</span>
         </label>
         {{#if (or (not-eq groupFilter 'all') searchQuery showPlayedOnly)}}
-            <button type="button" class="wc-btn wc-btn--ghost wc-btn--sm" onclick={{action "clearFilters"}}>Clear</button>
+            <button type="button" class="wc-btn wc-btn--ghost wc-btn--sm" onclick={{action "clearFilters"}}>{{t 'action.clear'}}</button>
         {{/if}}
     </div>
     <div class="wc-chips">
         <button type="button"
                 class="wc-chip {{if (eq groupFilter 'all') 'is-active'}}"
-                onclick={{action "setGroupFilter" "all"}}>All</button>
+                onclick={{action "setGroupFilter" "all"}}>{{t 'schedule.chip.all'}}</button>
         {{#each allGroups as |letter|}}
             <button type="button"
                     class="wc-chip {{if (eq groupFilter letter) 'is-active'}}"
@@ -38,7 +38,7 @@
         {{/each}}
     </div>
     <div class="wc-filters__summary">
-        Showing <strong>{{totalFiltered}}</strong> of {{model.matches.length}} matches
+        {{t 'schedule.summary.showing'}} <strong>{{totalFiltered}}</strong> {{t 'schedule.summary.of'}} {{model.matches.length}} {{t 'schedule.summary.matches'}}
     </div>
 </div>
 
@@ -47,8 +47,8 @@
         <section class="wc-day">
             <header class="wc-day__head">
                 <span class="wc-day__weekday">{{weekday day.date}}</span>
-                <h2 class="wc-day__date">{{day.label}}</h2>
-                <span class="wc-day__count">{{day.matches.length}} matches</span>
+                <h2 class="wc-day__date">{{long-date day.date}}</h2>
+                <span class="wc-day__count">{{day.matches.length}} {{t 'schedule.summary.matches'}}</span>
             </header>
             <ul class="wc-day__matches">
                 {{#each day.matches as |match|}}
@@ -56,7 +56,7 @@
                         <div class="wc-match__time">
                             <span class="wc-match__group">{{match.group}}</span>
                             {{#if match.isLive}}
-                                <span class="wc-live-badge"><span class="wc-live-badge__dot"></span>LIVE</span>
+                                <span class="wc-live-badge"><span class="wc-live-badge__dot"></span>{{t 'live'}}</span>
                             {{else}}
                                 <span class="wc-match__kick">{{format-time match.time}}</span>
                             {{/if}}
@@ -80,7 +80,7 @@
                                         <span class="wc-match__dash">&ndash;</span>
                                         <span>{{match.score2}}</span>
                                     {{else}}
-                                        <span class="wc-match__vs">vs</span>
+                                        <span class="wc-match__vs">{{t 'match.vs'}}</span>
                                     {{/if}}
                                 </div>
                                 {{#if match.team2Code}}
@@ -104,8 +104,8 @@
         </section>
     {{else}}
         <div class="wc-empty">
-            <p>No matches match those filters.</p>
-            <button type="button" class="wc-btn wc-btn--ghost" onclick={{action "clearFilters"}}>Clear filters</button>
+            <p>{{t 'schedule.empty'}}</p>
+            <button type="button" class="wc-btn wc-btn--ghost" onclick={{action "clearFilters"}}>{{t 'action.clearFilters'}}</button>
         </div>
     {{/each}}
 </div>

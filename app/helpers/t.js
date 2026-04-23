@@ -5,11 +5,8 @@ import { observer } from '@ember/object';
 export default Helper.extend({
     locale: service('locale'),
 
-    compute([iso]) {
-        if (!iso) return '';
-        const d = new Date(`${iso}T12:00:00Z`);
-        const dow = d.getUTCDay();
-        return this.get('locale').t(`weekday.${dow}`);
+    compute([key]) {
+        return this.get('locale').t(key);
     },
 
     _onLocaleChange: observer('locale.current', function () {

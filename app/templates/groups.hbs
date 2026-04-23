@@ -1,29 +1,29 @@
 <section class="wc-page-head">
     <div>
-        <h1>Group stage</h1>
-        <p>48 teams across 12 groups. Top two plus the eight best third-placed teams advance to the Round of 32.</p>
+        <h1>{{t 'groups.title'}}</h1>
+        <p>{{t 'groups.subtitle'}}</p>
     </div>
-    <button type="button" class="wc-btn wc-btn--ghost" onclick={{action "refresh"}}>Refresh</button>
+    <button type="button" class="wc-btn wc-btn--ghost" onclick={{action "refresh"}}>{{t 'action.refresh'}}</button>
 </section>
 
 <div class="wc-groups">
     {{#each model.groups as |group|}}
         <article class="wc-group">
             <header class="wc-group__head">
-                <span class="wc-group__badge">Group {{group.letter}}</span>
-                <span class="wc-group__hint">Top 2 advance</span>
+                <span class="wc-group__badge">{{t 'group.prefix'}} {{group.letter}}</span>
+                <span class="wc-group__hint">{{t 'groups.hint.top2'}}</span>
             </header>
             <table class="wc-table">
                 <thead>
                     <tr>
-                        <th class="wc-table__pos">#</th>
-                        <th class="wc-table__team">Team</th>
-                        <th><abbr title="Matches Played">MP</abbr></th>
-                        <th><abbr title="Wins">W</abbr></th>
-                        <th><abbr title="Draws">D</abbr></th>
-                        <th><abbr title="Losses">L</abbr></th>
-                        <th><abbr title="Goal Difference">GD</abbr></th>
-                        <th><abbr title="Points">Pts</abbr></th>
+                        <th class="wc-table__pos">{{t 'table.pos'}}</th>
+                        <th class="wc-table__team">{{t 'table.team'}}</th>
+                        <th><abbr title={{t 'table.title.mp'}}>{{t 'table.mp'}}</abbr></th>
+                        <th><abbr title={{t 'table.title.w'}}>{{t 'table.w'}}</abbr></th>
+                        <th><abbr title={{t 'table.title.d'}}>{{t 'table.d'}}</abbr></th>
+                        <th><abbr title={{t 'table.title.l'}}>{{t 'table.l'}}</abbr></th>
+                        <th><abbr title={{t 'table.title.gd'}}>{{t 'table.gd'}}</abbr></th>
+                        <th><abbr title={{t 'table.title.pts'}}>{{t 'table.pts'}}</abbr></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -51,7 +51,7 @@
                     {{/each}}
                 </tbody>
             </table>
-            <div class="wc-group__legend">Qualifies for Round of 32</div>
+            <div class="wc-group__legend">{{t 'groups.legend.r32'}}</div>
         </article>
     {{/each}}
 </div>

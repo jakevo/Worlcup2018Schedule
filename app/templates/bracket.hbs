@@ -1,14 +1,14 @@
 <section class="wc-page-head">
     <div>
-        <h1>Knockout bracket</h1>
-        <p>32 teams from the group stage: 12 group winners, 12 runners-up and the 8 best third-placed teams.</p>
+        <h1>{{t 'bracket.title'}}</h1>
+        <p>{{t 'bracket.subtitle'}}</p>
     </div>
 </section>
 
 <div class="wc-bracket">
     {{#each model.rounds as |round|}}
         <section class="wc-bracket__round wc-bracket__round--{{round.key}}">
-            <h2 class="wc-bracket__title">{{round.title}}</h2>
+            <h2 class="wc-bracket__title">{{t (concat 'bracket.round.' round.key)}}</h2>
             <div class="wc-bracket__matches">
                 {{#each round.matches as |match|}}
                     <article class="wc-bracket-match">
@@ -21,7 +21,9 @@
                             {{/link-to}}
                         {{else}}
                             <div class="wc-bracket-match__slot {{if match.top.resolved 'is-resolved'}}">
-                                <span class="wc-bracket-match__placeholder">{{match.top.label}}</span>
+                                <span class="wc-bracket-match__placeholder">
+                                    {{#if match.top.winnerOf}}{{t 'bracket.winner'}} {{match.top.winnerOf}}{{else}}{{match.top.label}}{{/if}}
+                                </span>
                             </div>
                         {{/if}}
                         {{#if match.bot.team.fifaCode}}
@@ -32,7 +34,9 @@
                             {{/link-to}}
                         {{else}}
                             <div class="wc-bracket-match__slot {{if match.bot.resolved 'is-resolved'}}">
-                                <span class="wc-bracket-match__placeholder">{{match.bot.label}}</span>
+                                <span class="wc-bracket-match__placeholder">
+                                    {{#if match.bot.winnerOf}}{{t 'bracket.winner'}} {{match.bot.winnerOf}}{{else}}{{match.bot.label}}{{/if}}
+                                </span>
                             </div>
                         {{/if}}
                     </article>

@@ -1,44 +1,44 @@
 {{#if model.notFound}}
     <section class="wc-empty">
-        <p>We couldn't find a team with code <strong>{{model.code}}</strong>.</p>
-        {{#link-to 'groups' class='wc-btn wc-btn--ghost'}}Back to groups{{/link-to}}
+        <p>{{t 'team.notFound.prefix'}} <strong>{{model.code}}</strong>.</p>
+        {{#link-to 'groups' class='wc-btn wc-btn--ghost'}}{{t 'team.back'}}{{/link-to}}
     </section>
 {{else}}
     <section class="wc-team-hero">
         <img class="wc-team-hero__flag" src={{model.team.flag}} alt="{{model.team.name}} flag">
         <div class="wc-team-hero__body">
             <span class="wc-team-hero__eyebrow">
-                Group {{model.groupLetter}} &middot; {{model.team.confederation}}
+                {{t 'group.prefix'}} {{model.groupLetter}} &middot; {{model.team.confederation}}
             </span>
             <h1 class="wc-team-hero__name">{{model.team.name}}</h1>
             <div class="wc-team-hero__meta">
                 <span class="wc-team-hero__chip">{{model.team.fifaCode}}</span>
-                <span class="wc-team-hero__chip">Pot {{model.team.pot}}</span>
-                <span class="wc-team-hero__chip">Position #{{model.positionInGroup}}</span>
+                <span class="wc-team-hero__chip">{{t 'team.pot'}} {{model.team.pot}}</span>
+                <span class="wc-team-hero__chip">{{t 'team.positionPrefix'}} #{{model.positionInGroup}}</span>
             </div>
         </div>
     </section>
 
     <section class="wc-section">
         <div class="wc-section__head">
-            <h2 class="wc-section__title">Record</h2>
+            <h2 class="wc-section__title">{{t 'team.record'}}</h2>
         </div>
         <dl class="wc-record">
-            <div><dt>Played</dt><dd>{{model.groupStanding.mp}}</dd></div>
-            <div><dt>Wins</dt><dd>{{model.groupStanding.w}}</dd></div>
-            <div><dt>Draws</dt><dd>{{model.groupStanding.d}}</dd></div>
-            <div><dt>Losses</dt><dd>{{model.groupStanding.l}}</dd></div>
-            <div><dt>Goals for</dt><dd>{{model.groupStanding.gf}}</dd></div>
-            <div><dt>Goals against</dt><dd>{{model.groupStanding.ga}}</dd></div>
-            <div><dt>Goal diff</dt><dd>{{model.groupStanding.gd}}</dd></div>
-            <div class="wc-record__pts"><dt>Points</dt><dd>{{model.groupStanding.pts}}</dd></div>
+            <div><dt>{{t 'team.record.mp'}}</dt><dd>{{model.groupStanding.mp}}</dd></div>
+            <div><dt>{{t 'team.record.w'}}</dt><dd>{{model.groupStanding.w}}</dd></div>
+            <div><dt>{{t 'team.record.d'}}</dt><dd>{{model.groupStanding.d}}</dd></div>
+            <div><dt>{{t 'team.record.l'}}</dt><dd>{{model.groupStanding.l}}</dd></div>
+            <div><dt>{{t 'team.record.gf'}}</dt><dd>{{model.groupStanding.gf}}</dd></div>
+            <div><dt>{{t 'team.record.ga'}}</dt><dd>{{model.groupStanding.ga}}</dd></div>
+            <div><dt>{{t 'team.record.gd'}}</dt><dd>{{model.groupStanding.gd}}</dd></div>
+            <div class="wc-record__pts"><dt>{{t 'team.record.pts'}}</dt><dd>{{model.groupStanding.pts}}</dd></div>
         </dl>
     </section>
 
     <section class="wc-section">
         <div class="wc-section__head">
-            <h2 class="wc-section__title">Fixtures</h2>
-            {{#link-to 'schedule' class='wc-section__link'}}Full schedule &rarr;{{/link-to}}
+            <h2 class="wc-section__title">{{t 'team.fixtures'}}</h2>
+            {{#link-to 'schedule' class='wc-section__link'}}{{t 'team.fixtures.full'}}{{/link-to}}
         </div>
         <ul class="wc-team-fixtures">
             {{#each model.fixtures as |match|}}
@@ -46,7 +46,7 @@
                     <div class="wc-match__time">
                         <span class="wc-match__group">{{weekday match.date}} {{short-date match.date}}</span>
                         {{#if match.isLive}}
-                            <span class="wc-live-badge"><span class="wc-live-badge__dot"></span>LIVE</span>
+                            <span class="wc-live-badge"><span class="wc-live-badge__dot"></span>{{t 'live'}}</span>
                         {{else}}
                             <span class="wc-match__kick">{{format-time match.time}}</span>
                         {{/if}}
@@ -70,7 +70,7 @@
                                     <span class="wc-match__dash">&ndash;</span>
                                     <span>{{match.score2}}</span>
                                 {{else}}
-                                    <span class="wc-match__vs">vs</span>
+                                    <span class="wc-match__vs">{{t 'match.vs'}}</span>
                                 {{/if}}
                             </div>
                             {{#if match.team2Code}}
@@ -94,8 +94,8 @@
 
     <section class="wc-section">
         <div class="wc-section__head">
-            <h2 class="wc-section__title">Group {{model.groupLetter}}</h2>
-            {{#link-to 'groups' class='wc-section__link'}}All groups &rarr;{{/link-to}}
+            <h2 class="wc-section__title">{{t 'group.prefix'}} {{model.groupLetter}}</h2>
+            {{#link-to 'groups' class='wc-section__link'}}{{t 'team.group.all'}}{{/link-to}}
         </div>
         <ul class="wc-team-group">
             {{#each model.groupTeams as |t index|}}

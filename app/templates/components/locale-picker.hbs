@@ -1,0 +1,27 @@
+<button type="button"
+        class="wc-locale__btn"
+        onclick={{action "toggle"}}
+        aria-label={{t 'locale.switch'}}
+        aria-haspopup="listbox"
+        aria-expanded={{isOpen}}
+        title={{t 'locale.switch'}}>
+    <span class="wc-locale__current">{{currentLocale.short}}</span>
+    <svg viewBox="0 0 12 8" width="10" height="7" aria-hidden="true">
+        <path d="M1 1.5 L6 6.5 L11 1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+</button>
+
+{{#if isOpen}}
+    <div class="wc-locale__menu" role="listbox">
+        {{#each locales as |item|}}
+            <button type="button"
+                    class="wc-locale__opt {{if (eq item.code locale.current) 'is-active'}}"
+                    role="option"
+                    aria-selected={{eq item.code locale.current}}
+                    onclick={{action "select" item.code}}>
+                <span class="wc-locale__opt-short">{{item.short}}</span>
+                <span class="wc-locale__opt-label">{{item.label}}</span>
+            </button>
+        {{/each}}
+    </div>
+{{/if}}
