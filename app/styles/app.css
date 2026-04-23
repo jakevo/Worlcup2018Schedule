@@ -1248,6 +1248,12 @@ th.wc-table__team { display: table-cell; font-weight: 700; }
 
 [data-theme="dark"] .wc-featured::-webkit-scrollbar-thumb { background: var(--border-strong); }
 
+[data-theme="dark"] .wc-nav__link.active {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(229, 23, 74, 0.45);
+}
+
 [data-theme="dark"] img { filter: brightness(0.95); }
 
 /* ---------- LIVE badge ------------------------------------------- */
