@@ -6,7 +6,7 @@
 </section>
 
 <ul class="wc-news">
-    {{#each model as |feed|}}
+    {{#each feeds as |feed|}}
         <li class="wc-news__item">
             <span class="wc-news__source">{{feed.source}}</span>
             <a class="wc-news__title" href={{feed.url}} target="_blank" rel="noopener">{{feed.title}}</a>
