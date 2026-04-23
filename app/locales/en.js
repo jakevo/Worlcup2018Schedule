@@ -13,6 +13,8 @@ export default {
     'tab.bracket': 'Bracket',
     'tab.venues': 'Venues',
     'tab.news': 'News',
+    'tab.more': 'More',
+    'more.title': 'More',
     'theme.toggle': 'Toggle dark mode',
     'locale.switch': 'Switch language',
 

@@ -1825,7 +1825,8 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
         text-decoration: none;
         transition: color 0.15s;
     }
-    .wc-tab.active { color: var(--accent); }
+    .wc-tab.active,
+    .wc-tab.is-active { color: var(--accent); }
     .wc-tab:hover { text-decoration: none; color: var(--accent); }
     .wc-tab__icon { width: 22px; height: 22px; display: block; }
     .wc-tab__label {
@@ -1836,6 +1837,79 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+    }
+    .wc-tab--more {
+        background: transparent;
+        border: 0;
+        cursor: pointer;
+        font-family: inherit;
+    }
+
+    /* "More" bottom sheet — backdrop + sheet sitting above the tabbar */
+    .wc-more-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(10, 17, 40, 0.48);
+        z-index: 85;
+        animation: wc-backdrop-in 0.15s ease-out;
+    }
+    .wc-more-sheet {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: calc(56px + env(safe-area-inset-bottom));
+        background: var(--surface);
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        padding: 10px 16px 20px;
+        z-index: 90;
+        box-shadow: 0 -10px 26px rgba(10, 17, 40, 0.22);
+        animation: wc-sheet-in 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .wc-more-sheet__handle {
+        width: 42px;
+        height: 4px;
+        border-radius: 999px;
+        background: var(--border-strong);
+        margin: 0 auto 12px;
+    }
+    .wc-more-sheet__grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    .wc-more-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 20px 12px;
+        border-radius: 14px;
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        color: var(--ink);
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 600;
+        transition: transform 0.08s, border-color 0.15s, color 0.15s;
+    }
+    .wc-more-item:hover,
+    .wc-more-item:focus {
+        text-decoration: none;
+        border-color: var(--accent);
+        color: var(--accent);
+    }
+    .wc-more-item:active { transform: scale(0.97); }
+    .wc-more-item.active { border-color: var(--accent); color: var(--accent); }
+    .wc-more-item__icon { width: 28px; height: 28px; color: var(--accent); }
+    @keyframes wc-backdrop-in {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    @keyframes wc-sheet-in {
+        from { transform: translateY(110%); }
+        to { transform: translateY(0); }
     }
 
     /* Reserve space at the bottom of the scroll area so the fixed

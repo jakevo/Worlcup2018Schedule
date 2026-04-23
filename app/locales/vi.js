@@ -13,6 +13,8 @@ export default {
     'tab.bracket': 'Loại trực tiếp',
     'tab.venues': 'Sân',
     'tab.news': 'Tin tức',
+    'tab.more': 'Khác',
+    'more.title': 'Thêm',
     'theme.toggle': 'Chuyển chế độ sáng/tối',
     'locale.switch': 'Đổi ngôn ngữ',
 
