@@ -1,0 +1,25 @@
+<svg viewBox="0 0 100 120" width={{size}} height={{size}} aria-hidden="true">
+    <defs>
+        <linearGradient id="wc-crest-sheen-{{fifaCode}}" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.25"/>
+            <stop offset="60%" stop-color="#ffffff" stop-opacity="0"/>
+        </linearGradient>
+    </defs>
+    <path d="M8 8 L92 8 L92 58 Q92 95 50 116 Q8 95 8 58 Z"
+          fill={{colors.primary}}
+          stroke={{colors.secondary}}
+          stroke-width="3.5"/>
+    <path d="M8 8 L92 8 L92 58 Q92 95 50 116 Q8 95 8 58 Z"
+          fill="url(#wc-crest-sheen-{{fifaCode}})"/>
+    <line x1="12" y1="38" x2="88" y2="38"
+          stroke={{colors.secondary}}
+          stroke-width="1.2"
+          opacity="0.55"/>
+    <text x="50" y="78"
+          text-anchor="middle"
+          font-size="26"
+          font-weight="900"
+          fill={{colors.secondary}}
+          font-family="Inter, sans-serif"
+          letter-spacing="0.02em">{{fifaCode}}</text>
+</svg>

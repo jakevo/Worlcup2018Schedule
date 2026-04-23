@@ -4,13 +4,16 @@
         {{#link-to 'groups' class='wc-btn wc-btn--ghost'}}{{t 'team.back'}}{{/link-to}}
     </section>
 {{else}}
-    <section class="wc-team-hero">
-        <img class="wc-team-hero__flag" src={{model.team.flag}} alt="{{model.team.name}} flag">
+    <section class="wc-team-hero" style={{team-hero-style model.team.fifaCode}}>
+        {{team-crest fifaCode=model.team.fifaCode size=112}}
         <div class="wc-team-hero__body">
             <span class="wc-team-hero__eyebrow">
                 {{t 'group.prefix'}} {{model.groupLetter}} &middot; {{model.team.confederation}}
             </span>
-            <h1 class="wc-team-hero__name">{{model.team.name}}</h1>
+            <h1 class="wc-team-hero__name">
+                <img class="wc-team-hero__flag" src={{model.team.flag}} alt="{{model.team.name}} flag">
+                {{model.team.name}}
+            </h1>
             <div class="wc-team-hero__meta">
                 <span class="wc-team-hero__chip">{{model.team.fifaCode}}</span>
                 <span class="wc-team-hero__chip">{{t 'team.pot'}} {{model.team.pot}}</span>
