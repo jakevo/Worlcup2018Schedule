@@ -1,5 +1,7 @@
 import Controller from '@ember/controller';
 import { computed } from '@ember/object';
+import { getOwner } from '@ember/application';
+import { invalidateTournamentCache } from '../utils/tournament-data';
 
 export default Controller.extend({
     groupFilter: 'all',
@@ -47,6 +49,10 @@ export default Controller.extend({
         },
         togglePlayedOnly() {
             this.set('showPlayedOnly', !this.get('showPlayedOnly'));
+        },
+        refresh() {
+            invalidateTournamentCache();
+            getOwner(this).lookup('route:application').refresh();
         }
     }
 });
