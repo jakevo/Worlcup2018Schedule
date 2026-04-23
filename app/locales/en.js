@@ -52,7 +52,6 @@ export default {
     'group.prefix': 'Group',
 
     'home.contenders.title': 'Title contenders',
-    'home.contenders.subtitle': 'Rough win-chance based on form and pre-tournament strength.',
 
     'home.featured.title': 'Featured fixtures',
     'home.featured.seeAll': 'See all →',

@@ -52,7 +52,6 @@ export default {
     'group.prefix': 'Bảng',
 
     'home.contenders.title': 'Ứng cử viên vô địch',
-    'home.contenders.subtitle': 'Ước tính cơ hội vô địch dựa trên phong độ và sức mạnh trước giải.',
 
     'home.featured.title': 'Trận đấu nổi bật',
     'home.featured.seeAll': 'Xem tất cả →',

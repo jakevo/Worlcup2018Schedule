@@ -124,17 +124,12 @@
     <div class="wc-section__head">
         <h2 class="wc-section__title">{{t 'home.contenders.title'}}</h2>
     </div>
-    <p class="wc-contenders__hint">{{t 'home.contenders.subtitle'}}</p>
     <ol class="wc-contenders">
         {{#each model.contenders as |item index|}}
             {{#link-to 'team' item.team.fifaCode class='wc-contender'}}
                 <span class="wc-contender__rank">{{inc index}}</span>
                 {{#if item.team.flag}}<img class="wc-contender__flag" src={{item.team.flag}} alt="">{{/if}}
                 <span class="wc-contender__name">{{item.team.name}}</span>
-                <span class="wc-contender__bar" aria-hidden="true">
-                    <span class="wc-contender__fill" style={{width-style item.pct}}></span>
-                </span>
-                <span class="wc-contender__pct">{{pct item.pct}}</span>
             {{/link-to}}
         {{/each}}
     </ol>
