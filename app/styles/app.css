@@ -1759,6 +1759,15 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
     .wc-locale__btn { height: 30px; padding: 0 10px; font-size: 11px; }
     .wc-header__tools { gap: 8px; }
 
+    /* Countdown: lighter + smaller so four units fit comfortably. */
+    .wc-countdown { padding: 14px 16px; gap: 8px; }
+    .wc-countdown__num { font-size: 26px; font-weight: 600; letter-spacing: -0.01em; }
+    .wc-countdown__unit { min-width: 40px; }
+    .wc-countdown__unit-label { font-size: 9px; letter-spacing: 0.08em; }
+    .wc-countdown__sep { font-size: 20px; padding-bottom: 16px; font-weight: 500; }
+    .wc-countdown__label { font-size: 10px; letter-spacing: 0.1em; }
+    .wc-countdown__meta { font-size: 11px; }
+
     /* Hero: compact padding, let stats shrink so "Cities" doesn't clip. */
     .wc-hero { padding: 22px 18px; }
     .wc-hero__title { font-size: 26px; }
