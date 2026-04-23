@@ -2,6 +2,25 @@ import Route from '@ember/routing/route';
 import { loadTournament } from '../utils/tournament-data';
 import { photoFor } from '../utils/team-colors';
 
+const POSITION_BUCKETS = [
+    { labelKey: 'team.squad.gk',  match: /^(goalkeeper|gk|keeper|portero)/i },
+    { labelKey: 'team.squad.def', match: /^(defender|def|centre-?back|full-?back)/i },
+    { labelKey: 'team.squad.mid', match: /^(midfielder|mid)/i },
+    { labelKey: 'team.squad.fwd', match: /^(attacker|forward|fwd|striker)/i }
+];
+
+function bucketize(squad) {
+    const buckets = POSITION_BUCKETS.map(b => ({ labelKey: b.labelKey, players: [] }));
+    const other = [];
+    for (const p of (squad || [])) {
+        const i = POSITION_BUCKETS.findIndex(b => b.match.test(p.position || ''));
+        if (i !== -1) buckets[i].players.push(p);
+        else other.push(p);
+    }
+    if (other.length) buckets.push({ labelKey: 'team.squad.other', players: other });
+    return buckets;
+}
+
 export default Route.extend({
     model(params) {
         const code = (params.code || '').toUpperCase();
@@ -26,6 +45,9 @@ export default Route.extend({
             );
             const groupTeams = (data.groups.find(g => g.letter === groupLetter) || {}).teams || [];
 
+            const squadSource = (data.squads && data.squads[code]) ||
+                (team && team.squad) || [];
+
             return {
                 team,
                 groupLetter,
@@ -33,7 +55,9 @@ export default Route.extend({
                 positionInGroup,
                 groupTeams,
                 fixtures,
-                heroPhoto: photoFor(code)
+                heroPhoto: photoFor(code),
+                squad: squadSource,
+                squadByPosition: bucketize(squadSource)
             };
         });
     }

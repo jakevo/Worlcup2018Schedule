@@ -50,6 +50,45 @@
 
     <section class="wc-section">
         <div class="wc-section__head">
+            <h2 class="wc-section__title">{{t 'team.squad'}}</h2>
+        </div>
+        {{#if model.squad.length}}
+            <div class="wc-squad">
+                {{#each model.squadByPosition as |group|}}
+                    {{#if group.players.length}}
+                        <div class="wc-squad__group">
+                            <h3 class="wc-squad__heading">{{t group.labelKey}}</h3>
+                            <ul class="wc-squad__list">
+                                {{#each group.players as |player|}}
+                                    <li class="wc-squad__player">
+                                        {{#if player.photo}}
+                                            <img class="wc-squad__photo" src={{player.photo}} alt="">
+                                        {{else}}
+                                            <span class="wc-squad__photo wc-squad__photo--placeholder">{{player.number}}</span>
+                                        {{/if}}
+                                        <div class="wc-squad__body">
+                                            <strong class="wc-squad__name">{{player.name}}</strong>
+                                            <span class="wc-squad__meta">
+                                                {{#if player.number}}<span class="wc-squad__num">#{{player.number}}</span>{{/if}}
+                                                {{#if player.age}}<span>{{player.age}}</span>{{/if}}
+                                            </span>
+                                        </div>
+                                    </li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    {{/if}}
+                {{/each}}
+            </div>
+        {{else}}
+            <div class="wc-placeholder">
+                <p>{{t 'team.squad.empty'}}</p>
+            </div>
+        {{/if}}
+    </section>
+
+    <section class="wc-section">
+        <div class="wc-section__head">
             <h2 class="wc-section__title">{{t 'team.fixtures'}}</h2>
             {{#link-to 'schedule' class='wc-section__link'}}{{t 'team.fixtures.full'}}{{/link-to}}
         </div>

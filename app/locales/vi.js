@@ -141,6 +141,12 @@ export default {
     'team.fixtures': 'Lịch thi đấu',
     'team.fixtures.full': 'Lịch đầy đủ →',
     'team.group.all': 'Tất cả bảng →',
+    'team.squad': 'Đội hình',
+    'team.squad.empty': 'Danh sách cầu thủ sẽ hiển thị khi kết nối dữ liệu trực tiếp.',
+    'team.squad.gk': 'Thủ môn',
+    'team.squad.def': 'Hậu vệ',
+    'team.squad.mid': 'Tiền vệ',
+    'team.squad.fwd': 'Tiền đạo',
 
     'scorers.title': 'Vua phá lưới',
     'scorers.subtitle': 'Cuộc đua Chiếc giày vàng — những cầu thủ dẫn đầu giải đấu.',

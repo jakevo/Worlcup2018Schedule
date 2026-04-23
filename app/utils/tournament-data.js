@@ -157,6 +157,11 @@ export function loadTournament() {
             daysUntilKickoff,
             kickoffMs,
             endMs,
+            // Keyed by FIFA code. Populated by live providers (api-football
+            // /players/squads). Empty on static; team page falls back to
+            // its placeholder message.
+            squads: data.squads || {},
+            topScorers: data.topScorers || [],
             updatedAt: new Date().toISOString()
         };
     });

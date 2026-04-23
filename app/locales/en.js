@@ -141,6 +141,12 @@ export default {
     'team.fixtures': 'Fixtures',
     'team.fixtures.full': 'Full schedule →',
     'team.group.all': 'All groups →',
+    'team.squad': 'Squad',
+    'team.squad.empty': 'Player list will appear here once a live data feed is connected.',
+    'team.squad.gk': 'Goalkeepers',
+    'team.squad.def': 'Defenders',
+    'team.squad.mid': 'Midfielders',
+    'team.squad.fwd': 'Forwards',
 
     'scorers.title': 'Top scorers',
     'scorers.subtitle': 'Golden boot race — leaders across the tournament.',
