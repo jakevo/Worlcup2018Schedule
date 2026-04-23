@@ -1631,6 +1631,18 @@ a.wc-bracket-match__slot:hover .wc-bracket-match__team {
 }
 a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
 
+/* Hide the focus ring for pointer users; keyboard users still get
+   :focus-visible via browser defaults where supported. */
+a.wc-match__team:focus,
+a.wc-card__team:focus,
+a.wc-next__team:focus,
+a.wc-bracket-match__slot:focus,
+.wc-table__team-link:focus,
+.wc-team-group__name:focus,
+.wc-contender:focus,
+.wc-more-item:focus,
+.wc-tab:focus { outline: none; }
+
 .wc-table__team-link {
     display: inline-flex;
     align-items: center;
