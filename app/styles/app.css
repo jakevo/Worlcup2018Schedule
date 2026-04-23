@@ -898,6 +898,7 @@ th.wc-table__team { display: table-cell; font-weight: 700; }
     display: flex;
     flex-direction: column;
     gap: 16px;
+    min-width: 0;
 }
 
 .wc-day {
@@ -906,6 +907,9 @@ th.wc-table__team { display: table-cell; font-weight: 700; }
     padding: 14px;
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--border);
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
 }
 .wc-day__head {
     display: flex;
@@ -945,6 +949,7 @@ th.wc-table__team { display: table-cell; font-weight: 700; }
     display: flex;
     flex-direction: column;
     gap: 8px;
+    min-width: 0;
 }
 
 .wc-match {
@@ -1873,13 +1878,14 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
     box-shadow: var(--shadow-sm);
 }
 .wc-bracket-match__id {
-    position: absolute;
-    top: 6px;
-    right: 8px;
+    display: block;
+    padding: 4px 10px;
     font-size: 9px;
     color: var(--muted);
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--border);
 }
 .wc-bracket-match__slot {
     display: flex;
