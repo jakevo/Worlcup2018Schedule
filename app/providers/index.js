@@ -1,5 +1,6 @@
 import StaticJsonProvider from './static-json';
 import FootballDataProvider from './football-data';
+import ApiFootballProvider from './api-football';
 
 /*
  * Returns a data provider instance for the given config. All providers
@@ -15,10 +16,12 @@ export function createProvider(config) {
     switch (kind) {
         case 'football-data':
             return new FootballDataProvider(cfg);
+        case 'api-football':
+            return new ApiFootballProvider(cfg);
         case 'static':
         default:
             return new StaticJsonProvider(cfg);
     }
 }
 
-export { StaticJsonProvider, FootballDataProvider };
+export { StaticJsonProvider, FootballDataProvider, ApiFootballProvider };

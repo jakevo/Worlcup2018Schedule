@@ -22,10 +22,20 @@ module.exports = function(environment) {
       // when it is created
     },
 
-    // Data source for tournament teams + schedule. Flip to
-    //   { kind: 'football-data', apiKey: '...' }
-    // once a live API is available — no other app code should need
-    // to change, see app/providers/index.js.
+    // Data source for tournament teams + schedule.
+    //
+    // To switch to live api-football data, stand up the Cloudflare
+    // Worker in proxy/cloudflare-worker.js (it holds the api-sports
+    // key server-side) and point proxyUrl at it:
+    //
+    //   dataProvider: {
+    //     kind: 'api-football',
+    //     proxyUrl: 'https://wc2026-proxy.yoursub.workers.dev'
+    //   }
+    //
+    // Never put `apiKey` here in a deployed build — it would ship
+    // to every browser. apiKey is only OK for local dev builds you
+    // never push.
     dataProvider: {
       kind: 'static'
     }
