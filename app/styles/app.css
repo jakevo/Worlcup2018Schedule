@@ -389,10 +389,30 @@ img { max-width: 100%; display: block; }
     margin-top: 2px;
 }
 .wc-countdown__matchup {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     font-size: 14px;
     font-weight: 700;
     letter-spacing: 0.01em;
     color: #ffd561;
+}
+.wc-countdown__team {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.wc-countdown__team img {
+    width: 20px;
+    height: auto;
+    border-radius: 3px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+}
+.wc-countdown__vs {
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.55);
+    text-transform: lowercase;
 }
 .wc-countdown__place {
     font-size: 11px;
@@ -1787,7 +1807,8 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
     .wc-countdown__sep { font-size: 20px; padding-bottom: 16px; font-weight: 500; }
     .wc-countdown__label { font-size: 10px; letter-spacing: 0.1em; }
     .wc-countdown__meta { font-size: 11px; }
-    .wc-countdown__matchup { font-size: 13px; }
+    .wc-countdown__matchup { font-size: 13px; gap: 6px; }
+    .wc-countdown__team img { width: 18px; }
     .wc-countdown__place { font-size: 10px; }
 
     /* Hero: compact padding, let stats shrink so "Cities" doesn't clip. */

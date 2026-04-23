@@ -27,7 +27,9 @@ export default {
     'countdown.hours': 'Hours',
     'countdown.mins': 'Mins',
     'countdown.secs': 'Secs',
-    'countdown.opener.teams': 'Mexico v South Africa',
+    'countdown.opener.team1': 'Mexico',
+    'countdown.opener.team2': 'South Africa',
+    'countdown.opener.vs': 'v',
     'countdown.opener.place': 'Estadio Azteca · Mexico City',
 
     'stats.teams': 'Teams',

@@ -27,7 +27,9 @@ export default {
     'countdown.hours': 'Giờ',
     'countdown.mins': 'Phút',
     'countdown.secs': 'Giây',
-    'countdown.opener.teams': 'Mexico gặp Nam Phi',
+    'countdown.opener.team1': 'Mexico',
+    'countdown.opener.team2': 'Nam Phi',
+    'countdown.opener.vs': 'gặp',
     'countdown.opener.place': 'Estadio Azteca · Mexico City',
 
     'stats.teams': 'Đội',
