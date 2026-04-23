@@ -13,24 +13,28 @@
                 {{#each round.matches as |match|}}
                     <article class="wc-bracket-match">
                         <div class="wc-bracket-match__id">{{match.id}}</div>
-                        <div class="wc-bracket-match__slot {{if match.top.resolved 'is-resolved'}}">
-                            {{#if match.top.team}}
+                        {{#if match.top.team.fifaCode}}
+                            {{#link-to 'team' match.top.team.fifaCode class=(concat 'wc-bracket-match__slot' (if match.top.resolved ' is-resolved'))}}
                                 {{#if match.top.team.flag}}<img src={{match.top.team.flag}} alt="">{{/if}}
                                 <span class="wc-bracket-match__team">{{match.top.team.name}}</span>
                                 <span class="wc-bracket-match__seed">{{match.top.label}}</span>
-                            {{else}}
+                            {{/link-to}}
+                        {{else}}
+                            <div class="wc-bracket-match__slot {{if match.top.resolved 'is-resolved'}}">
                                 <span class="wc-bracket-match__placeholder">{{match.top.label}}</span>
-                            {{/if}}
-                        </div>
-                        <div class="wc-bracket-match__slot {{if match.bot.resolved 'is-resolved'}}">
-                            {{#if match.bot.team}}
+                            </div>
+                        {{/if}}
+                        {{#if match.bot.team.fifaCode}}
+                            {{#link-to 'team' match.bot.team.fifaCode class=(concat 'wc-bracket-match__slot' (if match.bot.resolved ' is-resolved'))}}
                                 {{#if match.bot.team.flag}}<img src={{match.bot.team.flag}} alt="">{{/if}}
                                 <span class="wc-bracket-match__team">{{match.bot.team.name}}</span>
                                 <span class="wc-bracket-match__seed">{{match.bot.label}}</span>
-                            {{else}}
+                            {{/link-to}}
+                        {{else}}
+                            <div class="wc-bracket-match__slot {{if match.bot.resolved 'is-resolved'}}">
                                 <span class="wc-bracket-match__placeholder">{{match.bot.label}}</span>
-                            {{/if}}
-                        </div>
+                            </div>
+                        {{/if}}
                     </article>
                 {{/each}}
             </div>

@@ -31,10 +31,13 @@
                         <tr>
                             <td class="wc-table__pos">{{inc index}}</td>
                             <td class="wc-table__team">
-                                <img src={{team.flag}} alt="">
                                 {{#if team.fifaCode}}
-                                    {{#link-to 'team' team.fifaCode class='wc-table__team-name wc-table__team-link'}}{{team.name}}{{/link-to}}
+                                    {{#link-to 'team' team.fifaCode class='wc-table__team-link'}}
+                                        <img src={{team.flag}} alt="">
+                                        <span class="wc-table__team-name">{{team.name}}</span>
+                                    {{/link-to}}
                                 {{else}}
+                                    <img src={{team.flag}} alt="">
                                     <span class="wc-table__team-name">{{team.name}}</span>
                                 {{/if}}
                             </td>

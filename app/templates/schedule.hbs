@@ -63,14 +63,17 @@
                         </div>
                         <div class="wc-match__body">
                             <div class="wc-match__teams">
-                                <div class="wc-match__team">
-                                    {{#if match.team1Flag}}<img src={{match.team1Flag}} alt="">{{/if}}
-                                    {{#if match.team1Code}}
-                                        {{#link-to 'team' match.team1Code class='wc-match__name wc-match__name--link'}}{{match.team1}}{{/link-to}}
-                                    {{else}}
+                                {{#if match.team1Code}}
+                                    {{#link-to 'team' match.team1Code class='wc-match__team'}}
+                                        {{#if match.team1Flag}}<img src={{match.team1Flag}} alt="">{{/if}}
                                         <span class="wc-match__name">{{match.team1}}</span>
-                                    {{/if}}
-                                </div>
+                                    {{/link-to}}
+                                {{else}}
+                                    <div class="wc-match__team">
+                                        {{#if match.team1Flag}}<img src={{match.team1Flag}} alt="">{{/if}}
+                                        <span class="wc-match__name">{{match.team1}}</span>
+                                    </div>
+                                {{/if}}
                                 <div class="wc-match__score">
                                     {{#if match.played}}
                                         <span>{{match.score1}}</span>
@@ -80,14 +83,17 @@
                                         <span class="wc-match__vs">vs</span>
                                     {{/if}}
                                 </div>
-                                <div class="wc-match__team wc-match__team--right">
-                                    {{#if match.team2Code}}
-                                        {{#link-to 'team' match.team2Code class='wc-match__name wc-match__name--link'}}{{match.team2}}{{/link-to}}
-                                    {{else}}
+                                {{#if match.team2Code}}
+                                    {{#link-to 'team' match.team2Code class='wc-match__team wc-match__team--right'}}
                                         <span class="wc-match__name">{{match.team2}}</span>
-                                    {{/if}}
-                                    {{#if match.team2Flag}}<img src={{match.team2Flag}} alt="">{{/if}}
-                                </div>
+                                        {{#if match.team2Flag}}<img src={{match.team2Flag}} alt="">{{/if}}
+                                    {{/link-to}}
+                                {{else}}
+                                    <div class="wc-match__team wc-match__team--right">
+                                        <span class="wc-match__name">{{match.team2}}</span>
+                                        {{#if match.team2Flag}}<img src={{match.team2Flag}} alt="">{{/if}}
+                                    </div>
+                                {{/if}}
                             </div>
                         </div>
                         <div class="wc-match__venue">{{match.venue}} &middot; {{match.city}}</div>

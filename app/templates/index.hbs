@@ -82,10 +82,17 @@
                 {{/if}}
             </span>
             <div class="wc-next__teams">
-                <div class="wc-next__team">
-                    {{#if model.nextMatch.team1Flag}}<img src={{model.nextMatch.team1Flag}} alt="">{{/if}}
-                    <span>{{model.nextMatch.team1}}</span>
-                </div>
+                {{#if model.nextMatch.team1Code}}
+                    {{#link-to 'team' model.nextMatch.team1Code class='wc-next__team'}}
+                        {{#if model.nextMatch.team1Flag}}<img src={{model.nextMatch.team1Flag}} alt="">{{/if}}
+                        <span>{{model.nextMatch.team1}}</span>
+                    {{/link-to}}
+                {{else}}
+                    <div class="wc-next__team">
+                        {{#if model.nextMatch.team1Flag}}<img src={{model.nextMatch.team1Flag}} alt="">{{/if}}
+                        <span>{{model.nextMatch.team1}}</span>
+                    </div>
+                {{/if}}
                 <div class="wc-next__vs">
                     <svg viewBox="0 0 32 32" class="wc-ball" aria-hidden="true">
                         <circle cx="16" cy="16" r="14" fill="#fff" stroke="#0a1128" stroke-width="1.5"></circle>
@@ -97,10 +104,17 @@
                         <line x1="11.5" y1="12" x2="5" y2="10" stroke="#0a1128" stroke-width="1"></line>
                     </svg>
                 </div>
-                <div class="wc-next__team">
-                    {{#if model.nextMatch.team2Flag}}<img src={{model.nextMatch.team2Flag}} alt="">{{/if}}
-                    <span>{{model.nextMatch.team2}}</span>
-                </div>
+                {{#if model.nextMatch.team2Code}}
+                    {{#link-to 'team' model.nextMatch.team2Code class='wc-next__team'}}
+                        {{#if model.nextMatch.team2Flag}}<img src={{model.nextMatch.team2Flag}} alt="">{{/if}}
+                        <span>{{model.nextMatch.team2}}</span>
+                    {{/link-to}}
+                {{else}}
+                    <div class="wc-next__team">
+                        {{#if model.nextMatch.team2Flag}}<img src={{model.nextMatch.team2Flag}} alt="">{{/if}}
+                        <span>{{model.nextMatch.team2}}</span>
+                    </div>
+                {{/if}}
             </div>
             <div class="wc-next__meta">
                 <span><strong>{{weekday model.nextMatch.date}}, {{short-date model.nextMatch.date}}</strong></span>
@@ -180,15 +194,29 @@
                     <span>{{weekday match.date}} &middot; {{short-date match.date}}</span>
                 </div>
                 <div class="wc-card__teams">
-                    <div class="wc-card__team">
-                        {{#if match.team1Flag}}<img src={{match.team1Flag}} alt="">{{/if}}
-                        <span>{{match.team1}}</span>
-                    </div>
+                    {{#if match.team1Code}}
+                        {{#link-to 'team' match.team1Code class='wc-card__team'}}
+                            {{#if match.team1Flag}}<img src={{match.team1Flag}} alt="">{{/if}}
+                            <span>{{match.team1}}</span>
+                        {{/link-to}}
+                    {{else}}
+                        <div class="wc-card__team">
+                            {{#if match.team1Flag}}<img src={{match.team1Flag}} alt="">{{/if}}
+                            <span>{{match.team1}}</span>
+                        </div>
+                    {{/if}}
                     <div class="wc-card__vs">VS</div>
-                    <div class="wc-card__team wc-card__team--right">
-                        <span>{{match.team2}}</span>
-                        {{#if match.team2Flag}}<img src={{match.team2Flag}} alt="">{{/if}}
-                    </div>
+                    {{#if match.team2Code}}
+                        {{#link-to 'team' match.team2Code class='wc-card__team wc-card__team--right'}}
+                            <span>{{match.team2}}</span>
+                            {{#if match.team2Flag}}<img src={{match.team2Flag}} alt="">{{/if}}
+                        {{/link-to}}
+                    {{else}}
+                        <div class="wc-card__team wc-card__team--right">
+                            <span>{{match.team2}}</span>
+                            {{#if match.team2Flag}}<img src={{match.team2Flag}} alt="">{{/if}}
+                        </div>
+                    {{/if}}
                 </div>
                 <div class="wc-card__foot">{{format-time match.time}} &middot; {{match.city}}</div>
             </article>
