@@ -1,18 +1,24 @@
-import RSVP from 'rsvp';
+import config from '../config/environment';
+import { createProvider } from '../providers';
 
-const TEAMS_URL = '/data.json';
-const SCHEDULE_URL = '/schedule.json';
 const POLL_INTERVAL_MS = 60 * 1000;
 const LIVE_WINDOW_MS = 115 * 60 * 1000; // ~kickoff + 115 min = still "live"
 
 let cachedPromise = null;
 let pollHandle = null;
+let providerInstance = null;
 
-function fetchJson(url) {
-    return fetch(url, { cache: 'no-store' }).then(r => {
-        if (!r.ok) throw new Error(`Failed to load ${url}: ${r.status}`);
-        return r.json();
-    });
+function getProvider() {
+    if (!providerInstance) {
+        providerInstance = createProvider(config.dataProvider);
+    }
+    return providerInstance;
+}
+
+// Exposed for tests so they can inject a fake provider.
+export function _setProviderForTesting(p) {
+    providerInstance = p;
+    cachedPromise = null;
 }
 
 function parseScore(match) {
@@ -100,14 +106,11 @@ function formatLongDate(iso) {
 
 export function loadTournament() {
     if (cachedPromise) return cachedPromise;
-    cachedPromise = RSVP.hash({
-        teamsDoc: fetchJson(TEAMS_URL),
-        scheduleDoc: fetchJson(SCHEDULE_URL).catch(() => ({ matches: [] }))
-    }).then(({ teamsDoc, scheduleDoc }) => {
-        const teams = teamsDoc.teams || [];
-        const tournament = teamsDoc.tournament || {};
-        const venues = teamsDoc.venues || [];
-        const matches = scheduleDoc.matches || [];
+    cachedPromise = getProvider().load().then(data => {
+        const teams = data.teams || [];
+        const tournament = data.tournament || {};
+        const venues = data.venues || [];
+        const matches = data.matches || [];
         const groups = buildGroups(teams);
         applyStandings(groups, matches);
 

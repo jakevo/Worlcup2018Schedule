@@ -20,6 +20,14 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+    },
+
+    // Data source for tournament teams + schedule. Flip to
+    //   { kind: 'football-data', apiKey: '...' }
+    // once a live API is available — no other app code should need
+    // to change, see app/providers/index.js.
+    dataProvider: {
+      kind: 'static'
     }
   };
 
