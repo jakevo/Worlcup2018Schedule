@@ -98,7 +98,7 @@ img { max-width: 100%; display: block; }
     transition: opacity 0.15s;
 }
 .wc-brand:hover { text-decoration: none; opacity: 0.88; }
-.wc-brand:focus { outline: none; }
+[data-theme="dark"] .wc-brand:focus { outline: none; }
 .wc-brand:focus-visible { outline: 2px solid rgba(255, 255, 255, 0.6); outline-offset: 4px; border-radius: 14px; }
 .wc-brand__mark {
     display: inline-flex;
@@ -1631,17 +1631,18 @@ a.wc-bracket-match__slot:hover .wc-bracket-match__team {
 }
 a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
 
-/* Hide the focus ring for pointer users; keyboard users still get
-   :focus-visible via browser defaults where supported. */
-a.wc-match__team:focus,
-a.wc-card__team:focus,
-a.wc-next__team:focus,
-a.wc-bracket-match__slot:focus,
-.wc-table__team-link:focus,
-.wc-team-group__name:focus,
-.wc-contender:focus,
-.wc-more-item:focus,
-.wc-tab:focus { outline: none; }
+/* Dark mode only: suppress the default focus outline on link/tab
+   surfaces (the browser draws it white, which jars on dark cards).
+   Light mode keeps the default ring for accessibility. */
+[data-theme="dark"] a.wc-match__team:focus,
+[data-theme="dark"] a.wc-card__team:focus,
+[data-theme="dark"] a.wc-next__team:focus,
+[data-theme="dark"] a.wc-bracket-match__slot:focus,
+[data-theme="dark"] .wc-table__team-link:focus,
+[data-theme="dark"] .wc-team-group__name:focus,
+[data-theme="dark"] .wc-contender:focus,
+[data-theme="dark"] .wc-more-item:focus,
+[data-theme="dark"] .wc-tab:focus { outline: none; }
 
 .wc-table__team-link {
     display: inline-flex;
