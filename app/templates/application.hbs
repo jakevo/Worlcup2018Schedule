@@ -1,6 +1,6 @@
 <header class="wc-header">
     <div class="wc-header__inner">
-        <div class="wc-brand">
+        {{#link-to 'index' class='wc-brand' aria-label=(t 'brand.title')}}
             <span class="wc-brand__mark" aria-hidden="true">
                 <svg viewBox="0 0 28 36" width="100%" height="100%">
                     <defs>
@@ -25,7 +25,7 @@
                     <img class="wc-brand__flag" src="https://flagcdn.com/w40/us.png" alt="">
                 </span>
             </div>
-        </div>
+        {{/link-to}}
         <nav class="wc-nav">
             {{#link-to 'index' class='wc-nav__link'}}{{t 'nav.home'}}{{/link-to}}
             {{#link-to 'groups' class='wc-nav__link'}}{{t 'nav.groups'}}{{/link-to}}
