@@ -71,3 +71,23 @@ export function colorsFor(fifaCode) {
     if (!fifaCode) return FALLBACK;
     return TEAM_COLORS[fifaCode] || FALLBACK;
 }
+
+/*
+ * Optional curated country / landmark photo URL per team.
+ * Empty by default — the hero falls back to a cinematic flag
+ * banner when no photo is set. Populate with free Unsplash /
+ * Pexels / Wikimedia Commons URLs when you want a proper photo
+ * per team. Template auto-picks photo-banner vs flag-banner.
+ *
+ * Example:
+ *   ARG: 'https://images.unsplash.com/photo-xxxxx?w=1200'
+ */
+export const TEAM_PHOTOS = {
+    // ARG: '...',
+    // BRA: '...',
+    // etc.
+};
+
+export function photoFor(fifaCode) {
+    return TEAM_PHOTOS[fifaCode] || null;
+}

@@ -1,5 +1,6 @@
 import Route from '@ember/routing/route';
 import { loadTournament } from '../utils/tournament-data';
+import { photoFor } from '../utils/team-colors';
 
 export default Route.extend({
     model(params) {
@@ -31,7 +32,8 @@ export default Route.extend({
                 groupStanding,
                 positionInGroup,
                 groupTeams,
-                fixtures
+                fixtures,
+                heroPhoto: photoFor(code)
             };
         });
     }

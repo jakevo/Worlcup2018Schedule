@@ -5,19 +5,29 @@
     </section>
 {{else}}
     <section class="wc-team-hero" style={{team-hero-style model.team.fifaCode}}>
-        {{team-crest fifaCode=model.team.fifaCode size=112}}
-        <div class="wc-team-hero__body">
-            <span class="wc-team-hero__eyebrow">
-                {{t 'group.prefix'}} {{model.groupLetter}} &middot; {{model.team.confederation}}
-            </span>
-            <h1 class="wc-team-hero__name">
-                <img class="wc-team-hero__flag" src={{model.team.flag}} alt="{{model.team.name}} flag">
-                {{model.team.name}}
-            </h1>
-            <div class="wc-team-hero__meta">
-                <span class="wc-team-hero__chip">{{model.team.fifaCode}}</span>
-                <span class="wc-team-hero__chip">{{t 'team.pot'}} {{model.team.pot}}</span>
-                <span class="wc-team-hero__chip">{{t 'team.positionPrefix'}} #{{model.positionInGroup}}</span>
+        <div class="wc-team-hero__banner" aria-hidden="true">
+            {{#if model.heroPhoto}}
+                <img class="wc-team-hero__photo" src={{model.heroPhoto}} alt="">
+            {{else if model.team.flag}}
+                <img class="wc-team-hero__photo wc-team-hero__photo--flag" src={{model.team.flag}} alt="">
+            {{/if}}
+            <div class="wc-team-hero__scrim"></div>
+        </div>
+        <div class="wc-team-hero__content">
+            {{team-crest fifaCode=model.team.fifaCode size=112}}
+            <div class="wc-team-hero__body">
+                <span class="wc-team-hero__eyebrow">
+                    {{t 'group.prefix'}} {{model.groupLetter}} &middot; {{model.team.confederation}}
+                </span>
+                <h1 class="wc-team-hero__name">
+                    <img class="wc-team-hero__flag" src={{model.team.flag}} alt="{{model.team.name}} flag">
+                    {{model.team.name}}
+                </h1>
+                <div class="wc-team-hero__meta">
+                    <span class="wc-team-hero__chip">{{model.team.fifaCode}}</span>
+                    <span class="wc-team-hero__chip">{{t 'team.pot'}} {{model.team.pot}}</span>
+                    <span class="wc-team-hero__chip">{{t 'team.positionPrefix'}} #{{model.positionInGroup}}</span>
+                </div>
             </div>
         </div>
     </section>
