@@ -1,0 +1,19 @@
+#:schema https://raw.githubusercontent.com/cloudflare/workers-sdk/main/packages/wrangler/config-schema.json
+
+# Cloudflare Worker config for the api-football proxy.
+# Deploys proxy/cloudflare-worker.js to the worker named below.
+#
+# Usage (from repo root):
+#   cd proxy
+#   npx wrangler login                       # one-time browser auth
+#   npx wrangler secret put API_SPORTS_KEY   # paste your key when prompted
+#   npx wrangler deploy                      # uploads + activates
+
+name = "wc2026-proxy"
+main = "cloudflare-worker.js"
+compatibility_date = "2024-11-01"
+
+# Optional: restrict CORS origin once the site is deployed.
+# Add a matching entry in Cloudflare dashboard or uncomment here:
+# [vars]
+# ALLOW_ORIGIN = "https://your-site.example.com"
