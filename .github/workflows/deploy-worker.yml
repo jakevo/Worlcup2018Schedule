@@ -19,7 +19,8 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: proxy
-          secrets: |
-            API_SPORTS_KEY
-        env:
-          API_SPORTS_KEY: ${{ secrets.API_SPORTS_KEY }}
+        # API_SPORTS_KEY is stored as a Worker secret via the
+        # Cloudflare dashboard (one-time manual step). CI only
+        # pushes the code; secrets live server-side and persist
+        # across deploys. If the secret ever needs rotating, do
+        # it in Cloudflare directly, not from CI.
