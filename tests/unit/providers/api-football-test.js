@@ -77,14 +77,16 @@ module('Unit | Provider | api-football', function () {
         assert.equal(p.kind(), 'api-football');
     });
 
-    test('direct mode: sends x-apisports-key header on every request', function (assert) {
+    test('direct mode: sends x-apisports-key header on every api-football request', function (assert) {
         const fetch = mockFetch({
             '/teams': mockResponse(TEAMS_RESPONSE),
             '/fixtures': mockResponse(FIXTURES_RESPONSE)
         });
         const p = new ApiFootballProvider({ apiKey: 'abc-123', fetch });
         return p.load().then(() => {
-            fetch.calls.forEach(c => {
+            const apiCalls = fetch.calls.filter(c => /api-sports\.io/.test(c.url));
+            assert.ok(apiCalls.length > 0, 'hit the api-sports endpoint');
+            apiCalls.forEach(c => {
                 assert.equal(c.opts.headers['x-apisports-key'], 'abc-123',
                     `${c.url} carried the api-sports key`);
             });
@@ -98,9 +100,9 @@ module('Unit | Provider | api-football', function () {
         });
         const p = new ApiFootballProvider({ proxyUrl: 'https://proxy.example', fetch });
         return p.load().then(() => {
-            fetch.calls.forEach(c => {
-                assert.ok(c.url.indexOf('https://proxy.example') === 0,
-                    `${c.url} routed through proxy`);
+            const apiCalls = fetch.calls.filter(c => c.url.indexOf('https://proxy.example') === 0);
+            assert.ok(apiCalls.length > 0, 'called the proxy');
+            apiCalls.forEach(c => {
                 assert.strictEqual(c.opts.headers['x-apisports-key'], undefined,
                     'no key header in proxy mode');
             });
@@ -126,12 +128,16 @@ module('Unit | Provider | api-football', function () {
         });
         const p = new ApiFootballProvider({ apiKey: 'k', fetch, leagueId: 42, season: 2030 });
         return p.load().then(() => {
-            assert.ok(fetch.calls.every(c => /league=42/.test(c.url) && /season=2030/.test(c.url)),
-                'override applied to both endpoints');
+            const apiCalls = fetch.calls.filter(c => /api-sports\.io/.test(c.url));
+            assert.ok(apiCalls.length > 0, 'hit the api');
+            apiCalls.forEach(c => {
+                assert.ok(/league=42/.test(c.url) && /season=2030/.test(c.url),
+                    `${c.url} used overridden league + season`);
+            });
         });
     });
 
-    test('normalizes teams into { name, fifaCode, flag, iso2 }', function (assert) {
+    test('normalizes teams into { name, fifaCode, flag }', function (assert) {
         const fetch = mockFetch({
             '/teams': mockResponse(TEAMS_RESPONSE),
             '/fixtures': mockResponse(FIXTURES_RESPONSE)
@@ -142,7 +148,6 @@ module('Unit | Provider | api-football', function () {
             assert.equal(data.teams[0].name, 'Mexico');
             assert.equal(data.teams[0].fifaCode, 'MEX');
             assert.equal(data.teams[0].flag, 'https://x/mx.png');
-            assert.equal(data.teams[0].iso2, 'me', 'iso2 derived from first 2 chars of country name');
         });
     });
 
@@ -159,7 +164,7 @@ module('Unit | Provider | api-football', function () {
         });
     });
 
-    test('normalizes fixtures: date + HH:mm split, score only when finished', function (assert) {
+    test('normalizes fixtures: date + HH:mm split in ET, score only when finished', function (assert) {
         const fetch = mockFetch({
             '/teams': mockResponse(TEAMS_RESPONSE),
             '/fixtures': mockResponse(FIXTURES_RESPONSE)
@@ -168,8 +173,9 @@ module('Unit | Provider | api-football', function () {
         return p.load().then(data => {
             assert.equal(data.matches.length, 2);
             const m0 = data.matches[0];
+            // 2026-06-11T22:00 UTC → 18:00 ET
             assert.equal(m0.date, '2026-06-11');
-            assert.equal(m0.time, '22:00');
+            assert.equal(m0.time, '18:00');
             assert.equal(m0.team1, 'Mexico');
             assert.equal(m0.team2, 'South Africa');
             assert.strictEqual(m0.score1, undefined, 'no score for NS fixture');

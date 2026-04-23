@@ -36,15 +36,14 @@ module.exports = function(environment) {
     // Never put `apiKey` here in a deployed build — it would ship
     // to every browser. apiKey is only OK for local dev builds you
     // never push.
-    // INFRASTRUCTURE READY, data not yet available.
-    // The api-football free tier only covers seasons 2022-2024;
-    // WC 2026 needs a paid plan (~$19/mo). When upgrading, flip to:
-    //   { kind: 'api-football',
-    //     proxyUrl: 'https://wc2026-proxy.javoucsd.workers.dev' }
-    // The proxy is deployed and tested end-to-end; only the plan
-    // tier blocks live data.
+    // Live data via the Cloudflare Worker proxy in proxy/. The
+    // api-key lives in the Worker's secret store, so this bundle
+    // carries no credentials. To fall back to the bundled JSON
+    // files (public/data.json + public/schedule.json), flip
+    // back to { kind: 'static' }.
     dataProvider: {
-      kind: 'static'
+      kind: 'api-football',
+      proxyUrl: 'https://wc2026-proxy.javoucsd.workers.dev'
     }
   };
 
