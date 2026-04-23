@@ -13,14 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Deploy proxy worker
-        uses: cloudflare/wrangler-action@v3
+      - uses: actions/setup-node@v4
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          workingDirectory: proxy
-        # API_SPORTS_KEY is stored as a Worker secret via the
-        # Cloudflare dashboard (one-time manual step). CI only
-        # pushes the code; secrets live server-side and persist
-        # across deploys. If the secret ever needs rotating, do
-        # it in Cloudflare directly, not from CI.
+          node-version: '20'
+      - name: Deploy proxy worker
+        run: npx --yes wrangler@latest deploy
+        working-directory: proxy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        # API_SPORTS_KEY is a Cloudflare Worker secret (managed in the
+        # dashboard, persists across deploys). CI only uploads code.
