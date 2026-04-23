@@ -147,6 +147,8 @@ export default {
     'team.squad.def': 'Hậu vệ',
     'team.squad.mid': 'Tiền vệ',
     'team.squad.fwd': 'Tiền đạo',
+    'team.startingXI': 'Đội hình xuất phát',
+    'team.startingXI.preview': 'Xem trước — tên cầu thủ và sơ đồ thật sẽ có khi kết nối dữ liệu trực tiếp.',
 
     'scorers.title': 'Vua phá lưới',
     'scorers.subtitle': 'Cuộc đua Chiếc giày vàng — những cầu thủ dẫn đầu giải đấu.',

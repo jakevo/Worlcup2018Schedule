@@ -48,6 +48,10 @@ export default Route.extend({
             const squadSource = (data.squads && data.squads[code]) ||
                 (team && team.squad) || [];
 
+            const lineup = (data.lineups && data.lineups[code]) || null;
+            const formation = (lineup && lineup.formation) || '4-3-3';
+            const startingXI = (lineup && lineup.startXI) || [];
+
             return {
                 team,
                 groupLetter,
@@ -57,7 +61,9 @@ export default Route.extend({
                 fixtures,
                 heroPhoto: photoFor(code),
                 squad: squadSource,
-                squadByPosition: bucketize(squadSource)
+                squadByPosition: bucketize(squadSource),
+                formation,
+                startingXI
             };
         });
     }

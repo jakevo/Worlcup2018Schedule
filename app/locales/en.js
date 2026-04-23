@@ -147,6 +147,8 @@ export default {
     'team.squad.def': 'Defenders',
     'team.squad.mid': 'Midfielders',
     'team.squad.fwd': 'Forwards',
+    'team.startingXI': 'Starting XI',
+    'team.startingXI.preview': 'Preview — real names and formation arrive with live data.',
 
     'scorers.title': 'Top scorers',
     'scorers.subtitle': 'Golden boot race — leaders across the tournament.',

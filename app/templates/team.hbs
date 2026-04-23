@@ -48,10 +48,17 @@
         </dl>
     </section>
 
-    <section class="wc-section">
+    <section class="wc-section" style={{team-hero-style model.team.fifaCode}}>
         <div class="wc-section__head">
             <h2 class="wc-section__title">{{t 'team.squad'}}</h2>
         </div>
+        {{pitch-lineup
+            formation=(if model.formation model.formation "4-3-3")
+            players=model.startingXI
+            fifaCode=model.team.fifaCode}}
+        {{#unless model.squad.length}}
+            <p class="wc-pitch__caption">{{t 'team.startingXI.preview'}}</p>
+        {{/unless}}
         {{#if model.squad.length}}
             <div class="wc-squad">
                 {{#each model.squadByPosition as |group|}}
@@ -79,10 +86,6 @@
                         </div>
                     {{/if}}
                 {{/each}}
-            </div>
-        {{else}}
-            <div class="wc-placeholder">
-                <p>{{t 'team.squad.empty'}}</p>
             </div>
         {{/if}}
     </section>
