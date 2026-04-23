@@ -73,6 +73,7 @@
             {{#link-to 'schedule' class='wc-section__link'}}All matches &rarr;{{/link-to}}
         </div>
         <article class="wc-next {{if model.nextMatch.isLive 'is-live'}}">
+            {{add-to-calendar match=model.nextMatch}}
             <span class="wc-next__label">
                 {{#if model.nextMatch.isLive}}
                     <span class="wc-live-badge wc-live-badge--solid"><span class="wc-live-badge__dot"></span>LIVE NOW</span>

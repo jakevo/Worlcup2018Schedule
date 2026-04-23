@@ -566,6 +566,7 @@ img { max-width: 100%; display: block; }
 /* ---------- Next-match spotlight --------------------------------- */
 
 .wc-next {
+    position: relative;
     background: var(--surface);
     border-radius: var(--radius-lg);
     padding: 18px;
@@ -943,8 +944,11 @@ th.wc-table__team { display: table-cell; font-weight: 700; }
 
 .wc-match {
     display: grid;
-    grid-template-columns: 60px 1fr;
-    gap: 12px;
+    grid-template-columns: 60px 1fr auto;
+    grid-template-areas:
+        "time body cal"
+        "venue venue venue";
+    gap: 8px 12px;
     padding: 12px;
     border: 1px solid var(--border);
     border-radius: var(--radius);
@@ -952,6 +956,10 @@ th.wc-table__team { display: table-cell; font-weight: 700; }
     transition: border-color 0.2s, transform 0.15s;
     align-items: center;
 }
+.wc-match > .wc-match__time { grid-area: time; }
+.wc-match > .wc-match__body { grid-area: body; }
+.wc-match > .wc-match__venue { grid-area: venue; }
+.wc-match > .wc-add-cal { grid-area: cal; align-self: center; }
 .wc-match:hover {
     border-color: var(--border-strong);
     transform: translateY(-1px);
@@ -1057,7 +1065,7 @@ th.wc-table__team { display: table-cell; font-weight: 700; }
 @media (min-width: 640px) {
     .wc-day { padding: 18px 20px; }
     .wc-match {
-        grid-template-columns: 88px 1fr;
+        grid-template-columns: 88px 1fr auto;
         padding: 14px 16px;
     }
     .wc-match__kick { font-size: 13px; }
@@ -1069,7 +1077,8 @@ th.wc-table__team { display: table-cell; font-weight: 700; }
 
 @media (min-width: 960px) {
     .wc-match {
-        grid-template-columns: 100px 1fr 220px;
+        grid-template-columns: 100px 1fr auto 220px;
+        grid-template-areas: "time body cal venue";
     }
     .wc-match__body { grid-template-columns: 1fr; }
     .wc-match__venue {
@@ -1422,6 +1431,136 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
     min-width: 0;
 }
 .wc-table__team-link:hover .wc-table__team-name { color: var(--accent); text-decoration: underline; }
+
+/* ---------- Add-to-calendar ------------------------------------- */
+
+.wc-add-cal {
+    position: relative;
+    display: inline-flex;
+    flex-shrink: 0;
+    z-index: 5;
+}
+.wc-add-cal__btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--ink-soft);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.05s;
+    font-family: inherit;
+}
+.wc-add-cal__btn:hover {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-color: var(--accent);
+}
+.wc-add-cal__btn:active { transform: scale(0.92); }
+.wc-add-cal.is-open .wc-add-cal__btn {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    box-shadow: 0 4px 14px rgba(229, 23, 74, 0.4);
+}
+
+.wc-add-cal__menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 240px;
+    max-width: calc(100vw - 32px);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    padding: 6px;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    animation: wc-add-cal-pop 0.15s ease-out;
+}
+@keyframes wc-add-cal-pop {
+    from { opacity: 0; transform: translateY(-4px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.wc-add-cal__opt {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 13px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    text-align: left;
+    font-family: inherit;
+    width: 100%;
+    transition: background 0.12s, color 0.12s;
+}
+.wc-add-cal__opt:hover,
+.wc-add-cal__opt:focus {
+    background: var(--accent-soft);
+    color: var(--accent);
+    text-decoration: none;
+    outline: none;
+}
+.wc-add-cal__opt-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent-soft);
+    border-radius: 6px;
+    padding: 2px;
+}
+.wc-add-cal__opt:hover .wc-add-cal__opt-icon,
+.wc-add-cal__opt:focus .wc-add-cal__opt-icon {
+    background: var(--accent);
+    color: #fff;
+}
+.wc-add-cal__opt-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+    min-width: 0;
+}
+.wc-add-cal__opt-text strong { font-weight: 700; font-size: 13px; }
+.wc-add-cal__opt-text em {
+    font-style: normal;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+}
+.wc-add-cal__opt:hover .wc-add-cal__opt-text em,
+.wc-add-cal__opt:focus .wc-add-cal__opt-text em { color: var(--accent); opacity: 0.8; }
+
+/* Placement variants */
+.wc-next .wc-add-cal {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+}
+.wc-match .wc-add-cal__btn { width: 30px; height: 30px; }
+
+/* Narrow-screen: anchor menu to viewport right with inset */
+@media (max-width: 520px) {
+    .wc-add-cal__menu {
+        right: -4px;
+        min-width: 220px;
+    }
+}
 
 /* ---------- Venues ----------------------------------------------- */
 
