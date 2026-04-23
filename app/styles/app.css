@@ -447,26 +447,31 @@ img { max-width: 100%; display: block; }
     color: rgba(255, 255, 255, 0.55);
 }
 
-/* Live / today grid of fixture cards */
+/* Live / today grid of fixture cards. Stretch the grid to the widget
+   width (the .wc-tlive flex container is align-items:center so it
+   won't stretch children by default). */
 .wc-tlive__grid {
     display: grid;
     gap: 10px;
     width: 100%;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-self: stretch;
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 760px;
 }
-.wc-tlive__grid--1 { grid-template-columns: minmax(0, 1fr); max-width: 340px; }
-.wc-tlive__grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.wc-tlive__grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.wc-tlive__grid--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.wc-tlive__grid--5,
-.wc-tlive__grid--6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (min-width: 560px) {
+    .wc-tlive__grid--2,
+    .wc-tlive__grid--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .wc-tlive__grid--3,
+    .wc-tlive__grid--5,
+    .wc-tlive__grid--6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
 
 .wc-tlive-card {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 10px 14px 18px;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 10px 16px 20px;
     background: rgba(0, 0, 0, 0.22);
     border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 12px;
@@ -482,12 +487,13 @@ img { max-width: 100%; display: block; }
     color: #fff;
 }
 .wc-tlive-card__team {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 6px;
     min-width: 0;
     font-size: 12px;
     font-weight: 700;
+    flex: 0 0 auto;
 }
 .wc-tlive-card__team--right { justify-content: flex-end; }
 .wc-tlive-card__team img {
@@ -2077,10 +2083,7 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
     .wc-tlive__team img { width: 18px; }
     .wc-tlive__place { font-size: 10px; }
     .wc-tlive__grid { gap: 6px; }
-    .wc-tlive__grid--3,
-    .wc-tlive__grid--5,
-    .wc-tlive__grid--6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .wc-tlive-card { padding: 8px 10px; }
+    .wc-tlive-card { padding: 8px 14px 16px; gap: 10px; }
     .wc-tlive-card__code { font-size: 12px; }
     .wc-tlive-card__score { font-size: 16px; }
     .wc-tlive-card__team img { width: 20px; height: 13px; }
