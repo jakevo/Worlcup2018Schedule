@@ -7,6 +7,12 @@ export default {
     'nav.bracket': 'Loại trực tiếp',
     'nav.venues': 'Sân vận động',
     'nav.news': 'Tin tức',
+    'tab.home': 'Trang chủ',
+    'tab.groups': 'Bảng',
+    'tab.schedule': 'Lịch',
+    'tab.bracket': 'Loại trực tiếp',
+    'tab.venues': 'Sân',
+    'tab.news': 'Tin tức',
     'theme.toggle': 'Chuyển chế độ sáng/tối',
     'locale.switch': 'Đổi ngôn ngữ',
 

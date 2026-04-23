@@ -7,6 +7,12 @@ export default {
     'nav.bracket': 'Bracket',
     'nav.venues': 'Venues',
     'nav.news': 'News',
+    'tab.home': 'Home',
+    'tab.groups': 'Groups',
+    'tab.schedule': 'Fixtures',
+    'tab.bracket': 'Bracket',
+    'tab.venues': 'Venues',
+    'tab.news': 'News',
     'theme.toggle': 'Toggle dark mode',
     'locale.switch': 'Switch language',
 
