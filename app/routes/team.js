@@ -1,5 +1,6 @@
 import Route from '@ember/routing/route';
-import { loadTournament } from '../utils/tournament-data';
+import RSVP from 'rsvp';
+import { loadTournament, loadSquad } from '../utils/tournament-data';
 import { photoFor } from '../utils/team-colors';
 
 const POSITION_BUCKETS = [
@@ -8,6 +9,13 @@ const POSITION_BUCKETS = [
     { labelKey: 'team.squad.mid', match: /^(midfielder|mid)/i },
     { labelKey: 'team.squad.fwd', match: /^(attacker|forward|fwd|striker)/i }
 ];
+
+const POSITION_ORDER = { goalkeeper: 0, defender: 1, midfielder: 2, attacker: 3 };
+
+function positionWeight(p) {
+    const key = String(p || '').toLowerCase().split(' ')[0];
+    return POSITION_ORDER[key] != null ? POSITION_ORDER[key] : 4;
+}
 
 function bucketize(squad) {
     const buckets = POSITION_BUCKETS.map(b => ({ labelKey: b.labelKey, players: [] }));
@@ -19,6 +27,21 @@ function bucketize(squad) {
     }
     if (other.length) buckets.push({ labelKey: 'team.squad.other', players: other });
     return buckets;
+}
+
+/*
+ * Construct a probable XI from a squad. No shirt-number magic —
+ * pick 1 GK, 4 DEF, 3 MID, 3 FWD (default 4-3-3) in roster order.
+ * Replaced by real lineups when /fixtures/lineups is wired.
+ */
+function pickStartingXI(squad) {
+    const sorted = (squad || []).slice().sort((a, b) =>
+        positionWeight(a.position) - positionWeight(b.position));
+    const gk = sorted.filter(p => /^goalkeeper/i.test(p.position || '')).slice(0, 1);
+    const def = sorted.filter(p => /^defender/i.test(p.position || '')).slice(0, 4);
+    const mid = sorted.filter(p => /^midfielder/i.test(p.position || '')).slice(0, 3);
+    const fwd = sorted.filter(p => /^(attacker|forward)/i.test(p.position || '')).slice(0, 3);
+    return gk.concat(def, mid, fwd);
 }
 
 export default Route.extend({
@@ -45,29 +68,30 @@ export default Route.extend({
             );
             const groupTeams = (data.groups.find(g => g.letter === groupLetter) || {}).teams || [];
 
-            const squadSource = (data.squads && data.squads[code]) ||
-                (team && team.squad) || [];
+            return RSVP.hash({
+                tournament: data,
+                squad: team && team.id ? loadSquad(team.id) : Promise.resolve([])
+            }).then(({ squad }) => {
+                const startingXI = pickStartingXI(squad);
+                const startingXIRows = [];
+                for (let i = 0; i < 11; i++) startingXIRows.push(startingXI[i] || {});
+                const formation = '4-3-3';
 
-            const lineup = (data.lineups && data.lineups[code]) || null;
-            const formation = (lineup && lineup.formation) || '4-3-3';
-            const startingXI = (lineup && lineup.startXI) || [];
-            const startingXIRows = [];
-            for (let i = 0; i < 11; i++) startingXIRows.push(startingXI[i] || {});
-
-            return {
-                team,
-                groupLetter,
-                groupStanding,
-                positionInGroup,
-                groupTeams,
-                fixtures,
-                heroPhoto: photoFor(code),
-                squad: squadSource,
-                squadByPosition: bucketize(squadSource),
-                formation,
-                startingXI,
-                startingXIRows
-            };
+                return {
+                    team,
+                    groupLetter,
+                    groupStanding,
+                    positionInGroup,
+                    groupTeams,
+                    fixtures,
+                    heroPhoto: photoFor(code),
+                    squad,
+                    squadByPosition: bucketize(squad),
+                    formation,
+                    startingXI,
+                    startingXIRows
+                };
+            });
         });
     }
 });

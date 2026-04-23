@@ -29,7 +29,16 @@
  */
 
 const UPSTREAM = 'https://v3.football.api-sports.io';
-const ALLOWED_PATHS = [/^\/teams(\?|$)/, /^\/fixtures(\?|$)/, /^\/leagues(\?|$)/];
+const ALLOWED_PATHS = [
+    /^\/teams(\?|$)/,
+    /^\/fixtures(\?|$)/,
+    /^\/leagues(\?|$)/,
+    /^\/players\/squads(\?|$)/,
+    /^\/players(\?|$)/,
+    /^\/fixtures\/lineups(\?|$)/,
+    /^\/fixtures\/events(\?|$)/,
+    /^\/fixtures\/statistics(\?|$)/
+];
 
 export default {
     async fetch(request, env) {

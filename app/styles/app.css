@@ -2683,6 +2683,16 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
     border-bottom: 1px solid rgba(255, 255, 255, 0.16);
 }
 .wc-xi__list-head > .wc-crest { flex-shrink: 0; filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35)); }
+.wc-crest__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 4px;
+}
+.wc-crest--logo { display: inline-flex; align-items: center; justify-content: center; }
 .wc-xi__eyebrow {
     display: block;
     font-size: 10px;

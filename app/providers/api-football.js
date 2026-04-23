@@ -107,6 +107,25 @@ export default class ApiFootballProvider {
         return this._get(`/fixtures?league=${this.leagueId}&season=${this.season}`);
     }
 
+    loadSquad(teamId) {
+        if (!teamId) return Promise.resolve([]);
+        if (!this._squadCache) this._squadCache = {};
+        if (this._squadCache[teamId]) return Promise.resolve(this._squadCache[teamId]);
+        return this._get(`/players/squads?team=${teamId}`).then(doc => {
+            const rows = ((doc && doc.response) || [])[0];
+            const players = ((rows && rows.players) || []).map(p => ({
+                id: p.id,
+                name: p.name,
+                age: p.age,
+                number: p.number,
+                position: p.position,
+                photo: p.photo
+            }));
+            this._squadCache[teamId] = players;
+            return players;
+        }).catch(() => []);
+    }
+
     _get(path) {
         const headers = {};
         // In proxy mode the Worker attaches the key server-side.

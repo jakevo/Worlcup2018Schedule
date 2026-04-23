@@ -14,7 +14,7 @@
             <div class="wc-team-hero__scrim"></div>
         </div>
         <div class="wc-team-hero__content">
-            {{team-crest fifaCode=model.team.fifaCode size=112}}
+            {{team-crest fifaCode=model.team.fifaCode logoUrl=model.team.flag size=112}}
             <div class="wc-team-hero__body">
                 <span class="wc-team-hero__eyebrow">
                     {{t 'group.prefix'}} {{model.groupLetter}} &middot; {{model.team.confederation}}
@@ -56,7 +56,7 @@
         <div class="wc-xi">
             <aside class="wc-xi__list">
                 <header class="wc-xi__list-head">
-                    {{team-crest fifaCode=model.team.fifaCode size=42}}
+                    {{team-crest fifaCode=model.team.fifaCode logoUrl=model.team.flag size=42}}
                     <div>
                         <span class="wc-xi__eyebrow">{{t 'team.startingXI'}}</span>
                         <strong class="wc-xi__formation">{{if model.formation model.formation "4-3-3"}}</strong>

@@ -20,6 +20,8 @@ export default class StaticJsonProvider {
 
     kind() { return 'static'; }
 
+    loadSquad() { return Promise.resolve([]); }
+
     load() {
         return Promise.all([
             this._fetchJson(this.teamsUrl),

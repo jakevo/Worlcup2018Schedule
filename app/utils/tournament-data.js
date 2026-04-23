@@ -21,6 +21,14 @@ export function _setProviderForTesting(p) {
     cachedPromise = null;
 }
 
+// Lazy-load a single team's squad. Cached inside the provider so
+// repeat calls for the same team don't burn API quota.
+export function loadSquad(teamId) {
+    const p = getProvider();
+    if (typeof p.loadSquad !== 'function') return Promise.resolve([]);
+    return p.loadSquad(teamId);
+}
+
 function parseScore(match) {
     if (match.score1 !== undefined && match.score2 !== undefined) {
         return { s1: match.score1, s2: match.score2, played: true };
