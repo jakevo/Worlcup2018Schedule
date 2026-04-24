@@ -232,6 +232,7 @@ img { max-width: 100%; display: block; }
     scrollbar-width: none;
     flex-shrink: 1;
     min-width: 0;
+    padding-right: 12px;
 }
 .wc-nav::-webkit-scrollbar { display: none; }
 .wc-nav__link {
@@ -241,12 +242,22 @@ img { max-width: 100%; display: block; }
     font-weight: 600;
     font-size: 13px;
     white-space: nowrap;
+    text-decoration: none;
     transition: background 0.2s, color 0.2s;
+}
+.wc-nav__link:hover,
+.wc-nav__link:focus,
+.wc-nav__link:visited,
+.wc-nav__link:active {
+    text-decoration: none;
+    color: #fff;
 }
 .wc-nav__link:hover {
     background: rgba(255, 255, 255, 0.12);
-    color: #fff;
-    text-decoration: none;
+}
+.wc-nav__link:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.55);
+    outline-offset: -2px;
 }
 .wc-nav__link.active {
     background: #fff;
@@ -255,11 +266,14 @@ img { max-width: 100%; display: block; }
 }
 
 @media (min-width: 720px) {
-    .wc-header__inner { padding: 18px 32px; gap: 28px; }
+    .wc-header__inner { padding: 18px 32px; gap: 20px; }
     .wc-brand__mark { width: 48px; height: 48px; }
     .wc-brand__title { font-size: 18px; }
     .wc-brand__flag { width: 18px; height: 12px; }
-    .wc-nav__link { font-size: 14px; padding: 9px 16px; }
+    .wc-nav__link { font-size: 13px; padding: 8px 12px; }
+}
+@media (min-width: 1100px) {
+    .wc-nav__link { font-size: 14px; padding: 9px 14px; }
 }
 
 /* ---------- Buttons ---------------------------------------------- */

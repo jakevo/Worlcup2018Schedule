@@ -50,19 +50,19 @@
             <h2 class="wc-section__title">{{t 'team.squad'}}</h2>
         </div>
 
-        <div class="wc-xi">
-            <div class="wc-xi__pitch">
-                {{pitch-lineup
-                    formation=(if model.formation model.formation "4-3-3")
-                    players=model.startingXI
-                    teamCode=model.team.fifaCode
-                    orientation="landscape"}}
+        {{#if model.squad.length}}
+            <div class="wc-xi">
+                <div class="wc-xi__pitch">
+                    {{pitch-lineup
+                        formation=(if model.formation model.formation "4-3-3")
+                        players=model.startingXI
+                        teamCode=model.team.fifaCode
+                        orientation="landscape"}}
+                </div>
             </div>
-        </div>
-
-        {{#unless model.squad.length}}
+        {{else}}
             <p class="wc-pitch__caption">{{t 'team.startingXI.preview'}}</p>
-        {{/unless}}
+        {{/if}}
         {{#if model.squad.length}}
             <input id="wc-squad-toggle" type="checkbox" class="wc-squad-toggle__input">
             <label for="wc-squad-toggle" class="wc-squad-toggle">
