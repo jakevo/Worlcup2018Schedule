@@ -15,24 +15,6 @@ function toZulu(d) {
     return `${d.getUTCFullYear()}${pad2(d.getUTCMonth() + 1)}${pad2(d.getUTCDate())}T${pad2(d.getUTCHours())}${pad2(d.getUTCMinutes())}${pad2(d.getUTCSeconds())}Z`;
 }
 
-function escapeIcs(s) {
-    return String(s || '')
-        .replace(/\\/g, '\\\\')
-        .replace(/([;,])/g, '\\$1')
-        .replace(/\r?\n/g, '\\n');
-}
-
-function foldIcsLine(line) {
-    if (line.length <= 75) return line;
-    const parts = [];
-    let i = 0;
-    while (i < line.length) {
-        parts.push((i === 0 ? '' : ' ') + line.slice(i, i + 73));
-        i += 73;
-    }
-    return parts.join('\r\n');
-}
-
 export default Component.extend({
     tagName: 'span',
     classNames: ['wc-add-cal'],
@@ -111,35 +93,19 @@ export default Component.extend({
         return `https://outlook.live.com/calendar/0/deeplink/compose?${params.toString()}`;
     }),
 
-    icsFilename: computed('match.{date,team1,team2}', function () {
+    icsUrl: computed('match.{date,time,team1,team2,group,venue,city}', function () {
         const m = this.get('match') || {};
-        const slug = (s) => String(s || '').replace(/[^a-z0-9]+/gi, '_').replace(/^_|_$/g, '');
-        return `wc2026-${m.date}-${slug(m.team1)}-vs-${slug(m.team2)}.ics`;
+        const params = new URLSearchParams({
+            date: m.date || '',
+            time: m.time || '',
+            t1: m.team1 || '',
+            t2: m.team2 || '',
+            g: m.group || '',
+            v: m.venue || '',
+            c: m.city || ''
+        });
+        return `/ics?${params.toString()}`;
     }),
-
-    _buildIcs() {
-        const m = this.get('match') || {};
-        const { start, end } = this.get('_window');
-        const uid = `wc2026-${m.date}-${(m.team1 || '').replace(/\s+/g, '')}-${(m.team2 || '').replace(/\s+/g, '')}@worldcup2026`;
-        const lines = [
-            'BEGIN:VCALENDAR',
-            'VERSION:2.0',
-            'PRODID:-//World Cup 2026//Schedule//EN',
-            'CALSCALE:GREGORIAN',
-            'METHOD:PUBLISH',
-            'BEGIN:VEVENT',
-            `UID:${uid}`,
-            `DTSTAMP:${toZulu(new Date())}`,
-            `DTSTART:${toZulu(start)}`,
-            `DTEND:${toZulu(end)}`,
-            foldIcsLine(`SUMMARY:${escapeIcs(this.get('title'))}`),
-            foldIcsLine(`DESCRIPTION:${escapeIcs(this.get('description'))}`),
-            foldIcsLine(`LOCATION:${escapeIcs(this.get('location'))}`),
-            'END:VEVENT',
-            'END:VCALENDAR'
-        ];
-        return lines.join('\r\n');
-    },
 
     actions: {
         toggle() {
@@ -147,30 +113,6 @@ export default Component.extend({
         },
         close() {
             this.set('isOpen', false);
-        },
-        downloadIcs() {
-            const ics = this._buildIcs();
-            const ua = (typeof navigator !== 'undefined' && navigator.userAgent) || '';
-            const isIOS = /iPad|iPhone|iPod/.test(ua) || (/Mac/.test(ua) && 'ontouchend' in document);
-            this.set('isOpen', false);
-
-            if (isIOS) {
-                // Safari on iOS won't honor <a download> with blob URLs; a
-                // data: URL lets the OS hand the .ics off to the Calendar app.
-                window.location.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
-                return;
-            }
-
-            const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = this.get('icsFilename');
-            a.rel = 'noopener';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            setTimeout(() => URL.revokeObjectURL(url), 2000);
         }
     }
 });
