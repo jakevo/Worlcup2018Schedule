@@ -73,8 +73,6 @@ export default Route.extend({
                 squad: team && team.id ? loadSquad(team.id) : Promise.resolve([])
             }).then(({ squad }) => {
                 const startingXI = pickStartingXI(squad);
-                const startingXIRows = [];
-                for (let i = 0; i < 11; i++) startingXIRows.push(startingXI[i] || {});
                 const formation = '4-3-3';
 
                 return {
@@ -88,8 +86,7 @@ export default Route.extend({
                     squad,
                     squadByPosition: bucketize(squad),
                     formation,
-                    startingXI,
-                    startingXIRows
+                    startingXI
                 };
             });
         });

@@ -7,12 +7,14 @@ export default Controller.extend({
     groupFilter: 'all',
     searchQuery: '',
     showPlayedOnly: false,
+    selectedDate: null,
+    _dateInitialized: false,
 
     allGroups: computed('model.groups.[]', function () {
         return (this.get('model.groups') || []).map(g => g.letter);
     }),
 
-    filteredDays: computed('model.matchesByDate.[]', 'groupFilter', 'searchQuery', 'showPlayedOnly', function () {
+    allDays: computed('model.matchesByDate.[]', 'groupFilter', 'searchQuery', 'showPlayedOnly', function () {
         const group = this.get('groupFilter');
         const query = (this.get('searchQuery') || '').trim().toLowerCase();
         const playedOnly = this.get('showPlayedOnly');
@@ -34,6 +36,30 @@ export default Controller.extend({
             .filter(Boolean);
     }),
 
+    todayOrNext: computed('allDays.[]', function () {
+        const days = this.get('allDays') || [];
+        if (!days.length) return null;
+        const now = new Date();
+        const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+        if (days.some(d => d.date === today)) return today;
+        const upcoming = days.find(d => d.date >= today);
+        return upcoming ? upcoming.date : days[days.length - 1].date;
+    }),
+
+    activeDate: computed('selectedDate', 'todayOrNext', '_dateInitialized', function () {
+        const selected = this.get('selectedDate');
+        if (selected) return selected;
+        if (!this.get('_dateInitialized')) return this.get('todayOrNext');
+        return null;
+    }),
+
+    filteredDays: computed('allDays.[]', 'activeDate', function () {
+        const days = this.get('allDays') || [];
+        const active = this.get('activeDate');
+        if (!active) return days;
+        return days.filter(d => d.date === active);
+    }),
+
     totalFiltered: computed('filteredDays.[]', function () {
         return (this.get('filteredDays') || []).reduce((n, d) => n + d.matches.length, 0);
     }),
@@ -49,6 +75,19 @@ export default Controller.extend({
         },
         togglePlayedOnly() {
             this.set('showPlayedOnly', !this.get('showPlayedOnly'));
+        },
+        selectDate(date) {
+            if (this.get('activeDate') === date) {
+                this.set('selectedDate', null);
+                this.set('_dateInitialized', true);
+            } else {
+                this.set('selectedDate', date);
+                this.set('_dateInitialized', true);
+            }
+        },
+        showAllDates() {
+            this.set('selectedDate', null);
+            this.set('_dateInitialized', true);
         },
         refresh() {
             invalidateTournamentCache();

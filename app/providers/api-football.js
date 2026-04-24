@@ -132,10 +132,11 @@ export default class ApiFootballProvider {
         if (!this.proxyUrl && this.apiKey) {
             headers['x-apisports-key'] = this.apiKey;
         }
-        return this.fetchFn(`${this.baseUrl}${path}`, {
-            headers,
-            cache: 'no-store'
-        }).then(r => {
+        // Let the browser honor Cache-Control from the Worker. The app
+        // has its own in-memory cache (tournament-data.cachedPromise) to
+        // avoid duplicate in-flight calls; forcing `no-store` here means
+        // every poll pays full Worker cold-start latency.
+        return this.fetchFn(`${this.baseUrl}${path}`, { headers }).then(r => {
             if (!r.ok) throw new Error(`api-football ${path}: ${r.status}`);
             return r.json();
         });

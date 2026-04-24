@@ -150,6 +150,17 @@ export default Component.extend({
         },
         downloadIcs() {
             const ics = this._buildIcs();
+            const ua = (typeof navigator !== 'undefined' && navigator.userAgent) || '';
+            const isIOS = /iPad|iPhone|iPod/.test(ua) || (/Mac/.test(ua) && 'ontouchend' in document);
+            this.set('isOpen', false);
+
+            if (isIOS) {
+                // Safari on iOS won't honor <a download> with blob URLs; a
+                // data: URL lets the OS hand the .ics off to the Calendar app.
+                window.location.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
+                return;
+            }
+
             const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
@@ -160,7 +171,6 @@ export default Component.extend({
             a.click();
             document.body.removeChild(a);
             setTimeout(() => URL.revokeObjectURL(url), 2000);
-            this.set('isOpen', false);
         }
     }
 });

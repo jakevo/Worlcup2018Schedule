@@ -11,15 +11,15 @@
     </div>
     <div class="wc-tlive__opener">
         <div class="wc-tlive__matchup">
-            <span class="wc-tlive__team">
+            {{#link-to 'team' 'MEX' class='wc-tlive__team'}}
                 <img src="https://flagcdn.com/w40/mx.png" alt="">
                 {{t 'countdown.opener.team1'}}
-            </span>
+            {{/link-to}}
             <span class="wc-tlive__vs">{{t 'countdown.opener.vs'}}</span>
-            <span class="wc-tlive__team">
+            {{#link-to 'team' 'RSA' class='wc-tlive__team'}}
                 <img src="https://flagcdn.com/w40/za.png" alt="">
                 {{t 'countdown.opener.team2'}}
-            </span>
+            {{/link-to}}
         </div>
         <div class="wc-tlive__place">{{t 'countdown.opener.place'}}</div>
     </div>

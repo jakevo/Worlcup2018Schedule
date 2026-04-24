@@ -4,17 +4,21 @@
             <span class="wc-brand__mark" aria-hidden="true">
                 <svg viewBox="0 0 28 36" width="100%" height="100%">
                     <defs>
-                        <linearGradient id="wc-brand-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <linearGradient id="wc-brand-gold" x1="0%" y1="0%" x2="0%" y2="100%">
                             <stop offset="0%" stop-color="#fff3c2"></stop>
-                            <stop offset="50%" stop-color="#ffd561"></stop>
-                            <stop offset="100%" stop-color="#e09b12"></stop>
+                            <stop offset="48%" stop-color="#ffd561"></stop>
+                            <stop offset="100%" stop-color="#c7870d"></stop>
                         </linearGradient>
                     </defs>
-                    <path d="M8 5 Q14 1 20 5 L20 9 Q24 11.5 23 16 Q22 23 16 25.5 L16 27.5 L20 27.5 L20 30 L8 30 L8 27.5 L12 27.5 L12 25.5 Q6 23 5 16 Q4 11.5 8 9 Z"
+                    <path d="M7 10 Q2 12 2 16 Q2 20 6 21.8" fill="none" stroke="url(#wc-brand-gold)" stroke-width="1.7" stroke-linecap="round"></path>
+                    <path d="M21 10 Q26 12 26 16 Q26 20 22 21.8" fill="none" stroke="url(#wc-brand-gold)" stroke-width="1.7" stroke-linecap="round"></path>
+                    <path d="M6 7 Q6 3 14 3 Q22 3 22 7 L22 13 Q22 21 17 23 L17 25 L19 25 L19 27 L9 27 L9 25 L11 25 L11 23 Q6 21 6 13 Z"
                           fill="url(#wc-brand-gold)" stroke="#7a4a00" stroke-width="0.55"></path>
-                    <path d="M20 11 Q25 12 24.5 16.5 Q24.2 19.5 22 21" fill="none" stroke="#7a4a00" stroke-width="0.7"></path>
-                    <path d="M8 11 Q3 12 3.5 16.5 Q3.8 19.5 6 21" fill="none" stroke="#7a4a00" stroke-width="0.7"></path>
-                    <rect x="6" y="30" width="16" height="3" rx="0.8" fill="url(#wc-brand-gold)" stroke="#7a4a00" stroke-width="0.5"></rect>
+                    <path d="M14 3 Q10.5 7 14 11" fill="none" stroke="#7a4a00" stroke-width="0.45" opacity="0.55"></path>
+                    <path d="M14 3 Q17.5 7 14 11" fill="none" stroke="#7a4a00" stroke-width="0.45" opacity="0.55"></path>
+                    <path d="M7.6 6.2 Q14 8.4 20.4 6.2" fill="none" stroke="#7a4a00" stroke-width="0.45" opacity="0.5"></path>
+                    <rect x="7" y="27" width="14" height="2.4" rx="0.4" fill="url(#wc-brand-gold)" stroke="#7a4a00" stroke-width="0.5"></rect>
+                    <rect x="4" y="29.4" width="20" height="3.6" rx="0.8" fill="url(#wc-brand-gold)" stroke="#7a4a00" stroke-width="0.5"></rect>
                 </svg>
             </span>
             <div class="wc-brand__text">
@@ -58,6 +62,45 @@
         </div>
     </div>
 </header>
+
+<div class="wc-ticker" role="region" aria-label="World Cup 2026 headlines">
+    <div class="wc-ticker__track">
+        <div class="wc-ticker__group">
+            <span class="wc-ticker__item">
+                <span class="wc-ticker__tag">{{t 'ticker.tag.kickoff'}}</span>
+                <strong>{{t 'footer.kickoff'}}</strong> {{t 'footer.kickoff.detail'}}
+            </span>
+            <span class="wc-ticker__sep" aria-hidden="true">●</span>
+            <span class="wc-ticker__item">
+                <span class="wc-ticker__tag">{{t 'ticker.tag.final'}}</span>
+                <strong>{{t 'footer.final'}}</strong> {{t 'footer.final.detail'}}
+            </span>
+            <span class="wc-ticker__sep" aria-hidden="true">●</span>
+            <span class="wc-ticker__item">
+                <span class="wc-ticker__tag wc-ticker__tag--news">{{t 'ticker.tag.news'}}</span>
+                {{t 'ticker.news.placeholder'}}
+            </span>
+            <span class="wc-ticker__sep" aria-hidden="true">●</span>
+        </div>
+        <div class="wc-ticker__group" aria-hidden="true">
+            <span class="wc-ticker__item">
+                <span class="wc-ticker__tag">{{t 'ticker.tag.kickoff'}}</span>
+                <strong>{{t 'footer.kickoff'}}</strong> {{t 'footer.kickoff.detail'}}
+            </span>
+            <span class="wc-ticker__sep">●</span>
+            <span class="wc-ticker__item">
+                <span class="wc-ticker__tag">{{t 'ticker.tag.final'}}</span>
+                <strong>{{t 'footer.final'}}</strong> {{t 'footer.final.detail'}}
+            </span>
+            <span class="wc-ticker__sep">●</span>
+            <span class="wc-ticker__item">
+                <span class="wc-ticker__tag wc-ticker__tag--news">{{t 'ticker.tag.news'}}</span>
+                {{t 'ticker.news.placeholder'}}
+            </span>
+            <span class="wc-ticker__sep">●</span>
+        </div>
+    </div>
+</div>
 
 <main class="wc-main">
     {{outlet}}

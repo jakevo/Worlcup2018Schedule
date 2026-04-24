@@ -1,10 +1,12 @@
 import config from '../config/environment';
 import { createProvider } from '../providers';
 
-const POLL_INTERVAL_MS = 60 * 1000;
-const LIVE_WINDOW_MS = 115 * 60 * 1000; // ~kickoff + 115 min = still "live"
+const FAST_POLL_MS = 60 * 1000;            // live matches: 1 min
+const SLOW_POLL_MS = 10 * 60 * 1000;       // pre/post tournament: 10 min
+const LIVE_WINDOW_MS = 115 * 60 * 1000;    // ~kickoff + 115 min = still "live"
 
 let cachedPromise = null;
+let cachedData = null;
 let pollHandle = null;
 let providerInstance = null;
 
@@ -120,77 +122,99 @@ function formatLongDate(iso) {
     return d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', timeZone: 'UTC' });
 }
 
+function buildResult(data) {
+    const teams = data.teams || [];
+    const tournament = data.tournament || {};
+    const venues = data.venues || [];
+    const matches = data.matches || [];
+    const groups = buildGroups(teams);
+    applyStandings(groups, matches);
+
+    const now = Date.now();
+    const enriched = enrichMatches(matches, teams, now);
+    const liveMatches = enriched.filter(m => m.isLive);
+    const upcoming = enriched.filter(m => !m.played && !m.isLive && m.kickoff >= now);
+    const nextMatch = liveMatches[0] || upcoming[0] || enriched[0] || null;
+    const featured = upcoming.slice(0, 8);
+
+    const byDate = [];
+    for (const m of enriched) {
+        const last = byDate[byDate.length - 1];
+        if (last && last.date === m.date) last.matches.push(m);
+        else byDate.push({
+            date: m.date,
+            label: formatLongDate(m.date),
+            matches: [m]
+        });
+    }
+
+    const kickoffMs = new Date(`${tournament.startDate || '2026-06-11'}T18:00:00-05:00`).getTime();
+    const endMs = new Date(`${tournament.endDate || '2026-07-19'}T23:59:59-04:00`).getTime();
+    const daysUntilKickoff = Math.max(0, Math.ceil((kickoffMs - now) / (1000 * 60 * 60 * 24)));
+
+    return {
+        tournament,
+        venues,
+        teams,
+        groups,
+        matches: enriched,
+        matchesByDate: byDate,
+        nextMatch,
+        liveMatches,
+        featured,
+        daysUntilKickoff,
+        kickoffMs,
+        endMs,
+        squads: data.squads || {},
+        topScorers: data.topScorers || [],
+        updatedAt: new Date().toISOString()
+    };
+}
+
 export function loadTournament() {
     if (cachedPromise) return cachedPromise;
-    cachedPromise = getProvider().load().then(data => {
-        const teams = data.teams || [];
-        const tournament = data.tournament || {};
-        const venues = data.venues || [];
-        const matches = data.matches || [];
-        const groups = buildGroups(teams);
-        applyStandings(groups, matches);
-
-        const now = Date.now();
-        const enriched = enrichMatches(matches, teams, now);
-        const liveMatches = enriched.filter(m => m.isLive);
-        const upcoming = enriched.filter(m => !m.played && !m.isLive && m.kickoff >= now);
-        const nextMatch = liveMatches[0] || upcoming[0] || enriched[0] || null;
-        const featured = upcoming.slice(0, 8);
-
-        const byDate = [];
-        for (const m of enriched) {
-            const last = byDate[byDate.length - 1];
-            if (last && last.date === m.date) last.matches.push(m);
-            else byDate.push({
-                date: m.date,
-                label: formatLongDate(m.date),
-                matches: [m]
-            });
-        }
-
-        const kickoffMs = new Date(`${tournament.startDate || '2026-06-11'}T18:00:00-05:00`).getTime();
-        const endMs = new Date(`${tournament.endDate || '2026-07-19'}T23:59:59-04:00`).getTime();
-        const daysUntilKickoff = Math.max(0, Math.ceil((kickoffMs - now) / (1000 * 60 * 60 * 24)));
-
-        return {
-            tournament,
-            venues,
-            teams,
-            groups,
-            matches: enriched,
-            matchesByDate: byDate,
-            nextMatch,
-            liveMatches,
-            featured,
-            daysUntilKickoff,
-            kickoffMs,
-            endMs,
-            // Keyed by FIFA code. Populated by live providers (api-football
-            // /players/squads). Empty on static; team page falls back to
-            // its placeholder message.
-            squads: data.squads || {},
-            topScorers: data.topScorers || [],
-            updatedAt: new Date().toISOString()
-        };
-    });
+    cachedPromise = getProvider().load()
+        .then(buildResult)
+        .then(result => { cachedData = result; return result; })
+        .catch(err => {
+            cachedPromise = null;
+            throw err;
+        });
     return cachedPromise;
 }
 
 export function invalidateTournamentCache() {
     cachedPromise = null;
+    cachedData = null;
+}
+
+// Decide the next poll delay based on whether anything live is happening.
+// Pre-tournament and post-tournament we don't need 60s polling — the
+// schedule and standings aren't moving, so we back off to 10 min to save
+// the Cloudflare Worker / api-football quota and reduce cold-start pain.
+function nextPollDelay() {
+    const data = cachedData;
+    if (!data) return FAST_POLL_MS;
+    if (data.liveMatches && data.liveMatches.length) return FAST_POLL_MS;
+    const now = Date.now();
+    if (data.kickoffMs && now < data.kickoffMs) return SLOW_POLL_MS;
+    if (data.endMs && now > data.endMs) return SLOW_POLL_MS;
+    return FAST_POLL_MS;
 }
 
 export function startPolling(onTick) {
     stopPolling();
-    pollHandle = setInterval(() => {
+    const tick = () => {
         invalidateTournamentCache();
         if (typeof onTick === 'function') onTick();
-    }, POLL_INTERVAL_MS);
+        pollHandle = setTimeout(tick, nextPollDelay());
+    };
+    pollHandle = setTimeout(tick, nextPollDelay());
 }
 
 export function stopPolling() {
     if (pollHandle) {
-        clearInterval(pollHandle);
+        clearTimeout(pollHandle);
         pollHandle = null;
     }
 }

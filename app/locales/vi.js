@@ -25,6 +25,13 @@ export default {
     'footer.final': 'Chung kết:',
     'footer.final.detail': '19 tháng 7, 2026 · MetLife Stadium',
 
+    'ticker.tag.kickoff': 'KHAI MẠC',
+    'ticker.tag.final': 'CHUNG KẾT',
+    'ticker.tag.news': 'TIN',
+    'ticker.news.placeholder': 'Đếm ngược tới World Cup 2026 — 48 đội, 16 thành phố, 104 trận.',
+    'schedule.dayStrip.aria': 'Chọn ngày thi đấu',
+    'schedule.dayStrip.all': 'Tất cả',
+
     'home.dates': '11 tháng 6 – 19 tháng 7, 2026',
     'home.hero.titlePre': '48 quốc gia. 16 thành phố.',
     'home.hero.titleEm': 'Một chiếc cúp.',
@@ -121,6 +128,10 @@ export default {
     'venues.stadium.many': 'sân',
     'venues.card.capacity': 'Sức chứa',
     'venues.card.matches': 'Trận đấu',
+    'venues.modal.close': 'Đóng',
+    'venues.modal.opened': 'Khánh thành',
+    'venues.modal.surface': 'Mặt sân',
+    'venues.modal.tenant': 'Chủ nhà',
 
     'news.title': 'Tin tức & bình luận',
     'news.subtitle': 'Các tòa soạn uy tín đồng hành cùng mọi trận đấu, tranh cãi và niềm vui.',
@@ -142,6 +153,7 @@ export default {
     'team.fixtures.full': 'Lịch đầy đủ →',
     'team.group.all': 'Tất cả bảng →',
     'team.squad': 'Đội hình',
+    'team.squad.toggle': 'Xem toàn đội hình',
     'team.squad.empty': 'Danh sách cầu thủ sẽ hiển thị khi kết nối dữ liệu trực tiếp.',
     'team.squad.gk': 'Thủ môn',
     'team.squad.def': 'Hậu vệ',

@@ -30,7 +30,7 @@
             </header>
             <div class="wc-venue-grid">
                 {{#each country.venues as |venue|}}
-                    <article class="wc-venue-card">
+                    <button type="button" class="wc-venue-card" onclick={{action "openVenue" venue}}>
                         <div class="wc-venue-card__body">
                             <h3 class="wc-venue-card__stadium">{{venue.stadium}}</h3>
                             <p class="wc-venue-card__city">{{venue.city}}</p>
@@ -45,9 +45,63 @@
                                 </div>
                             </dl>
                         </div>
-                    </article>
+                    </button>
                 {{/each}}
             </div>
         </section>
     {{/if}}
 {{/each}}
+
+{{#if activeVenue}}
+    <div class="wc-venue-modal" role="dialog" aria-modal="true" aria-labelledby="wc-venue-modal-title">
+        <div class="wc-venue-modal__backdrop" onclick={{action "closeVenue"}}></div>
+        <div class="wc-venue-modal__panel">
+            <button type="button" class="wc-venue-modal__close" onclick={{action "closeVenue"}} aria-label={{t 'venues.modal.close'}}>
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                    <line x1="5" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                    <line x1="19" y1="5" x2="5" y2="19" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                </svg>
+            </button>
+            {{#if activeVenue.imageUrl}}
+                <div class="wc-venue-modal__hero">
+                    <img src={{activeVenue.imageUrl}} alt="{{activeVenue.stadium}}" loading="lazy">
+                </div>
+            {{/if}}
+            <div class="wc-venue-modal__body">
+                <span class="wc-venue-modal__eyebrow">{{activeVenue.city}} · {{activeVenue.country}}</span>
+                <h2 class="wc-venue-modal__title" id="wc-venue-modal-title">{{activeVenue.stadium}}</h2>
+                {{#if activeVenue.blurb}}
+                    <p class="wc-venue-modal__blurb">{{activeVenue.blurb}}</p>
+                {{/if}}
+                <dl class="wc-venue-modal__facts">
+                    <div>
+                        <dt>{{t 'venues.card.capacity'}}</dt>
+                        <dd>{{activeVenue.capacityFmt}}</dd>
+                    </div>
+                    {{#if activeVenue.yearOpened}}
+                        <div>
+                            <dt>{{t 'venues.modal.opened'}}</dt>
+                            <dd>{{activeVenue.yearOpened}}</dd>
+                        </div>
+                    {{/if}}
+                    {{#if activeVenue.surface}}
+                        <div>
+                            <dt>{{t 'venues.modal.surface'}}</dt>
+                            <dd>{{activeVenue.surface}}</dd>
+                        </div>
+                    {{/if}}
+                    {{#if activeVenue.tenant}}
+                        <div>
+                            <dt>{{t 'venues.modal.tenant'}}</dt>
+                            <dd>{{activeVenue.tenant}}</dd>
+                        </div>
+                    {{/if}}
+                    <div>
+                        <dt>{{t 'venues.card.matches'}}</dt>
+                        <dd>{{activeVenue.matches}}</dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+    </div>
+{{/if}}

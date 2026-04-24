@@ -25,6 +25,13 @@ export default {
     'footer.final': 'Final:',
     'footer.final.detail': '19 July 2026 · MetLife Stadium',
 
+    'ticker.tag.kickoff': 'KICKOFF',
+    'ticker.tag.final': 'FINAL',
+    'ticker.tag.news': 'NEWS',
+    'ticker.news.placeholder': 'Countdown to World Cup 2026 — 48 nations, 16 host cities, 104 matches.',
+    'schedule.dayStrip.aria': 'Pick match day',
+    'schedule.dayStrip.all': 'All',
+
     'home.dates': '11 June – 19 July 2026',
     'home.hero.titlePre': '48 nations. 16 cities.',
     'home.hero.titleEm': 'One trophy.',
@@ -121,6 +128,10 @@ export default {
     'venues.stadium.many': 'stadiums',
     'venues.card.capacity': 'Capacity',
     'venues.card.matches': 'Matches',
+    'venues.modal.close': 'Close',
+    'venues.modal.opened': 'Opened',
+    'venues.modal.surface': 'Surface',
+    'venues.modal.tenant': 'Home tenant',
 
     'news.title': 'News & coverage',
     'news.subtitle': 'Trusted desks covering every kickoff, controversy and celebration.',
@@ -142,6 +153,7 @@ export default {
     'team.fixtures.full': 'Full schedule →',
     'team.group.all': 'All groups →',
     'team.squad': 'Squad',
+    'team.squad.toggle': 'Show full squad',
     'team.squad.empty': 'Player list will appear here once a live data feed is connected.',
     'team.squad.gk': 'Goalkeepers',
     'team.squad.def': 'Defenders',

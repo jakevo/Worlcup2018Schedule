@@ -53,9 +53,19 @@
 
     {{#each markers as |p|}}
         <div class="wc-pitch__player" style={{xy-style p.x p.y}}>
-            <span class="wc-pitch__dot" style={{team-hero-style teamCode}}>
-                {{#if p.number}}{{p.number}}{{else}}·{{/if}}
+            <span class="wc-pitch__avatar" style={{team-hero-style teamCode}}>
+                {{#if p.photo}}
+                    <img class="wc-pitch__photo" src={{p.photo}} alt="">
+                {{else}}
+                    <span class="wc-pitch__initial">{{if p.number p.number "·"}}</span>
+                {{/if}}
+                {{#if p.number}}
+                    <span class="wc-pitch__num-badge" style={{team-hero-style teamCode}}>{{p.number}}</span>
+                {{/if}}
             </span>
+            {{#if p.name}}
+                <span class="wc-pitch__name">{{p.name}}</span>
+            {{/if}}
         </div>
     {{/each}}
 

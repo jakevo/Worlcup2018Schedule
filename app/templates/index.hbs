@@ -184,19 +184,25 @@
     </div>
     <ul class="wc-hosts-strip">
         <li>
-            <img src="https://flagcdn.com/w160/ca.png" alt="Canada flag">
-            <strong>{{t 'home.hosts.canada'}}</strong>
-            <span>{{t 'home.hosts.canadaCities'}}</span>
+            {{#link-to 'team' 'CAN' class='wc-hosts-strip__link'}}
+                <img src="https://flagcdn.com/w160/ca.png" alt="Canada flag">
+                <strong>{{t 'home.hosts.canada'}}</strong>
+                <span>{{t 'home.hosts.canadaCities'}}</span>
+            {{/link-to}}
         </li>
         <li>
-            <img src="https://flagcdn.com/w160/mx.png" alt="Mexico flag">
-            <strong>{{t 'home.hosts.mexico'}}</strong>
-            <span>{{t 'home.hosts.mexicoCities'}}</span>
+            {{#link-to 'team' 'MEX' class='wc-hosts-strip__link'}}
+                <img src="https://flagcdn.com/w160/mx.png" alt="Mexico flag">
+                <strong>{{t 'home.hosts.mexico'}}</strong>
+                <span>{{t 'home.hosts.mexicoCities'}}</span>
+            {{/link-to}}
         </li>
         <li>
-            <img src="https://flagcdn.com/w160/us.png" alt="USA flag">
-            <strong>{{t 'home.hosts.usa'}}</strong>
-            <span>{{t 'home.hosts.usaCities'}}</span>
+            {{#link-to 'team' 'USA' class='wc-hosts-strip__link'}}
+                <img src="https://flagcdn.com/w160/us.png" alt="USA flag">
+                <strong>{{t 'home.hosts.usa'}}</strong>
+                <span>{{t 'home.hosts.usaCities'}}</span>
+            {{/link-to}}
         </li>
     </ul>
 </section>

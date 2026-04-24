@@ -42,9 +42,34 @@
     </div>
 </div>
 
+{{#if allDays.length}}
+    <nav class="wc-daystrip" aria-label="{{t 'schedule.dayStrip.aria'}}">
+        <ol class="wc-daystrip__list">
+            <li>
+                <button type="button"
+                        class="wc-daystrip__item wc-daystrip__item--all {{unless activeDate 'is-active'}}"
+                        onclick={{action "showAllDates"}}>
+                    <span class="wc-daystrip__all">{{t 'schedule.dayStrip.all'}}</span>
+                </button>
+            </li>
+            {{#each allDays as |day|}}
+                <li>
+                    <button type="button"
+                            class="wc-daystrip__item {{if (eq day.date activeDate) 'is-active'}}"
+                            onclick={{action "selectDate" day.date}}>
+                        <span class="wc-daystrip__dow">{{weekday day.date}}</span>
+                        <span class="wc-daystrip__num">{{day-num day.date}}</span>
+                        <span class="wc-daystrip__month">{{month-short day.date}}</span>
+                    </button>
+                </li>
+            {{/each}}
+        </ol>
+    </nav>
+{{/if}}
+
 <div class="wc-schedule">
     {{#each filteredDays as |day|}}
-        <section class="wc-day">
+        <section class="wc-day" id="wc-day-{{day.date}}">
             <header class="wc-day__head">
                 <span class="wc-day__weekday">{{weekday day.date}}</span>
                 <h2 class="wc-day__date">{{long-date day.date}}</h2>

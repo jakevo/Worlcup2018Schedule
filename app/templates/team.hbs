@@ -19,10 +19,7 @@
                 <span class="wc-team-hero__eyebrow">
                     {{t 'group.prefix'}} {{model.groupLetter}} &middot; {{model.team.confederation}}
                 </span>
-                <h1 class="wc-team-hero__name">
-                    <img class="wc-team-hero__flag" src={{model.team.flag}} alt="{{model.team.name}} flag">
-                    {{model.team.name}}
-                </h1>
+                <h1 class="wc-team-hero__name">{{model.team.name}}</h1>
                 <div class="wc-team-hero__meta">
                     <span class="wc-team-hero__chip">{{model.team.fifaCode}}</span>
                     <span class="wc-team-hero__chip">{{t 'team.pot'}} {{model.team.pot}}</span>
@@ -54,20 +51,6 @@
         </div>
 
         <div class="wc-xi">
-            <aside class="wc-xi__list">
-                <header class="wc-xi__list-head">
-                    <span class="wc-xi__eyebrow">{{t 'team.startingXI'}}</span>
-                    <strong class="wc-xi__formation">{{if model.formation model.formation "4-3-3"}}</strong>
-                </header>
-                <ol class="wc-xi__players">
-                    {{#each model.startingXIRows as |p|}}
-                        <li>
-                            <span class="wc-xi__num">{{if p.number p.number "—"}}</span>
-                            <span class="wc-xi__name">{{if p.name p.name "Player"}}</span>
-                        </li>
-                    {{/each}}
-                </ol>
-            </aside>
             <div class="wc-xi__pitch">
                 {{pitch-lineup
                     formation=(if model.formation model.formation "4-3-3")
@@ -81,6 +64,11 @@
             <p class="wc-pitch__caption">{{t 'team.startingXI.preview'}}</p>
         {{/unless}}
         {{#if model.squad.length}}
+            <input id="wc-squad-toggle" type="checkbox" class="wc-squad-toggle__input">
+            <label for="wc-squad-toggle" class="wc-squad-toggle">
+                <span class="wc-squad-toggle__show">{{t 'team.squad.toggle'}}</span>
+                <span class="wc-squad-toggle__hide">{{t 'team.squad'}} ▲</span>
+            </label>
             <div class="wc-squad">
                 {{#each model.squadByPosition as |group|}}
                     {{#if group.players.length}}
@@ -177,10 +165,13 @@
             {{#each model.groupTeams as |t index|}}
                 <li class="{{if (eq t.fifaCode model.team.fifaCode) 'is-self'}}">
                     <span class="wc-team-group__pos">{{inc index}}</span>
-                    <img src={{t.flag}} alt="">
                     {{#if t.fifaCode}}
+                        {{#link-to 'team' t.fifaCode class='wc-team-group__flag'}}
+                            <img src={{t.flag}} alt="">
+                        {{/link-to}}
                         {{#link-to 'team' t.fifaCode class='wc-team-group__name'}}{{t.name}}{{/link-to}}
                     {{else}}
+                        <img src={{t.flag}} alt="">
                         <span class="wc-team-group__name">{{t.name}}</span>
                     {{/if}}
                     <span class="wc-team-group__pts">{{t.pts}}</span>

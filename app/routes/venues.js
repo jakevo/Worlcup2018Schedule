@@ -16,7 +16,12 @@ export default Route.extend({
                 capacity: v.capacity,
                 capacityFmt: Number(v.capacity || 0).toLocaleString('en-US'),
                 flag: `https://flagcdn.com/w160/${iso[v.country] || 'un'}.png`,
-                matches: matchCounts.get(v.stadium) || 0
+                matches: matchCounts.get(v.stadium) || 0,
+                imageUrl: v.imageUrl || null,
+                yearOpened: v.yearOpened || null,
+                surface: v.surface || null,
+                tenant: v.tenant || null,
+                blurb: v.blurb || ''
             }));
             venues.sort((a, b) => b.matches - a.matches || b.capacity - a.capacity);
             const byCountry = { Mexico: [], Canada: [], USA: [] };

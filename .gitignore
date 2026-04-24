@@ -21,3 +21,7 @@ testem.log
 .node_modules.ember-try/
 bower.json.ember-try
 package.json.ember-try
+
+# Claude Code local state (screenshots, permissions, task locks)
+/.claude
+/.wrangler

@@ -6,6 +6,14 @@ export default Controller.extend({
     router: service('router'),
     isMoreOpen: false,
 
+    init() {
+        this._super(...arguments);
+        // Read currentRouteName once so the observer below is activated.
+        // Without this, Ember's classic observers can stay dormant until
+        // the property is consumed somewhere in a template/computed.
+        this.get('router.currentRouteName');
+    },
+
     _closeOnRouteChange: observer('router.currentRouteName', function () {
         if (this.get('isMoreOpen')) this.set('isMoreOpen', false);
     }),
