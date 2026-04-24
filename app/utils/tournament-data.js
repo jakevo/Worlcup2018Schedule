@@ -41,8 +41,10 @@ function parseScore(match) {
 function buildGroups(teams) {
     const byLetter = new Map();
     for (const t of teams) {
-        if (!byLetter.has(t.group)) byLetter.set(t.group, []);
-        byLetter.get(t.group).push(Object.assign({}, t, {
+        const letter = typeof t.group === 'string' ? t.group.trim() : '';
+        if (!letter) continue;
+        if (!byLetter.has(letter)) byLetter.set(letter, []);
+        byLetter.get(letter).push(Object.assign({}, t, {
             mp: 0, w: 0, d: 0, l: 0, gf: 0, ga: 0, gd: 0, pts: 0
         }));
     }
