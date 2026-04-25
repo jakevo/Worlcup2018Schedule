@@ -5,7 +5,7 @@ import { buildBracket } from '../utils/bracket';
 export default Route.extend({
     model() {
         return loadTournament().then(data => ({
-            rounds: buildBracket(data.groups),
+            rounds: buildBracket(data.groups, data.matches),
             updatedAt: data.updatedAt
         }));
     }

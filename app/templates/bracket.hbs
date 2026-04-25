@@ -11,7 +11,7 @@
             <h2 class="wc-bracket__title">{{t (concat 'bracket.round.' round.key)}}</h2>
             <div class="wc-bracket__matches">
                 {{#each round.matches as |match|}}
-                    <article class="wc-bracket-match">
+                    <article class="wc-bracket-match {{if match.fixture 'has-fixture'}}">
                         <div class="wc-bracket-match__id">{{match.id}}</div>
                         {{#if match.top.team.fifaCode}}
                             {{#link-to 'team' match.top.team.fifaCode class=(concat 'wc-bracket-match__slot' (if match.top.resolved ' is-resolved'))}}
@@ -38,6 +38,25 @@
                                     {{#if match.bot.winnerOf}}{{t 'bracket.winner'}} {{match.bot.winnerOf}}{{else}}{{match.bot.label}}{{/if}}
                                 </span>
                             </div>
+                        {{/if}}
+                        {{#if match.fixture}}
+                            <div class="wc-bracket-match__meta">
+                                <span class="wc-bracket-match__when">
+                                    {{weekday match.fixture.date}} {{short-date match.fixture.date}} · {{format-time match.fixture.time}}
+                                </span>
+                                {{#if match.fixture.venue}}
+                                    <span class="wc-bracket-match__where">{{match.fixture.venue}}</span>
+                                {{/if}}
+                                {{#if match.fixture.played}}
+                                    <span class="wc-bracket-match__score">{{match.fixture.score1}}–{{match.fixture.score2}}</span>
+                                {{/if}}
+                            </div>
+                            {{#unless match.fixture.played}}
+                                <div class="wc-bracket-match__actions">
+                                    {{match-alert match=match.fixture}}
+                                    {{add-to-calendar match=match.fixture}}
+                                </div>
+                            {{/unless}}
                         {{/if}}
                     </article>
                 {{/each}}

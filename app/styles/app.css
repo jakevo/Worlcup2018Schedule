@@ -2778,6 +2778,47 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
     font-weight: 600;
 }
 
+/* Live-data block under each bracket cell when api-football has the
+   fixture. Shows kickoff date/time, venue, optional final score, and
+   a bell + calendar action row when the match hasn't been played. */
+.wc-bracket-match.has-fixture { box-shadow: 0 4px 14px rgba(229, 23, 74, 0.12); }
+.wc-bracket-match__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px 12px;
+    border-top: 1px solid var(--border);
+    background: var(--surface-2);
+    font-size: 11px;
+    color: var(--ink-soft);
+    line-height: 1.35;
+}
+.wc-bracket-match__when {
+    color: var(--ink);
+    font-weight: 700;
+}
+.wc-bracket-match__where {
+    color: var(--muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.wc-bracket-match__score {
+    color: var(--accent);
+    font-weight: 900;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+}
+.wc-bracket-match__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    padding: 6px 10px;
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+}
+
 @media (max-width: 719px) {
     .wc-bracket {
         grid-auto-flow: row;

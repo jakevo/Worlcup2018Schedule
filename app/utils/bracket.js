@@ -59,12 +59,24 @@ function buildNextRound(prefix, prev) {
     return out;
 }
 
-export function buildBracket(groups) {
-    const r32 = buildRound(R32_PAIRINGS, groups);
-    const r16 = buildNextRound('R16', r32);
-    const qf = buildNextRound('QF', r16);
-    const sf = buildNextRound('SF', qf);
-    const final = buildNextRound('F', sf);
+function attachFixture(cell, matches) {
+    const t1 = cell.top && cell.top.team && cell.top.team.name;
+    const t2 = cell.bot && cell.bot.team && cell.bot.team.name;
+    if (!t1 || !t2) return cell;
+    const found = matches.find(m =>
+        (m.team1 === t1 && m.team2 === t2) ||
+        (m.team1 === t2 && m.team2 === t1)
+    );
+    return found ? Object.assign({}, cell, { fixture: found }) : cell;
+}
+
+export function buildBracket(groups, matches) {
+    const ko = (matches || []).filter(m => !m.group);
+    const r32 = buildRound(R32_PAIRINGS, groups).map(c => attachFixture(c, ko));
+    const r16 = buildNextRound('R16', r32).map(c => attachFixture(c, ko));
+    const qf = buildNextRound('QF', r16).map(c => attachFixture(c, ko));
+    const sf = buildNextRound('SF', qf).map(c => attachFixture(c, ko));
+    const final = buildNextRound('F', sf).map(c => attachFixture(c, ko));
     return [
         { key: 'r32', matches: r32 },
         { key: 'r16', matches: r16 },
