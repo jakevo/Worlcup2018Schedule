@@ -38,6 +38,14 @@
 
     <article class="wc-notify__card wc-notify__card--alt">
         <h2 class="wc-notify__heading">{{t 'notify.ios.title'}}</h2>
+        <div class="wc-notify__warn" role="note">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="9"></circle>
+                <line x1="12" y1="8" x2="12" y2="13"></line>
+                <circle cx="12" cy="16.5" r="0.8" fill="currentColor"></circle>
+            </svg>
+            <span><strong>{{t 'notify.ios.chrome.title'}}</strong> {{t 'notify.ios.chrome.body'}}</span>
+        </div>
         <p class="wc-notify__hint">{{t 'notify.ios.requires'}}</p>
         <ol class="wc-notify__steps">
             <li>

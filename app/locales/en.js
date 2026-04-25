@@ -42,6 +42,8 @@ export default {
     'notify.preview.sample.time': 'now',
     'notify.ios.title': 'iPhone — install first, then tap the bell',
     'notify.ios.requires': 'iOS only allows web push from apps installed to the Home Screen. Requires iOS 16.4 or newer.',
+    'notify.ios.chrome.title': 'On iPhone, you must use Safari.',
+    'notify.ios.chrome.body': 'Chrome, Edge, Firefox and other browsers on iPhone can’t install web apps or receive push notifications — Apple only allows it through Safari. If you’re reading this in Chrome, copy the URL and open it in Safari first.',
     'notify.ios.step1.title': 'Open this site in Safari',
     'notify.ios.step1.body': 'iPhone install only works in Safari, even if you usually use Chrome. Copy the URL into Safari first.',
     'notify.ios.step2.title': 'Tap the Share button',

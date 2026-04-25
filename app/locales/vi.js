@@ -38,6 +38,8 @@ export default {
     'notify.preview.sample.time': 'vừa xong',
     'notify.ios.title': 'iPhone — cài app rồi bấm chuông',
     'notify.ios.requires': 'iOS chỉ cho web push với app cài vào Màn hình chính. Yêu cầu iOS 16.4 trở lên.',
+    'notify.ios.chrome.title': 'Trên iPhone, bạn phải dùng Safari.',
+    'notify.ios.chrome.body': 'Chrome, Edge, Firefox và các trình duyệt khác trên iPhone không cài app web được, cũng không nhận được thông báo đẩy — Apple chỉ cho phép qua Safari. Nếu bạn đang xem bằng Chrome, hãy sao chép địa chỉ và mở trong Safari trước.',
     'notify.ios.step1.title': 'Mở trang trong Safari',
     'notify.ios.step1.body': 'Cài app trên iPhone chỉ chạy trong Safari, kể cả khi bạn đang dùng Chrome. Sao chép địa chỉ và mở trong Safari trước.',
     'notify.ios.step2.title': 'Bấm nút Chia sẻ',
