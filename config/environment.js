@@ -44,7 +44,14 @@ module.exports = function(environment) {
     dataProvider: {
       kind: 'api-football',
       proxyUrl: 'https://wc2026-proxy.javoucsd.workers.dev'
-    }
+    },
+
+    // Web Push public VAPID key — safe to ship in the client bundle.
+    // The matching private key + subject live as encrypted Pages env
+    // vars (VAPID_PRIVATE_KEY, VAPID_SUBJECT) and never touch this
+    // repo. Rotate by generating a new pair, swapping both, and
+    // forcing all clients to re-subscribe.
+    vapidPublicKey: 'BPQYY01mVq_osgpZDKRujvUmOJgk1wQeg7lcWsReUdHqZA43Tj33v0fve-U48Blr-Q6p4Xnj-TOzTLxoPL6tE60'
   };
 
   if (environment === 'development') {
