@@ -84,6 +84,10 @@ export default {
     'about.telegram.aria': 'Nhắn qua Telegram',
     'about.contacts.aria': 'Kênh liên hệ',
     'action.toTop': 'Lên đầu trang',
+    'alert.label.off': 'Nhắc mình trước giờ bóng lăn',
+    'alert.label.on': 'Đã đặt nhắc trước trận — bấm để bỏ',
+    'alert.error.denied': 'Quyền thông báo bị từ chối. Bật lại trong cài đặt trình duyệt.',
+    'alert.error.network': 'Không lưu được. Thử lại sau chút nhé.',
 
     'footer.kickoff': 'Khai mạc:',
     'footer.kickoff.detail': '11 tháng 6, 2026 · Estadio Azteca',

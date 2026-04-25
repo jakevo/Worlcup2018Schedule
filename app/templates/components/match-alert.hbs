@@ -1,0 +1,21 @@
+<button type="button"
+        class="wc-match-alert__btn"
+        onclick={{action "toggle"}}
+        aria-pressed={{isOn}}
+        aria-label={{if isOn (t 'alert.label.on') (t 'alert.label.off')}}
+        title={{if isOn (t 'alert.label.on') (t 'alert.label.off')}}
+        disabled={{busy}}>
+    {{#if isOn}}
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+            <path d="M12 22a2 2 0 0 0 2-2h-4a2 2 0 0 0 2 2zm6.5-6V11a6.5 6.5 0 0 0-5-6.32V4a1.5 1.5 0 0 0-3 0v.68A6.5 6.5 0 0 0 5.5 11v5l-1.7 1.7A1 1 0 0 0 4.5 19h15a1 1 0 0 0 .7-1.71L18.5 16z"/>
+        </svg>
+    {{else}}
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 8a6 6 0 1 1 12 0c0 7 3 7 3 9H3c0-2 3-2 3-9z"></path>
+            <path d="M10.3 21a2 2 0 0 0 3.4 0"></path>
+        </svg>
+    {{/if}}
+</button>
+{{#if statusKey}}
+    <span class="wc-match-alert__status" role="status">{{t statusKey}}</span>
+{{/if}}

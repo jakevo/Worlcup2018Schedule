@@ -1399,7 +1399,13 @@ th.wc-table__team { display: table-cell; font-weight: 700; }
 .wc-match > .wc-match__time { grid-area: time; }
 .wc-match > .wc-match__body { grid-area: body; }
 .wc-match > .wc-match__venue { grid-area: venue; }
-.wc-match > .wc-add-cal { grid-area: cal; align-self: center; }
+.wc-match > .wc-match__actions {
+    grid-area: cal;
+    align-self: center;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
 .wc-match:hover {
     border-color: var(--border-strong);
     transform: translateY(-1px);
@@ -2310,7 +2316,7 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
         flex-wrap: wrap;
         align-items: center;
         gap: 6px 8px;
-        padding: 10px 44px 10px 10px;
+        padding: 10px 76px 10px 10px;
         min-width: 0;
         position: relative;
         max-width: 100%;
@@ -2318,11 +2324,12 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
     }
     .wc-match > .wc-match__time { flex-shrink: 0; width: 52px; }
     .wc-match > .wc-match__body { flex: 1 1 0; min-width: 0; overflow: hidden; }
-    .wc-match > .wc-add-cal {
+    .wc-match > .wc-match__actions {
         position: absolute;
         top: 50%;
-        right: 8px;
+        right: 6px;
         transform: translateY(-50%);
+        gap: 4px;
     }
     .wc-match > .wc-match__venue {
         flex: 1 1 100%;
@@ -3519,6 +3526,43 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
     box-shadow: 0 2px 6px rgba(229, 23, 74, 0.3);
 }
 .wc-footer__credit-label { white-space: nowrap; }
+
+/* ---------- Per-match alert (bell) button on schedule rows ----- */
+.wc-match-alert { display: inline-flex; align-items: center; }
+.wc-match-alert__btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--ink-soft);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.05s;
+    font-family: inherit;
+}
+.wc-match-alert__btn:hover {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-color: var(--accent);
+}
+.wc-match-alert__btn:active { transform: scale(0.92); }
+.wc-match-alert__btn:disabled { opacity: 0.55; cursor: progress; }
+.wc-match-alert.is-on .wc-match-alert__btn {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    box-shadow: 0 4px 14px rgba(229, 23, 74, 0.3);
+}
+.wc-match-alert__status {
+    display: none;
+}
+@media (max-width: 520px) {
+    .wc-match .wc-match-alert__btn { width: 28px; height: 28px; }
+}
 
 /* ---------- Floating "back to top" arrow ------------------------ */
 .wc-to-top {

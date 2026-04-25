@@ -130,7 +130,10 @@
                                 {{/if}}
                             </div>
                         </div>
-                        {{add-to-calendar match=match}}
+                        <span class="wc-match__actions">
+                            {{match-alert match=match}}
+                            {{add-to-calendar match=match}}
+                        </span>
                         <div class="wc-match__venue">{{match.venue}} &middot; {{match.city}}</div>
                     </li>
                 {{/each}}

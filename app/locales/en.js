@@ -88,6 +88,10 @@ export default {
     'about.telegram.aria': 'Message on Telegram',
     'about.contacts.aria': 'Contact links',
     'action.toTop': 'Back to top',
+    'alert.label.off': 'Get a kickoff reminder for this match',
+    'alert.label.on': 'You’ll be alerted before kickoff — tap to remove',
+    'alert.error.denied': 'Permission denied. Enable notifications in your browser settings.',
+    'alert.error.network': 'Couldn’t save. Try again in a moment.',
 
     'ticker.tag.kickoff': 'KICKOFF',
     'ticker.tag.final': 'FINAL',
