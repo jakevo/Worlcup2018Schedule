@@ -3953,13 +3953,20 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
     font-size: 13px;
     opacity: 0.85;
 }
-.wc-about__email {
+.wc-about__contacts {
+    list-style: none;
+    padding: 0;
+    margin: 14px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.wc-about__contact {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 64px;
-    height: 64px;
-    margin-top: 12px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
     background: var(--accent-soft);
     color: var(--accent);
@@ -3967,14 +3974,14 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
     transition: background 0.15s, color 0.15s, transform 0.12s, box-shadow 0.15s;
     box-shadow: 0 4px 14px rgba(229, 23, 74, 0.18);
 }
-.wc-about__email:hover {
+.wc-about__contact:hover {
     background: var(--accent);
     color: #fff;
     transform: translateY(-2px);
     box-shadow: 0 8px 22px rgba(229, 23, 74, 0.4);
     text-decoration: none;
 }
-.wc-about__email-icon { flex-shrink: 0; }
+.wc-about__contact svg { flex-shrink: 0; }
 
 @media (min-width: 640px) {
     .wc-about__cta-row { grid-template-columns: 1fr 1fr; }

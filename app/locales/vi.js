@@ -79,6 +79,10 @@ export default {
     'about.hire.title': 'Thuê mình làm web',
     'about.hire.body': 'Landing, dashboard, web app — gọn, nhanh, ship liền.',
     'about.email.aria': 'Gửi email cho mình',
+    'about.linkedin.aria': 'Kết nối qua LinkedIn',
+    'about.facebook.aria': 'Tìm mình trên Facebook',
+    'about.telegram.aria': 'Nhắn qua Telegram',
+    'about.contacts.aria': 'Kênh liên hệ',
     'action.toTop': 'Lên đầu trang',
 
     'footer.kickoff': 'Khai mạc:',

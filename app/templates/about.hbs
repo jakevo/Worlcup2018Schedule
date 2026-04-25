@@ -21,12 +21,37 @@
         <h2 class="wc-about__heading">{{t 'about.maker.title'}}</h2>
         <p>{{t 'about.maker.p1'}}</p>
         <p>{{t 'about.maker.p2'}}</p>
-        <a class="wc-about__email" href={{hireMailto}} aria-label={{t 'about.email.aria'}} title={{hireEmail}}>
-            <svg class="wc-about__email-icon" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="3" y="5" width="18" height="14" rx="2"></rect>
-                <polyline points="3,7 12,13 21,7"></polyline>
-            </svg>
-        </a>
+        <ul class="wc-about__contacts" aria-label={{t 'about.contacts.aria'}}>
+            <li>
+                <a class="wc-about__contact" href={{hireMailto}} aria-label={{t 'about.email.aria'}} title={{hireEmail}}>
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                        <polyline points="3,7 12,13 21,7"></polyline>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a class="wc-about__contact" href={{linkedinUrl}} target="_blank" rel="noopener" aria-label={{t 'about.linkedin.aria'}} title="LinkedIn">
+                    <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true">
+                        <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5zM2.75 9.5h4.5V21h-4.5V9.5zM9.75 9.5h4.31v1.57h.06c.6-1.13 2.07-2.32 4.27-2.32 4.57 0 5.41 3.01 5.41 6.92V21h-4.5v-4.84c0-1.15-.02-2.64-1.61-2.64-1.61 0-1.86 1.26-1.86 2.56V21h-4.49V9.5z"></path>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a class="wc-about__contact" href={{facebookUrl}} target="_blank" rel="noopener" aria-label={{t 'about.facebook.aria'}} title="Facebook">
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true">
+                        <path d="M13.5 22v-9h3l.5-3.5h-3.5V7.2c0-1 .3-1.7 1.7-1.7H17V2.3c-.3 0-1.4-.1-2.6-.1-2.6 0-4.4 1.6-4.4 4.5v2.8H7v3.5h3V22h3.5z"></path>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a class="wc-about__contact" href={{telegramUrl}} target="_blank" rel="noopener" aria-label={{t 'about.telegram.aria'}} title="Telegram">
+                    <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true">
+                        <path d="M21.5 4.2 18.4 19.6c-.2 1-.9 1.3-1.7.8l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.4-5.1 9.3-8.4c.4-.4-.1-.6-.6-.2l-11.5 7.2-4.9-1.5c-1.1-.3-1.1-1 .2-1.5l19.2-7.4c.9-.3 1.7.2 1.4 1.5z"></path>
+                    </svg>
+                </a>
+            </li>
+        </ul>
     </article>
 
     <div class="wc-about__cta-row">

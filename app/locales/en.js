@@ -83,6 +83,10 @@ export default {
     'about.hire.title': 'Hire me to build your site',
     'about.hire.body': 'Marketing pages, dashboards, web apps — I ship fast.',
     'about.email.aria': 'Email me',
+    'about.linkedin.aria': 'Connect on LinkedIn',
+    'about.facebook.aria': 'Find me on Facebook',
+    'about.telegram.aria': 'Message on Telegram',
+    'about.contacts.aria': 'Contact links',
     'action.toTop': 'Back to top',
 
     'ticker.tag.kickoff': 'KICKOFF',
