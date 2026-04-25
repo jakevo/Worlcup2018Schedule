@@ -3793,16 +3793,23 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
 .wc-about__email {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    margin-top: 6px;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin-top: 10px;
+    border-radius: 50%;
+    background: var(--accent-soft);
     color: var(--accent);
-    font-weight: 800;
-    font-size: 16px;
     text-decoration: none;
-    word-break: break-all;
+    transition: background 0.15s, color 0.15s, transform 0.1s;
+}
+.wc-about__email:hover {
+    background: var(--accent);
+    color: #fff;
+    transform: translateY(-1px);
+    text-decoration: none;
 }
 .wc-about__email-icon { flex-shrink: 0; }
-.wc-about__email:hover { text-decoration: underline; }
 
 @media (min-width: 640px) {
     .wc-about__cta-row { grid-template-columns: 1fr 1fr; }

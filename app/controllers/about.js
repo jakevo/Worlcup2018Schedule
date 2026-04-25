@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
 
 // Edit these two values to point at your own donate page and contact inbox.
-const DONATE_URL = 'https://www.buymeacoffee.com/wc2026hub';
+const DONATE_URL = 'https://account.venmo.com/u/Jake-Vo-1';
 const HIRE_EMAIL = 'javoucsd@gmail.com';
 
 export default Controller.extend({

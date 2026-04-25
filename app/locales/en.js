@@ -69,6 +69,7 @@ export default {
     'about.donate.body': 'Help keep the site fast, ad-free and updated.',
     'about.hire.title': 'Hire me to build your site',
     'about.hire.body': 'Marketing pages, dashboards, web apps — I ship fast.',
+    'about.email.aria': 'Email me',
 
     'ticker.tag.kickoff': 'KICKOFF',
     'ticker.tag.final': 'FINAL',
