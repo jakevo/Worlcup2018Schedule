@@ -38,6 +38,14 @@
             {{#link-to 'top-scorers' class='wc-nav__link'}}{{t 'nav.scorers'}}{{/link-to}}
             {{#link-to 'venues' class='wc-nav__link'}}{{t 'nav.venues'}}{{/link-to}}
             {{#link-to 'news' class='wc-nav__link'}}{{t 'nav.news'}}{{/link-to}}
+            {{#link-to 'notifications' class='wc-nav__link wc-nav__link--alert'}}
+                <svg class="wc-nav__bell" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M6 8a6 6 0 1 1 12 0c0 7 3 7 3 9H3c0-2 3-2 3-9z"></path>
+                    <path d="M10.3 21a2 2 0 0 0 3.4 0"></path>
+                </svg>
+                {{t 'nav.alerts'}}
+                <span class="wc-nav__alert-dot" aria-hidden="true"></span>
+            {{/link-to}}
         </nav>
         <div class="wc-header__tools">
             {{locale-picker}}
@@ -185,16 +193,46 @@
                 </svg>
                 <span>{{t 'nav.news'}}</span>
             {{/link-to}}
+            {{#link-to 'notifications' class='wc-more-item wc-more-item--alert'}}
+                <svg class="wc-more-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M6 8a6 6 0 1 1 12 0c0 7 3 7 3 9H3c0-2 3-2 3-9z"></path>
+                    <path d="M10.3 21a2 2 0 0 0 3.4 0"></path>
+                </svg>
+                <span>{{t 'nav.alerts'}}</span>
+            {{/link-to}}
+            {{#link-to 'about' class='wc-more-item'}}
+                <svg class="wc-more-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <line x1="12" y1="11" x2="12" y2="16"></line>
+                    <circle cx="12" cy="8" r="0.8" fill="currentColor"></circle>
+                </svg>
+                <span>{{t 'nav.about'}}</span>
+            {{/link-to}}
         </div>
     </div>
 {{/if}}
 
+{{#link-to 'about' class='wc-about-cta'}}
+    <span class="wc-about-cta__avatar" aria-hidden="true">
+        <svg viewBox="0 0 40 40" width="44" height="44">
+            <defs>
+                <linearGradient id="wc-about-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ffd561"></stop>
+                    <stop offset="100%" stop-color="#e5174a"></stop>
+                </linearGradient>
+            </defs>
+            <circle cx="20" cy="20" r="19" fill="url(#wc-about-grad)"></circle>
+            <text x="20" y="26" text-anchor="middle" font-family="Inter, sans-serif" font-weight="900" font-size="18" fill="#0a1128">JV</text>
+        </svg>
+    </span>
+    <span class="wc-about-cta__text">
+        <strong>{{t 'footer.about.cta.title'}}</strong>
+        <em>{{t 'footer.about.cta.body'}}</em>
+    </span>
+    <span class="wc-about-cta__chev" aria-hidden="true">›</span>
+{{/link-to}}
+
 <footer class="wc-footer">
     <span><strong>{{t 'footer.kickoff'}}</strong> {{t 'footer.kickoff.detail'}}</span>
     <span><strong>{{t 'footer.final'}}</strong> {{t 'footer.final.detail'}}</span>
-    <span class="wc-footer__links">
-        {{#link-to 'about' class='wc-footer__link'}}{{t 'footer.about'}}{{/link-to}}
-        <span aria-hidden="true">·</span>
-        {{#link-to 'notifications' class='wc-footer__link'}}{{t 'footer.alerts'}}{{/link-to}}
-    </span>
 </footer>

@@ -8,6 +8,8 @@ export default {
     'nav.venues': 'Sân vận động',
     'nav.news': 'Tin tức',
     'nav.scorers': 'Vua phá lưới',
+    'nav.alerts': 'Thông báo',
+    'nav.about': 'Giới thiệu',
     'tab.home': 'Trang chủ',
     'tab.groups': 'Bảng',
     'tab.schedule': 'Lịch',
@@ -20,8 +22,8 @@ export default {
     'theme.toggle': 'Chuyển chế độ sáng/tối',
     'locale.switch': 'Đổi ngôn ngữ',
 
-    'footer.about': 'Giới thiệu',
-    'footer.alerts': 'Thông báo iPhone',
+    'footer.about.cta.title': 'Do Jake Vo làm — solo web dev',
+    'footer.about.cta.body': 'Giới thiệu · thuê mình · ☕ mời mình ly cà phê',
 
     'notify.banner.title': 'Nhận nhắc nhở trận đấu trên iPhone',
     'notify.banner.body': 'Thêm trang này vào Màn hình chính để được nhắc trước mỗi trận.',

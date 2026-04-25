@@ -3427,19 +3427,107 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
     .wc-record dd { font-size: 26px; }
 }
 
-/* ---------- Footer links ----------------------------------------- */
-.wc-footer__links {
+/* ---------- Top-nav "Alerts" link (with bell + pulse dot) -------- */
+.wc-nav__link--alert {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    color: var(--muted);
+    gap: 6px;
+    padding-right: 22px !important;
+    background: var(--accent);
+    color: #fff !important;
+    border-radius: 999px;
+    font-weight: 700;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(229, 23, 74, 0.35);
 }
-.wc-footer__link {
-    color: var(--ink-soft);
+.wc-nav__link--alert:hover {
+    background: #ff3a66;
+    color: #fff !important;
+}
+.wc-nav__bell { flex-shrink: 0; }
+.wc-nav__alert-dot {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ffe066;
+    box-shadow: 0 0 0 0 rgba(255, 224, 102, 0.8);
+    animation: wc-alert-pulse 2.4s infinite;
+}
+@keyframes wc-alert-pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(255, 224, 102, 0.75); }
+    70%  { box-shadow: 0 0 0 9px rgba(255, 224, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 224, 102, 0); }
+}
+.wc-more-item--alert {
+    color: var(--accent);
+}
+.wc-more-item--alert .wc-more-item__icon { color: var(--accent); }
+
+/* ---------- Site-wide "About" CTA card (above footer) ----------- */
+.wc-about-cta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    max-width: 1180px;
+    margin: 24px auto 0;
+    padding: 14px 18px;
+    background: linear-gradient(135deg,
+                rgba(229, 23, 74, 0.08),
+                rgba(255, 213, 97, 0.08));
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
     text-decoration: none;
-    font-weight: 600;
+    color: var(--ink);
+    box-shadow: var(--shadow);
+    transition: transform 0.12s, border-color 0.15s, box-shadow 0.15s;
 }
-.wc-footer__link:hover { color: var(--accent); text-decoration: underline; }
+.wc-about-cta:hover {
+    border-color: var(--accent);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg);
+}
+.wc-about-cta__avatar {
+    flex-shrink: 0;
+    line-height: 0;
+    border-radius: 50%;
+    box-shadow: 0 4px 14px rgba(229, 23, 74, 0.25);
+}
+.wc-about-cta__text {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.wc-about-cta__text strong {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--ink);
+}
+.wc-about-cta__text em {
+    font-style: normal;
+    font-size: 12px;
+    color: var(--ink-soft);
+}
+.wc-about-cta__chev {
+    color: var(--muted);
+    font-size: 24px;
+    font-weight: 300;
+    flex-shrink: 0;
+}
+.wc-about-cta:hover .wc-about-cta__chev { color: var(--accent); }
+@media (max-width: 520px) {
+    .wc-about-cta {
+        margin: 18px 14px 0;
+        padding: 12px 14px;
+    }
+    .wc-about-cta__avatar svg { width: 38px; height: 38px; }
+    .wc-about-cta__text strong { font-size: 14px; }
+    .wc-about-cta__text em { font-size: 11px; }
+}
 
 /* ---------- Schedule "Get iPhone alerts" banner ------------------ */
 .wc-notify-banner {
