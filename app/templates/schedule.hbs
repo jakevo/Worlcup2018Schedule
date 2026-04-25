@@ -6,6 +6,15 @@
     <button type="button" class="wc-btn wc-btn--ghost" onclick={{action "refresh"}}>{{t 'action.refresh'}}</button>
 </section>
 
+{{#link-to 'notifications' class='wc-notify-banner'}}
+    <span class="wc-notify-banner__icon" aria-hidden="true">🔔</span>
+    <span class="wc-notify-banner__text">
+        <strong>{{t 'notify.banner.title'}}</strong>
+        <em>{{t 'notify.banner.body'}}</em>
+    </span>
+    <span class="wc-notify-banner__chev" aria-hidden="true">›</span>
+{{/link-to}}
+
 <div class="wc-filters">
     <div class="wc-filters__row">
         <label class="wc-search">

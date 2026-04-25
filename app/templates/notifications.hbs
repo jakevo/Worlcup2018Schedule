@@ -1,0 +1,55 @@
+<section class="wc-notify">
+    <header class="wc-notify__hero">
+        <div class="wc-notify__bell" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 8a6 6 0 1 1 12 0c0 7 3 7 3 9H3c0-2 3-2 3-9z"></path>
+                <path d="M10.3 21a2 2 0 0 0 3.4 0"></path>
+            </svg>
+        </div>
+        <span class="wc-notify__eyebrow">{{t 'notify.eyebrow'}}</span>
+        <h1 class="wc-notify__title">{{t 'notify.title'}}</h1>
+        <p class="wc-notify__lede">{{t 'notify.lede'}}</p>
+    </header>
+
+    <article class="wc-notify__card">
+        <h2 class="wc-notify__heading">{{t 'notify.ios.title'}}</h2>
+        <p class="wc-notify__hint">{{t 'notify.ios.requires'}}</p>
+        <ol class="wc-notify__steps">
+            <li>
+                <span class="wc-notify__num">1</span>
+                <div>
+                    <strong>{{t 'notify.ios.step1.title'}}</strong>
+                    <p>{{t 'notify.ios.step1.body'}}</p>
+                </div>
+            </li>
+            <li>
+                <span class="wc-notify__num">2</span>
+                <div>
+                    <strong>{{t 'notify.ios.step2.title'}}</strong>
+                    <p>{{t 'notify.ios.step2.body'}}</p>
+                </div>
+            </li>
+            <li>
+                <span class="wc-notify__num">3</span>
+                <div>
+                    <strong>{{t 'notify.ios.step3.title'}}</strong>
+                    <p>{{t 'notify.ios.step3.body'}}</p>
+                </div>
+            </li>
+            <li>
+                <span class="wc-notify__num">4</span>
+                <div>
+                    <strong>{{t 'notify.ios.step4.title'}}</strong>
+                    <p>{{t 'notify.ios.step4.body'}}</p>
+                </div>
+            </li>
+        </ol>
+    </article>
+
+    <article class="wc-notify__card wc-notify__card--alt">
+        <h2 class="wc-notify__heading">{{t 'notify.android.title'}}</h2>
+        <p>{{t 'notify.android.body'}}</p>
+    </article>
+
+    <p class="wc-notify__footnote">{{t 'notify.footnote'}}</p>
+</section>

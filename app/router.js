@@ -15,6 +15,8 @@ Router.map(function() {
   this.route('news');
   this.route('top-scorers');
   this.route('match', { path: '/match/:id' });
+  this.route('about');
+  this.route('notifications');
 });
 
 export default Router;

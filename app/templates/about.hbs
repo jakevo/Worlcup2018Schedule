@@ -1,0 +1,47 @@
+<section class="wc-about">
+    <header class="wc-about__hero">
+        <span class="wc-about__eyebrow">{{t 'about.eyebrow'}}</span>
+        <h1 class="wc-about__title">{{t 'about.title'}}</h1>
+        <p class="wc-about__lede">{{t 'about.lede'}}</p>
+    </header>
+
+    <article class="wc-about__card">
+        <h2 class="wc-about__heading">{{t 'about.project.title'}}</h2>
+        <p>{{t 'about.project.p1'}}</p>
+        <p>{{t 'about.project.p2'}}</p>
+        <ul class="wc-about__list">
+            <li><strong>{{t 'about.project.feat1.title'}}</strong> — {{t 'about.project.feat1.body'}}</li>
+            <li><strong>{{t 'about.project.feat2.title'}}</strong> — {{t 'about.project.feat2.body'}}</li>
+            <li><strong>{{t 'about.project.feat3.title'}}</strong> — {{t 'about.project.feat3.body'}}</li>
+            <li><strong>{{t 'about.project.feat4.title'}}</strong> — {{t 'about.project.feat4.body'}}</li>
+        </ul>
+    </article>
+
+    <article class="wc-about__card">
+        <h2 class="wc-about__heading">{{t 'about.maker.title'}}</h2>
+        <p>{{t 'about.maker.p1'}}</p>
+        <p>{{t 'about.maker.p2'}}</p>
+    </article>
+
+    <div class="wc-about__cta-row">
+        <a class="wc-about__cta wc-about__cta--donate" href={{donateUrl}} target="_blank" rel="noopener">
+            <span class="wc-about__cta-icon" aria-hidden="true">☕</span>
+            <span class="wc-about__cta-text">
+                <strong>{{t 'about.donate.title'}}</strong>
+                <em>{{t 'about.donate.body'}}</em>
+            </span>
+        </a>
+        <a class="wc-about__cta wc-about__cta--hire" href={{hireMailto}}>
+            <span class="wc-about__cta-icon" aria-hidden="true">✉</span>
+            <span class="wc-about__cta-text">
+                <strong>{{t 'about.hire.title'}}</strong>
+                <em>{{t 'about.hire.body'}}</em>
+            </span>
+        </a>
+    </div>
+
+    <p class="wc-about__contact">
+        {{t 'about.contact.prefix'}}
+        <a href={{hireMailto}}>{{hireEmail}}</a>
+    </p>
+</section>

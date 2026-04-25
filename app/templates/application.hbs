@@ -192,4 +192,9 @@
 <footer class="wc-footer">
     <span><strong>{{t 'footer.kickoff'}}</strong> {{t 'footer.kickoff.detail'}}</span>
     <span><strong>{{t 'footer.final'}}</strong> {{t 'footer.final.detail'}}</span>
+    <span class="wc-footer__links">
+        {{#link-to 'about' class='wc-footer__link'}}{{t 'footer.about'}}{{/link-to}}
+        <span aria-hidden="true">·</span>
+        {{#link-to 'notifications' class='wc-footer__link'}}{{t 'footer.alerts'}}{{/link-to}}
+    </span>
 </footer>
