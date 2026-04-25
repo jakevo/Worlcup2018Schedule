@@ -3791,7 +3791,9 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
     opacity: 0.85;
 }
 .wc-about__email {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     margin-top: 6px;
     color: var(--accent);
     font-weight: 800;
@@ -3799,6 +3801,7 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
     text-decoration: none;
     word-break: break-all;
 }
+.wc-about__email-icon { flex-shrink: 0; }
 .wc-about__email:hover { text-decoration: underline; }
 
 @media (min-width: 640px) {
