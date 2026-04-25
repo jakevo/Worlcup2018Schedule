@@ -3427,28 +3427,37 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
     .wc-record dd { font-size: 26px; }
 }
 
-/* ---------- Top-nav "Alerts" link (with bell + pulse dot) -------- */
-.wc-nav__link--alert {
+/* ---------- Header-tools "Alerts" pill (always visible) --------- */
+.wc-tool-alert {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding-right: 22px !important;
+    padding: 7px 14px 7px 11px;
     background: var(--accent);
-    color: #fff !important;
+    color: #fff;
     border-radius: 999px;
     font-weight: 700;
+    font-size: 13px;
+    line-height: 1;
+    text-decoration: none;
     position: relative;
     box-shadow: 0 4px 12px rgba(229, 23, 74, 0.35);
+    flex-shrink: 0;
+    transition: background 0.15s, transform 0.05s;
 }
-.wc-nav__link--alert:hover {
-    background: #ff3a66;
-    color: #fff !important;
+.wc-tool-alert:hover,
+.wc-tool-alert:focus,
+.wc-tool-alert:visited,
+.wc-tool-alert:active {
+    color: #fff;
+    text-decoration: none;
 }
-.wc-nav__bell { flex-shrink: 0; }
-.wc-nav__alert-dot {
+.wc-tool-alert:hover { background: #ff3a66; }
+.wc-tool-alert:active { transform: translateY(1px); }
+.wc-tool-alert__dot {
     position: absolute;
-    top: 6px;
-    right: 8px;
+    top: 4px;
+    right: 6px;
     width: 8px;
     height: 8px;
     border-radius: 50%;
@@ -3460,6 +3469,20 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
     0%   { box-shadow: 0 0 0 0 rgba(255, 224, 102, 0.75); }
     70%  { box-shadow: 0 0 0 9px rgba(255, 224, 102, 0); }
     100% { box-shadow: 0 0 0 0 rgba(255, 224, 102, 0); }
+}
+/* On narrow phones we already have the pill in the More sheet; hide
+   the header label so the pill becomes a compact bell icon and
+   doesn't squeeze the brand or locale picker. */
+@media (max-width: 720px) {
+    .wc-tool-alert__label { display: none; }
+    .wc-tool-alert {
+        padding: 8px;
+        width: 36px;
+        height: 36px;
+        justify-content: center;
+        gap: 0;
+    }
+    .wc-tool-alert__dot { top: 3px; right: 4px; }
 }
 .wc-more-item--alert {
     color: var(--accent);

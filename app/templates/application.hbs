@@ -38,16 +38,16 @@
             {{#link-to 'top-scorers' class='wc-nav__link'}}{{t 'nav.scorers'}}{{/link-to}}
             {{#link-to 'venues' class='wc-nav__link'}}{{t 'nav.venues'}}{{/link-to}}
             {{#link-to 'news' class='wc-nav__link'}}{{t 'nav.news'}}{{/link-to}}
-            {{#link-to 'notifications' class='wc-nav__link wc-nav__link--alert'}}
-                <svg class="wc-nav__bell" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        </nav>
+        <div class="wc-header__tools">
+            {{#link-to 'notifications' class='wc-tool-alert' title=(t 'nav.alerts')}}
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M6 8a6 6 0 1 1 12 0c0 7 3 7 3 9H3c0-2 3-2 3-9z"></path>
                     <path d="M10.3 21a2 2 0 0 0 3.4 0"></path>
                 </svg>
-                {{t 'nav.alerts'}}
-                <span class="wc-nav__alert-dot" aria-hidden="true"></span>
+                <span class="wc-tool-alert__label">{{t 'nav.alerts'}}</span>
+                <span class="wc-tool-alert__dot" aria-hidden="true"></span>
             {{/link-to}}
-        </nav>
-        <div class="wc-header__tools">
             {{locale-picker}}
             <button type="button" class="wc-theme-toggle" onclick={{action "toggleTheme"}} aria-label={{t 'theme.toggle'}} title={{t 'theme.toggle'}}>
                 <svg class="wc-theme-toggle__icon wc-theme-toggle__icon--sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
