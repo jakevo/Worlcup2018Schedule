@@ -23,3 +23,12 @@ crons = ["*/5 * * * *"]
 [[kv_namespaces]]
 binding = "SUBSCRIPTIONS"
 id = "047474c6806f47b08f51b808c3532ee9"
+
+# Service binding to the existing api-football proxy Worker on the same
+# account. Lets us call it without going through the public workers.dev
+# DNS, which Cloudflare's bot protection blocks for Worker-to-Worker
+# subrequests (error 1042).
+[[services]]
+binding = "PROXY"
+service = "wc2026-proxy"
+
