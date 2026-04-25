@@ -2360,8 +2360,12 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
     }
     .wc-match__team:not(.wc-match__team--right) { grid-area: team1; }
     .wc-match__score { grid-area: score; min-width: 0; font-size: 12px; }
-    .wc-match__team--right { grid-area: team2; flex-direction: row; justify-content: flex-start; }
-    .wc-match__team--right .wc-match__name { text-align: left; }
+    /* DOM order for team2 is name-then-flag (so on desktop the flag
+       hugs the right edge). On mobile we stack vertically and want
+       the flag on the LEFT for both rows so they scan as a column —
+       row-reverse flips the visual without touching the markup. */
+    .wc-match__team--right { grid-area: team2; flex-direction: row-reverse; justify-content: flex-end; }
+    .wc-match__team--right .wc-match__name { text-align: left; flex: 1 1 auto; }
     .wc-match__team {
         min-width: 0;
         gap: 8px;
