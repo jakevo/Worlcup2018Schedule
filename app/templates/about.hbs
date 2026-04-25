@@ -21,11 +21,12 @@
         <h2 class="wc-about__heading">{{t 'about.maker.title'}}</h2>
         <p>{{t 'about.maker.p1'}}</p>
         <p>{{t 'about.maker.p2'}}</p>
-        <a class="wc-about__email" href={{hireMailto}} aria-label={{t 'about.email.aria'}} title={{hireEmail}}>
-            <svg class="wc-about__email-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <a class="wc-about__email" href={{hireMailto}}>
+            <svg class="wc-about__email-icon" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <rect x="3" y="5" width="18" height="14" rx="2"></rect>
                 <polyline points="3,7 12,13 21,7"></polyline>
             </svg>
+            <span>{{hireEmail}}</span>
         </a>
     </article>
 
@@ -35,13 +36,6 @@
             <span class="wc-about__cta-text">
                 <strong>{{t 'about.donate.title'}}</strong>
                 <em>{{t 'about.donate.body'}}</em>
-            </span>
-        </a>
-        <a class="wc-about__cta wc-about__cta--hire" href={{hireMailto}}>
-            <span class="wc-about__cta-icon" aria-hidden="true">✉</span>
-            <span class="wc-about__cta-text">
-                <strong>{{t 'about.hire.title'}}</strong>
-                <em>{{t 'about.hire.body'}}</em>
             </span>
         </a>
     </div>

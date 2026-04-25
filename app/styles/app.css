@@ -3529,6 +3529,40 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
     .wc-about-cta__text em { font-size: 11px; }
 }
 
+/* ---------- Floating "back to top" arrow ------------------------ */
+.wc-to-top {
+    position: fixed;
+    right: 16px;
+    bottom: 80px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 22px rgba(229, 23, 74, 0.4);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px);
+    transition: opacity 0.2s, transform 0.2s, background 0.15s;
+    z-index: 70;
+    padding: 0;
+}
+.wc-to-top:hover { background: #ff3a66; }
+.wc-to-top:active { transform: translateY(0) scale(0.94); }
+.wc-to-top.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+@media (min-width: 720px) {
+    .wc-to-top { right: 24px; bottom: 24px; width: 48px; height: 48px; }
+}
+
 /* ---------- Schedule "Get iPhone alerts" banner ------------------ */
 .wc-notify-banner {
     display: flex;
@@ -3793,23 +3827,16 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
 .wc-about__email {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
+    gap: 10px;
     margin-top: 10px;
-    border-radius: 50%;
-    background: var(--accent-soft);
     color: var(--accent);
+    font-weight: 800;
+    font-size: 16px;
     text-decoration: none;
-    transition: background 0.15s, color 0.15s, transform 0.1s;
-}
-.wc-about__email:hover {
-    background: var(--accent);
-    color: #fff;
-    transform: translateY(-1px);
-    text-decoration: none;
+    word-break: break-all;
 }
 .wc-about__email-icon { flex-shrink: 0; }
+.wc-about__email:hover { text-decoration: underline; }
 
 @media (min-width: 640px) {
     .wc-about__cta-row { grid-template-columns: 1fr 1fr; }

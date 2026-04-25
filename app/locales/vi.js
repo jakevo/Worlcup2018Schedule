@@ -66,6 +66,7 @@ export default {
     'about.hire.title': 'Thuê mình làm web',
     'about.hire.body': 'Landing, dashboard, web app — gọn, nhanh, ship liền.',
     'about.email.aria': 'Gửi email cho mình',
+    'action.toTop': 'Lên đầu trang',
 
     'footer.kickoff': 'Khai mạc:',
     'footer.kickoff.detail': '11 tháng 6, 2026 · Estadio Azteca',
