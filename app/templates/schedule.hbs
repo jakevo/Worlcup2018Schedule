@@ -45,6 +45,9 @@
                     class="wc-chip {{if (eq groupFilter letter) 'is-active'}}"
                     onclick={{action "setGroupFilter" letter}}>{{letter}}</button>
         {{/each}}
+        <button type="button"
+                class="wc-chip wc-chip--ko {{if (eq groupFilter 'knockout') 'is-active'}}"
+                onclick={{action "setGroupFilter" "knockout"}}>{{t 'schedule.chip.knockout'}}</button>
     </div>
     <div class="wc-filters__summary">
         {{t 'schedule.summary.showing'}} <strong>{{totalFiltered}}</strong> {{t 'schedule.summary.of'}} {{model.matches.length}} {{t 'schedule.summary.matches'}}

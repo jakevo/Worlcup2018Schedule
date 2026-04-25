@@ -23,7 +23,15 @@ export default Controller.extend({
         return days
             .map(day => {
                 const matches = day.matches.filter(m => {
-                    if (group && group !== 'all' && m.group !== group) return false;
+                    if (group && group !== 'all') {
+                        if (group === 'knockout') {
+                            // Knockout matches have no group letter from the
+                            // api-football feed; only group-stage rows do.
+                            if (m.group) return false;
+                        } else if (m.group !== group) {
+                            return false;
+                        }
+                    }
                     if (playedOnly && !m.played) return false;
                     if (query) {
                         const hay = `${m.team1} ${m.team2} ${m.city} ${m.venue}`.toLowerCase();

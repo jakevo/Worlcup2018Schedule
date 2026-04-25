@@ -1567,6 +1567,22 @@ th.wc-table__team { display: table-cell; font-weight: 700; }
     border-color: transparent;
     box-shadow: 0 4px 12px rgba(229, 23, 74, 0.3);
 }
+.wc-chip--ko {
+    margin-left: 8px;
+    background: rgba(245, 158, 11, 0.10);
+    border-color: rgba(245, 158, 11, 0.5);
+    color: #b8730d;
+    letter-spacing: 0.04em;
+}
+.wc-chip--ko:hover { border-color: #f59e0b; color: #f59e0b; }
+.wc-chip--ko.is-active {
+    background: linear-gradient(135deg, #f59e0b, #b8730d);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
+}
+[data-theme="dark"] .wc-chip--ko { color: #fbbf24; }
+[data-theme="dark"] .wc-chip--ko:hover { color: #fde68a; }
 
 /* ---------- News ------------------------------------------------- */
 

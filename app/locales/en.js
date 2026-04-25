@@ -167,6 +167,7 @@ export default {
     'action.clear': 'Clear',
     'action.clearFilters': 'Clear filters',
     'schedule.chip.all': 'All',
+    'schedule.chip.knockout': 'KO',
     'schedule.summary.showing': 'Showing',
     'schedule.summary.of': 'of',
     'schedule.summary.matches': 'matches',

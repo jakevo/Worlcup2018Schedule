@@ -168,6 +168,7 @@ export default {
     'action.clear': 'Xóa',
     'action.clearFilters': 'Xóa bộ lọc',
     'schedule.chip.all': 'Tất cả',
+    'schedule.chip.knockout': 'Loại trực tiếp',
     'schedule.summary.showing': 'Hiển thị',
     'schedule.summary.of': 'trong',
     'schedule.summary.matches': 'trận',
