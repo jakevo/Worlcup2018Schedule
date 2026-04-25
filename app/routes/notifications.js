@@ -1,3 +1,10 @@
 import Route from '@ember/routing/route';
 
-export default Route.extend({});
+export default Route.extend({
+    model() {
+        return fetch('/config')
+            .then(r => r.ok ? r.json() : {})
+            .catch(() => ({}))
+            .then(cfg => ({ waitlistOpen: !!(cfg && cfg.waitlistOpen) }));
+    }
+});

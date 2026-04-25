@@ -18,6 +18,48 @@
         {{/link-to}}
     </header>
 
+    {{#if model.waitlistOpen}}
+        <article class="wc-notify__signup">
+            <h2 class="wc-notify__heading">{{t 'notify.signup.title'}}</h2>
+            <p class="wc-notify__sub">{{t 'notify.signup.sub'}}</p>
+
+            {{#if submittedState}}
+                <div class="wc-notify__success" role="status">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polyline points="4,12 10,18 20,6"></polyline>
+                    </svg>
+                    <span>
+                        {{#if (eq submittedState 'already_subscribed')}}
+                            {{t 'notify.signup.already'}}
+                        {{else}}
+                            {{t 'notify.signup.thanks'}}
+                        {{/if}}
+                    </span>
+                </div>
+            {{else}}
+                <form class="wc-notify__form" onsubmit={{action "submit"}}>
+                    <label class="wc-notify__label" for="wc-notify-email">{{t 'notify.signup.label'}}</label>
+                    <div class="wc-notify__row">
+                        {{input
+                            type="email"
+                            value=email
+                            id="wc-notify-email"
+                            class="wc-notify__input"
+                            placeholder=(t 'notify.signup.placeholder')
+                            autocomplete="email"
+                            required=true
+                            disabled=submitting}}
+                        <button type="submit" class="wc-notify__submit" disabled={{submitting}}>
+                            {{#if submitting}}{{t 'notify.signup.sending'}}{{else}}{{t 'notify.signup.submit'}}{{/if}}
+                        </button>
+                    </div>
+                    {{#if errorKey}}<p class="wc-notify__error" role="alert">{{t errorKey}}</p>{{/if}}
+                    <p class="wc-notify__privacy">{{t 'notify.signup.privacy'}}</p>
+                </form>
+            {{/if}}
+        </article>
+    {{/if}}
+
     <article class="wc-notify__card">
         <h2 class="wc-notify__heading">{{t 'notify.preview.title'}}</h2>
         <p class="wc-notify__sub">{{t 'notify.preview.sub'}}</p>
