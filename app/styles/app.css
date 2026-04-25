@@ -3466,68 +3466,36 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
 }
 .wc-more-item--alert .wc-more-item__icon { color: var(--accent); }
 
-/* ---------- Site-wide "About" CTA card (above footer) ----------- */
-.wc-about-cta {
-    display: flex;
+/* ---------- Footer credit pill (home only, between K/F lines) ---- */
+.wc-footer__credit {
+    display: inline-flex;
     align-items: center;
-    gap: 14px;
-    max-width: 1180px;
-    margin: 24px auto 0;
-    padding: 14px 18px;
-    background: linear-gradient(135deg,
-                rgba(229, 23, 74, 0.08),
-                rgba(255, 213, 97, 0.08));
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    text-decoration: none;
-    color: var(--ink);
-    box-shadow: var(--shadow);
-    transition: transform 0.12s, border-color 0.15s, box-shadow 0.15s;
-}
-.wc-about-cta:hover {
-    border-color: var(--accent);
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-lg);
-}
-.wc-about-cta__avatar {
-    flex-shrink: 0;
-    line-height: 0;
-    border-radius: 50%;
-    box-shadow: 0 4px 14px rgba(229, 23, 74, 0.25);
-}
-.wc-about-cta__text {
-    flex: 1 1 auto;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-}
-.wc-about-cta__text strong {
-    font-size: 15px;
-    font-weight: 800;
-    color: var(--ink);
-}
-.wc-about-cta__text em {
-    font-style: normal;
-    font-size: 12px;
+    gap: 8px;
+    align-self: center;
+    padding: 4px 10px 4px 4px;
+    border-radius: 999px;
+    background: rgba(229, 23, 74, 0.08);
+    border: 1px solid rgba(229, 23, 74, 0.18);
     color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+    transition: transform 0.12s, background 0.15s, color 0.15s, border-color 0.15s;
 }
-.wc-about-cta__chev {
-    color: var(--muted);
-    font-size: 24px;
-    font-weight: 300;
+.wc-footer__credit:hover {
+    background: rgba(229, 23, 74, 0.16);
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-1px);
+    text-decoration: none;
+}
+.wc-footer__credit svg {
     flex-shrink: 0;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(229, 23, 74, 0.3);
 }
-.wc-about-cta:hover .wc-about-cta__chev { color: var(--accent); }
-@media (max-width: 520px) {
-    .wc-about-cta {
-        margin: 18px 14px 0;
-        padding: 12px 14px;
-    }
-    .wc-about-cta__avatar svg { width: 38px; height: 38px; }
-    .wc-about-cta__text strong { font-size: 14px; }
-    .wc-about-cta__text em { font-size: 11px; }
-}
+.wc-footer__credit-label { white-space: nowrap; }
 
 /* ---------- Floating "back to top" arrow ------------------------ */
 .wc-to-top {

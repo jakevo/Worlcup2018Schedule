@@ -26,8 +26,8 @@ export default {
     'footer.kickoff.detail': '11 June 2026 · Estadio Azteca',
     'footer.final': 'Final:',
     'footer.final.detail': '19 July 2026 · MetLife Stadium',
-    'footer.about.cta.title': 'Made by Jake Vo — solo web dev',
-    'footer.about.cta.body': 'About this project · hire me · ☕ buy me a coffee',
+    'footer.credit.label': 'Made by Jake Vo',
+    'footer.credit.aria': 'About — made by Jake Vo',
 
     'notify.banner.title': 'Get match alerts on your iPhone',
     'notify.banner.body': 'Add this site to your Home Screen for kickoff reminders.',

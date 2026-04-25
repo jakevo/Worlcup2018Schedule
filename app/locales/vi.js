@@ -22,8 +22,8 @@ export default {
     'theme.toggle': 'Chuyển chế độ sáng/tối',
     'locale.switch': 'Đổi ngôn ngữ',
 
-    'footer.about.cta.title': 'Do Jake Vo làm — solo web dev',
-    'footer.about.cta.body': 'Giới thiệu · thuê mình · ☕ mời mình ly cà phê',
+    'footer.credit.label': 'Do Jake Vo làm',
+    'footer.credit.aria': 'Giới thiệu — do Jake Vo làm',
 
     'notify.banner.title': 'Nhận nhắc nhở trận đấu trên iPhone',
     'notify.banner.body': 'Thêm trang này vào Màn hình chính để được nhắc trước mỗi trận.',

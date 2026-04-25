@@ -212,30 +212,23 @@
     </div>
 {{/if}}
 
-{{#if isHome}}
-    {{#link-to 'about' class='wc-about-cta'}}
-        <span class="wc-about-cta__avatar" aria-hidden="true">
-            <svg viewBox="0 0 40 40" width="44" height="44">
+<footer class="wc-footer">
+    <span><strong>{{t 'footer.kickoff'}}</strong> {{t 'footer.kickoff.detail'}}</span>
+    {{#if isHome}}
+        {{#link-to 'about' class='wc-footer__credit' title=(t 'footer.credit.aria')}}
+            <svg viewBox="0 0 40 40" width="28" height="28" aria-hidden="true">
                 <defs>
-                    <linearGradient id="wc-about-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <linearGradient id="wc-footer-grad" x1="0%" y1="0%" x2="100%" y2="100%">
                         <stop offset="0%" stop-color="#ffd561"></stop>
                         <stop offset="100%" stop-color="#e5174a"></stop>
                     </linearGradient>
                 </defs>
-                <circle cx="20" cy="20" r="19" fill="url(#wc-about-grad)"></circle>
+                <circle cx="20" cy="20" r="19" fill="url(#wc-footer-grad)"></circle>
                 <text x="20" y="26" text-anchor="middle" font-family="Inter, sans-serif" font-weight="900" font-size="18" fill="#0a1128">JV</text>
             </svg>
-        </span>
-        <span class="wc-about-cta__text">
-            <strong>{{t 'footer.about.cta.title'}}</strong>
-            <em>{{t 'footer.about.cta.body'}}</em>
-        </span>
-        <span class="wc-about-cta__chev" aria-hidden="true">›</span>
-    {{/link-to}}
-{{/if}}
-
-<footer class="wc-footer">
-    <span><strong>{{t 'footer.kickoff'}}</strong> {{t 'footer.kickoff.detail'}}</span>
+            <span class="wc-footer__credit-label">{{t 'footer.credit.label'}}</span>
+        {{/link-to}}
+    {{/if}}
     <span><strong>{{t 'footer.final'}}</strong> {{t 'footer.final.detail'}}</span>
 </footer>
 
