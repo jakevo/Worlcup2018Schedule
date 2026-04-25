@@ -6,14 +6,80 @@
                 <path d="M10.3 21a2 2 0 0 0 3.4 0"></path>
             </svg>
         </div>
-        <span class="wc-notify__eyebrow">{{t 'notify.eyebrow'}}</span>
-        <h1 class="wc-notify__title">{{t 'notify.title'}}</h1>
-        <p class="wc-notify__lede">{{t 'notify.lede'}}</p>
+        <span class="wc-notify__eyebrow wc-notify__eyebrow--soon">{{t 'notify.eyebrow.soon'}}</span>
+        <h1 class="wc-notify__title">{{t 'notify.title.soon'}}</h1>
+        <p class="wc-notify__lede">{{t 'notify.lede.soon'}}</p>
     </header>
 
+    <article class="wc-notify__signup">
+        <h2 class="wc-notify__heading">{{t 'notify.signup.title'}}</h2>
+        <p class="wc-notify__sub">{{t 'notify.signup.sub'}}</p>
+
+        {{#if submittedState}}
+            <div class="wc-notify__success" role="status">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="4,12 10,18 20,6"></polyline>
+                </svg>
+                <span>
+                    {{#if (eq submittedState 'already_subscribed')}}
+                        {{t 'notify.signup.already'}}
+                    {{else}}
+                        {{t 'notify.signup.thanks'}}
+                    {{/if}}
+                </span>
+            </div>
+        {{else}}
+            <form class="wc-notify__form" onsubmit={{action "submit"}}>
+                <label class="wc-notify__label" for="wc-notify-email">{{t 'notify.signup.label'}}</label>
+                <div class="wc-notify__row">
+                    {{input
+                        type="email"
+                        value=email
+                        id="wc-notify-email"
+                        class="wc-notify__input"
+                        placeholder=(t 'notify.signup.placeholder')
+                        autocomplete="email"
+                        required=true
+                        disabled=submitting}}
+                    <button type="submit"
+                            class="wc-notify__submit"
+                            disabled={{submitting}}>
+                        {{#if submitting}}
+                            {{t 'notify.signup.sending'}}
+                        {{else}}
+                            {{t 'notify.signup.submit'}}
+                        {{/if}}
+                    </button>
+                </div>
+                {{#if errorKey}}
+                    <p class="wc-notify__error" role="alert">{{t errorKey}}</p>
+                {{/if}}
+                <p class="wc-notify__privacy">{{t 'notify.signup.privacy'}}</p>
+            </form>
+        {{/if}}
+    </article>
+
     <article class="wc-notify__card">
+        <h2 class="wc-notify__heading">{{t 'notify.preview.title'}}</h2>
+        <p class="wc-notify__sub">{{t 'notify.preview.sub'}}</p>
+        <div class="wc-notify__sample" aria-hidden="true">
+            <div class="wc-notify__sample-icon">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <polygon points="12,7 15,9.2 13.8,13 10.2,13 9,9.2" fill="#fff" stroke="none"></polygon>
+                </svg>
+            </div>
+            <div class="wc-notify__sample-body">
+                <strong>{{t 'notify.preview.sample.title'}}</strong>
+                <span>{{t 'notify.preview.sample.body'}}</span>
+            </div>
+            <span class="wc-notify__sample-time">{{t 'notify.preview.sample.time'}}</span>
+        </div>
+    </article>
+
+    <article class="wc-notify__card wc-notify__card--alt">
         <h2 class="wc-notify__heading">{{t 'notify.ios.title'}}</h2>
-        <p class="wc-notify__hint">{{t 'notify.ios.requires'}}</p>
+        <p class="wc-notify__hint">{{t 'notify.ios.preinstall'}}</p>
         <ol class="wc-notify__steps">
             <li>
                 <span class="wc-notify__num">1</span>
@@ -36,20 +102,8 @@
                     <p>{{t 'notify.ios.step3.body'}}</p>
                 </div>
             </li>
-            <li>
-                <span class="wc-notify__num">4</span>
-                <div>
-                    <strong>{{t 'notify.ios.step4.title'}}</strong>
-                    <p>{{t 'notify.ios.step4.body'}}</p>
-                </div>
-            </li>
         </ol>
     </article>
 
-    <article class="wc-notify__card wc-notify__card--alt">
-        <h2 class="wc-notify__heading">{{t 'notify.android.title'}}</h2>
-        <p>{{t 'notify.android.body'}}</p>
-    </article>
-
-    <p class="wc-notify__footnote">{{t 'notify.footnote'}}</p>
+    <p class="wc-notify__footnote">{{t 'notify.footnote.soon'}}</p>
 </section>
