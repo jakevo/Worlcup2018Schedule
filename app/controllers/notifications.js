@@ -6,7 +6,7 @@ export default Controller.extend({
 
     email: '',
     submitting: false,
-    submittedState: null, // 'subscribed' | 'already_subscribed' | null
+    submittedState: null,
     errorKey: null,
 
     actions: {

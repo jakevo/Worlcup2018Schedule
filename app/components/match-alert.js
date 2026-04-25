@@ -13,6 +13,7 @@ import {
 export default Component.extend({
     router: service('router'),
     locale: service('locale'),
+    siteConfig: service('site-config'),
 
     tagName: 'span',
     classNames: ['wc-match-alert'],

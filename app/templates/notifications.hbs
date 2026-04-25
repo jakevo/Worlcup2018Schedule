@@ -6,19 +6,25 @@
                 <path d="M10.3 21a2 2 0 0 0 3.4 0"></path>
             </svg>
         </div>
-        <span class="wc-notify__eyebrow wc-notify__eyebrow--live">{{t 'notify.eyebrow.live'}}</span>
-        <h1 class="wc-notify__title">{{t 'notify.title.live'}}</h1>
-        <p class="wc-notify__lede">{{t 'notify.lede.live'}}</p>
-        {{#link-to 'schedule' class='wc-notify__cta'}}
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M6 8a6 6 0 1 1 12 0c0 7 3 7 3 9H3c0-2 3-2 3-9z"></path>
-                <path d="M10.3 21a2 2 0 0 0 3.4 0"></path>
-            </svg>
-            <span>{{t 'notify.cta.openSchedule'}}</span>
-        {{/link-to}}
+        {{#if model.signupOpen}}
+            <span class="wc-notify__eyebrow wc-notify__eyebrow--soon">{{t 'notify.eyebrow.soon'}}</span>
+            <h1 class="wc-notify__title">{{t 'notify.title.soon'}}</h1>
+            <p class="wc-notify__lede">{{t 'notify.lede.soon'}}</p>
+        {{else}}
+            <span class="wc-notify__eyebrow wc-notify__eyebrow--live">{{t 'notify.eyebrow.live'}}</span>
+            <h1 class="wc-notify__title">{{t 'notify.title.live'}}</h1>
+            <p class="wc-notify__lede">{{t 'notify.lede.live'}}</p>
+            {{#link-to 'schedule' class='wc-notify__cta'}}
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M6 8a6 6 0 1 1 12 0c0 7 3 7 3 9H3c0-2 3-2 3-9z"></path>
+                    <path d="M10.3 21a2 2 0 0 0 3.4 0"></path>
+                </svg>
+                <span>{{t 'notify.cta.openSchedule'}}</span>
+            {{/link-to}}
+        {{/if}}
     </header>
 
-    {{#if model.waitlistOpen}}
+    {{#if model.signupOpen}}
         <article class="wc-notify__signup">
             <h2 class="wc-notify__heading">{{t 'notify.signup.title'}}</h2>
             <p class="wc-notify__sub">{{t 'notify.signup.sub'}}</p>
@@ -78,6 +84,7 @@
         </div>
     </article>
 
+    {{#unless model.signupOpen}}
     <article class="wc-notify__card wc-notify__card--alt">
         <h2 class="wc-notify__heading">{{t 'notify.ios.title'}}</h2>
         <div class="wc-notify__warn" role="note">
@@ -127,4 +134,5 @@
     </article>
 
     <p class="wc-notify__footnote">{{t 'notify.footnote.live'}}</p>
+    {{/unless}}
 </section>

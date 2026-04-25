@@ -5,6 +5,6 @@ export default Route.extend({
         return fetch('/config')
             .then(r => r.ok ? r.json() : {})
             .catch(() => ({}))
-            .then(cfg => ({ waitlistOpen: !!(cfg && cfg.waitlistOpen) }));
+            .then(cfg => ({ signupOpen: !!(cfg && cfg.signupOpen) }));
     }
 });

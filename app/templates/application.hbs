@@ -86,7 +86,7 @@
             <span class="wc-ticker__sep" aria-hidden="true">●</span>
             <span class="wc-ticker__item">
                 <span class="wc-ticker__tag wc-ticker__tag--news">{{t 'ticker.tag.news'}}</span>
-                {{t 'ticker.news.placeholder'}}
+                {{#if headlines.firstObject}}{{headlines.firstObject.title}}{{else}}{{t 'ticker.news.placeholder'}}{{/if}}
             </span>
             <span class="wc-ticker__sep" aria-hidden="true">●</span>
         </div>
@@ -103,7 +103,7 @@
             <span class="wc-ticker__sep">●</span>
             <span class="wc-ticker__item">
                 <span class="wc-ticker__tag wc-ticker__tag--news">{{t 'ticker.tag.news'}}</span>
-                {{t 'ticker.news.placeholder'}}
+                {{#if headlines.firstObject}}{{headlines.firstObject.title}}{{else}}{{t 'ticker.news.placeholder'}}{{/if}}
             </span>
             <span class="wc-ticker__sep">●</span>
         </div>

@@ -134,6 +134,10 @@
         .err { color: #ff8095; font-size: 13px; margin-top: 8px; }
         .ok { color: var(--good); font-size: 13px; margin-top: 8px; }
         .center { text-align: center; }
+        .state-panel { margin-top: 16px; padding: 12px 14px; background: var(--surface-2); border-radius: 10px; font-size: 12px; }
+        .state-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; }
+        .state-key { color: var(--muted); }
+        .state-row code { color: var(--ink); font-family: ui-monospace, SFMono-Regular, monospace; }
     </style>
 </head>
 <body>
@@ -154,12 +158,23 @@
         <div class="card">
             <div class="toggle-row">
                 <div class="label">
-                    Public signup form
-                    <span class="hint">When ON, /notifications shows the email field.</span>
+                    Show signup form on /notifications
+                    <span class="hint">ON = signup form is visible. OFF = signup form is hidden.</span>
                 </div>
-                <button id="toggle" class="switch" aria-label="Toggle waitlist form" aria-pressed="false"></button>
+                <button id="toggle" class="switch" aria-label="Toggle signup form visibility" aria-pressed="false"></button>
             </div>
             <p id="toggle-msg" class="ok" hidden></p>
+            <div id="state-panel" class="state-panel">
+                <div class="state-row">
+                    <span class="state-key">KV value (admin GET)</span>
+                    <code id="state-admin">…</code>
+                </div>
+                <div class="state-row">
+                    <span class="state-key">Public /config</span>
+                    <code id="state-config">…</code>
+                </div>
+                <p id="state-warn" class="err" hidden></p>
+            </div>
         </div>
 
         <div class="card">
@@ -193,6 +208,9 @@
     const listMsg = $('list-msg');
     const toggleBtn = $('toggle');
     const toggleMsg = $('toggle-msg');
+    const stateAdmin = $('state-admin');
+    const stateConfig = $('state-config');
+    const stateWarn = $('state-warn');
 
     function getToken() {
         try { return localStorage.getItem(STORAGE_KEY) || ''; } catch (e) { return ''; }
@@ -255,12 +273,34 @@
     async function fetchToggle() {
         const token = getToken();
         if (!token) return;
+        let adminVal = null, configVal = null;
         try {
-            const res = await fetch('/admin/waitlist-toggle?token=' + encodeURIComponent(token));
-            if (!res.ok) return;
-            const data = await res.json();
-            setSwitch(!!data.waitlistOpen);
-        } catch (err) { /* ignore */ }
+            const res = await fetch('/admin/waitlist-toggle?token=' + encodeURIComponent(token), { cache: 'no-store' });
+            const data = await res.json().catch(() => ({}));
+            if (res.ok && typeof data.signupOpen === 'boolean') {
+                adminVal = data.signupOpen;
+                setSwitch(adminVal);
+                stateAdmin.textContent = String(adminVal);
+            } else {
+                stateAdmin.textContent = `error ${res.status}: ${data.error || 'unknown'}`;
+            }
+        } catch (err) {
+            stateAdmin.textContent = 'fetch failed: ' + err.message;
+        }
+        try {
+            const res = await fetch('/config?_=' + Date.now(), { cache: 'no-store' });
+            const data = await res.json().catch(() => ({}));
+            configVal = !!data.signupOpen;
+            stateConfig.textContent = String(configVal);
+        } catch (err) {
+            stateConfig.textContent = 'fetch failed: ' + err.message;
+        }
+        if (adminVal !== null && configVal !== null && adminVal !== configVal) {
+            stateWarn.textContent = `Mismatch: KV says ${adminVal}, /config says ${configVal}. /config has up to 60s of edge KV cache — wait a minute and refresh.`;
+            stateWarn.hidden = false;
+        } else {
+            stateWarn.hidden = true;
+        }
     }
 
     function setSwitch(on) {
@@ -275,23 +315,34 @@
         const current = toggleBtn.dataset.state === 'on';
         const next = !current;
         toggleMsg.hidden = true;
+        toggleMsg.className = 'ok';
         try {
             const res = await fetch('/admin/waitlist-toggle?token=' + encodeURIComponent(token), {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ open: next })
+                body: JSON.stringify({ open: next }),
+                cache: 'no-store'
             });
             if (res.status === 401) {
                 clearToken();
                 return showLogin();
             }
-            const data = await res.json();
-            setSwitch(!!data.waitlistOpen);
-            toggleMsg.textContent = data.waitlistOpen
-                ? 'Public form is now ON. (~60s for the cache to refresh.)'
-                : 'Public form is now OFF.';
+            const data = await res.json().catch(() => ({}));
+            if (!res.ok || typeof data.signupOpen !== 'boolean') {
+                toggleMsg.className = 'err';
+                toggleMsg.textContent = `Toggle failed (HTTP ${res.status}): ${data.error || 'no signupOpen in response'}`;
+                toggleMsg.hidden = false;
+                fetchToggle();
+                return;
+            }
+            setSwitch(data.signupOpen);
+            toggleMsg.textContent = data.signupOpen
+                ? 'Signup form is ON — visible on /notifications. (~60s for cache to refresh.)'
+                : 'Signup form is OFF — hidden on /notifications.';
             toggleMsg.hidden = false;
+            fetchToggle();
         } catch (err) {
+            toggleMsg.className = 'err';
             toggleMsg.textContent = 'Toggle failed: ' + err;
             toggleMsg.hidden = false;
         }

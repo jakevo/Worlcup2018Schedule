@@ -1,7 +1,7 @@
-// Admin-only POST: flips the waitlist-open flag in KV. The /config
-// endpoint reads it; the public /notifications page reads /config to
-// decide whether to show the signup form. Edge cache on /config means
-// flips take ~60s to propagate.
+// Admin-only POST: flips the signup-form visibility flag in KV. ON
+// means /notifications shows the launch-ping signup. /config reads
+// the same KV key. Edge cache on /config means flips take ~60s to
+// propagate.
 
 function jsonResponse(payload, status = 200) {
     return new Response(JSON.stringify(payload), {
@@ -31,9 +31,12 @@ export async function onRequestPost({ request, env }) {
     try { body = await request.json(); } catch (e) {
         return jsonResponse({ error: 'bad_json' }, 400);
     }
-    const open = body && body.open === true;
+    if (!body || typeof body.open !== 'boolean') {
+        return jsonResponse({ error: 'missing_open_boolean' }, 400);
+    }
+    const open = body.open;
     await env.WAITLIST.put('_meta:open', open ? 'true' : 'false');
-    return jsonResponse({ ok: true, waitlistOpen: open });
+    return jsonResponse({ ok: true, signupOpen: open });
 }
 
 export async function onRequestGet({ request, env }) {
@@ -44,5 +47,5 @@ export async function onRequestGet({ request, env }) {
         return jsonResponse({ error: 'unauthorized' }, 401);
     }
     const v = await env.WAITLIST.get('_meta:open');
-    return jsonResponse({ waitlistOpen: v === 'true' });
+    return jsonResponse({ signupOpen: v === 'true' });
 }

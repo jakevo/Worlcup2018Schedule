@@ -1,0 +1,5 @@
+{{#each rounds as |round idx|}}
+    <div class="wc-bp2__round-panel" data-idx={{idx}}>
+        {{yield round idx}}
+    </div>
+{{/each}}

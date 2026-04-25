@@ -1,9 +1,11 @@
 import Controller from '@ember/controller';
 import { computed } from '@ember/object';
+import { inject as service } from '@ember/service';
 import { getOwner } from '@ember/application';
 import { invalidateTournamentCache } from '../utils/tournament-data';
 
 export default Controller.extend({
+    siteConfig: service('site-config'),
     groupFilter: 'all',
     searchQuery: '',
     showPlayedOnly: false,

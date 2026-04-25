@@ -1,0 +1,23 @@
+<div class="wc-bp-match__id">{{match.id}}</div>
+<div class="wc-bp-match__row">
+    {{#if match.top.team.flag}}
+        <span class="wc-bp-match__flag"><img src={{match.top.team.flag}} alt=""></span>
+    {{else}}
+        <span class="wc-bp-match__flag wc-bp-match__flag--empty"></span>
+    {{/if}}
+    <span class="wc-bp-match__name">
+        {{#if match.top.team.name}}{{match.top.team.name}}{{else if match.top.winnerOf}}W {{match.top.winnerOf}}{{else}}{{match.top.label}}{{/if}}
+    </span>
+    <span class="wc-bp-match__seed">{{match.top.label}}</span>
+</div>
+<div class="wc-bp-match__row">
+    {{#if match.bot.team.flag}}
+        <span class="wc-bp-match__flag"><img src={{match.bot.team.flag}} alt=""></span>
+    {{else}}
+        <span class="wc-bp-match__flag wc-bp-match__flag--empty"></span>
+    {{/if}}
+    <span class="wc-bp-match__name">
+        {{#if match.bot.team.name}}{{match.bot.team.name}}{{else if match.bot.winnerOf}}W {{match.bot.winnerOf}}{{else}}{{match.bot.label}}{{/if}}
+    </span>
+    <span class="wc-bp-match__seed">{{match.bot.label}}</span>
+</div>
