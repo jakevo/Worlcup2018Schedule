@@ -3702,13 +3702,16 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
     font-size: 13px;
     opacity: 0.85;
 }
-.wc-about__contact {
-    text-align: center;
-    color: var(--muted);
-    font-size: 13px;
-    padding-bottom: 8px;
+.wc-about__email {
+    display: inline-block;
+    margin-top: 6px;
+    color: var(--accent);
+    font-weight: 800;
+    font-size: 16px;
+    text-decoration: none;
+    word-break: break-all;
 }
-.wc-about__contact a { color: var(--accent); font-weight: 700; }
+.wc-about__email:hover { text-decoration: underline; }
 
 @media (min-width: 640px) {
     .wc-about__cta-row { grid-template-columns: 1fr 1fr; }

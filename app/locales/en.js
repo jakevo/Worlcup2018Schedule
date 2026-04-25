@@ -62,12 +62,11 @@ export default {
     'about.project.feat4.body': 'Real squads, kits and venue photos, refreshed live during matches.',
     'about.maker.title': 'About me',
     'about.maker.p1': 'Hi, I’m Jake Vo — solo web dev. World Cup Hub started as a weekend project because I couldn’t find a single site with everything about World Cup 2026 in one place :D',
-    'about.maker.p2': 'If you need a website built or made faster — drop me a line, I’d love to chat.',
+    'about.maker.p2': 'If you or someone you know is looking for help building a website, drop me a line at the email below:',
     'about.donate.title': 'Buy me a coffee',
     'about.donate.body': 'Help keep the site fast, ad-free and updated.',
     'about.hire.title': 'Hire me to build your site',
     'about.hire.body': 'Marketing pages, dashboards, web apps — I ship fast.',
-    'about.contact.prefix': 'Or just say hi:',
 
     'ticker.tag.kickoff': 'KICKOFF',
     'ticker.tag.final': 'FINAL',

@@ -58,12 +58,11 @@ export default {
     'about.project.feat4.body': 'Đội hình, áo đấu, ảnh sân vận động — refresh ngay lúc trận đang diễn ra.',
     'about.maker.title': 'Về mình',
     'about.maker.p1': 'Chào, mình là Jake Vo — solo web dev. World Cup Hub ban đầu chỉ là project cuối tuần vì mình không tìm ra trang web nào có đầy đủ thông tin về World Cup 2026 :D',
-    'about.maker.p2': 'Còn nếu cần build website hoặc tối ưu cho chạy nhanh hơn — cứ inbox, mình rất sẵn lòng.',
+    'about.maker.p2': 'Nếu bạn hay someone you know are looking for someone to help building website, cứ liên hệ mình qua email, dùng cái này nè:',
     'about.donate.title': 'Mời mình ly cà phê',
     'about.donate.body': 'Để trang luôn nhanh, không ads, luôn cập nhật.',
     'about.hire.title': 'Thuê mình làm web',
     'about.hire.body': 'Landing, dashboard, web app — gọn, nhanh, ship liền.',
-    'about.contact.prefix': 'Hoặc inbox trực tiếp:',
 
     'footer.kickoff': 'Khai mạc:',
     'footer.kickoff.detail': '11 tháng 6, 2026 · Estadio Azteca',
