@@ -3809,8 +3809,25 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
     box-shadow: var(--shadow-lg);
 }
 .wc-about__cta-icon {
-    font-size: 28px;
+    position: relative;
     flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+}
+.wc-about__cta-coffee {
+    font-size: 32px;
+    line-height: 1;
+}
+.wc-about__cta-venmo {
+    position: absolute;
+    right: -10px;
+    bottom: -6px;
+    line-height: 0;
+    border-radius: 8px;
+    box-shadow: 0 0 0 2px #fff, 0 4px 10px rgba(0, 0, 0, 0.18);
 }
 .wc-about__cta-text {
     display: flex;
@@ -3827,16 +3844,25 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
 .wc-about__email {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    margin-top: 10px;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    margin-top: 12px;
+    border-radius: 50%;
+    background: var(--accent-soft);
     color: var(--accent);
-    font-weight: 800;
-    font-size: 16px;
     text-decoration: none;
-    word-break: break-all;
+    transition: background 0.15s, color 0.15s, transform 0.12s, box-shadow 0.15s;
+    box-shadow: 0 4px 14px rgba(229, 23, 74, 0.18);
+}
+.wc-about__email:hover {
+    background: var(--accent);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(229, 23, 74, 0.4);
+    text-decoration: none;
 }
 .wc-about__email-icon { flex-shrink: 0; }
-.wc-about__email:hover { text-decoration: underline; }
 
 @media (min-width: 640px) {
     .wc-about__cta-row { grid-template-columns: 1fr 1fr; }
