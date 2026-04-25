@@ -1567,17 +1567,9 @@ th.wc-table__team { display: table-cell; font-weight: 700; }
     border-color: transparent;
     box-shadow: 0 4px 12px rgba(229, 23, 74, 0.3);
 }
-/* KO chip: same active state as group letters (red gradient + white
-   text). Default state hints amber so it visually separates from
-   A–L without competing with brand red. Active inherits .wc-chip.is-active. */
-.wc-chip--ko {
-    margin-left: 6px;
-    border-color: rgba(245, 158, 11, 0.55);
-    color: #b8730d;
-}
-.wc-chip--ko:hover { border-color: #f59e0b; color: #f59e0b; }
-[data-theme="dark"] .wc-chip--ko { color: #fbbf24; }
-[data-theme="dark"] .wc-chip--ko:hover { color: #fde68a; }
+/* KO chip behaves identically to A–L chips — only the label differs.
+   Small left margin separates it from the group letters at a glance. */
+.wc-chip--ko { margin-left: 6px; }
 
 /* ---------- News ------------------------------------------------- */
 
@@ -2357,10 +2349,22 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
         display: block;
     }
     .wc-match__body { min-width: 0; }
-    .wc-match__teams { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 6px; min-width: 0; }
+    /* Stack teams vertically on phones so names like "South Africa" or
+       "Bosnia & Herzegovina" never truncate, even when the action
+       stack is present on schedule rows. */
+    .wc-match__teams {
+        grid-template-columns: 1fr;
+        grid-template-areas: "team1" "score" "team2";
+        gap: 2px;
+        min-width: 0;
+    }
+    .wc-match__team:not(.wc-match__team--right) { grid-area: team1; }
+    .wc-match__score { grid-area: score; min-width: 0; font-size: 12px; }
+    .wc-match__team--right { grid-area: team2; flex-direction: row; justify-content: flex-start; }
+    .wc-match__team--right .wc-match__name { text-align: left; }
     .wc-match__team {
         min-width: 0;
-        gap: 6px;
+        gap: 8px;
     }
     .wc-match__team img { width: 22px; height: 15px; flex-shrink: 0; }
     .wc-match__name {
@@ -2369,9 +2373,9 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
         text-overflow: ellipsis;
         white-space: nowrap;
         flex: 1 1 auto;
-        font-size: 13px;
+        font-size: 14px;
     }
-    .wc-match__score { min-width: 40px; font-size: 15px; }
+    .wc-match__vs { font-size: 9px; opacity: 0.7; }
     .wc-match__group { font-size: 10px; }
     .wc-match__kick { font-size: 11px; }
     .wc-match__venue { font-size: 11px; gap: 4px; }
