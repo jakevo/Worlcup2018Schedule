@@ -1,0 +1,25 @@
+name = "wc2026-push-sender"
+main = "src/index.js"
+compatibility_date = "2026-04-25"
+
+# 5-min cron tick. Each tick scans the schedule for matches that kick off
+# in 25-35 min and fans web-push to every subscriber for that match.
+# Mark-and-skip via `sent:<matchId>` keeps a single send per match.
+[triggers]
+crons = ["*/5 * * * *"]
+
+# Vars set in dashboard or via `wrangler secret put` — never check in.
+#
+# Required:
+#   - VAPID_PUBLIC_KEY  (plaintext; same as the client app uses)
+#   - VAPID_PRIVATE_KEY (secret)
+#   - VAPID_SUBJECT     (plaintext, e.g. "mailto:javoucsd@gmail.com")
+#   - TRIGGER_KEY       (secret; arbitrary string for the manual /run endpoint)
+#
+# Required KV binding:
+#   - SUBSCRIPTIONS — points at the SAME wc2026-subscriptions namespace
+#     used by the Pages /subscribe Function so reads see what writes did.
+
+[[kv_namespaces]]
+binding = "SUBSCRIPTIONS"
+id = "047474c6806f47b08f51b808c3532ee9"

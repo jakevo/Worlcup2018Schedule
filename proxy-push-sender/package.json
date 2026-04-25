@@ -1,0 +1,11 @@
+{
+    "name": "wc2026-push-sender",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "deploy": "wrangler deploy",
+        "tail": "wrangler tail",
+        "dev": "wrangler dev"
+    }
+}
