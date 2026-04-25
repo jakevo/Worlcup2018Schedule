@@ -7,9 +7,9 @@
     <section class="wc-team-hero" style={{team-hero-style model.team.fifaCode}}>
         <div class="wc-team-hero__banner" aria-hidden="true">
             {{#if model.heroPhoto}}
-                <img class="wc-team-hero__photo" src={{model.heroPhoto}} alt="">
+                <img class="wc-team-hero__photo" src={{model.heroPhoto}} alt="" loading="eager" fetchpriority="high" decoding="async">
             {{else if model.team.flag}}
-                <img class="wc-team-hero__photo wc-team-hero__photo--flag" src={{model.team.flag}} alt="">
+                <img class="wc-team-hero__photo wc-team-hero__photo--flag" src={{model.team.flag}} alt="" loading="eager" fetchpriority="high" decoding="async">
             {{/if}}
             <div class="wc-team-hero__scrim"></div>
         </div>

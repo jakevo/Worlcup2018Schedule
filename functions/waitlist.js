@@ -53,6 +53,31 @@ export async function onRequestPost(context) {
     return jsonResponse({ ok: true, status: 'subscribed' });
 }
 
-export function onRequestGet() {
-    return jsonResponse({ error: 'method_not_allowed' }, 405);
+// Admin-only GET: returns the full waitlist as JSON when a valid
+// ADMIN_TOKEN is presented (?token= or Authorization: Bearer …).
+// Without the token returns 405 so the route doesn't leak data.
+export async function onRequestGet({ request, env }) {
+    if (!env || !env.WAITLIST) {
+        return jsonResponse({ error: 'storage_not_configured' }, 503);
+    }
+    const url = new URL(request.url);
+    const provided = url.searchParams.get('token')
+        || (request.headers.get('Authorization') || '').replace(/^Bearer\s+/i, '');
+    if (!env.ADMIN_TOKEN || provided !== env.ADMIN_TOKEN) {
+        return jsonResponse({ error: 'method_not_allowed' }, 405);
+    }
+
+    const list = await env.WAITLIST.list({ prefix: 'email:' });
+    const items = await Promise.all(list.keys.map(async k => {
+        const raw = await env.WAITLIST.get(k.name);
+        try {
+            return raw ? JSON.parse(raw) : { email: k.name.slice(6) };
+        } catch (e) {
+            return { email: k.name.slice(6), parseError: true };
+        }
+    }));
+
+    items.sort((a, b) => (a.signedUpAt || '').localeCompare(b.signedUpAt || ''));
+
+    return jsonResponse({ ok: true, count: items.length, items });
 }
