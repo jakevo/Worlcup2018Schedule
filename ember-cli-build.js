@@ -8,6 +8,12 @@ module.exports = function(defaults) {
       'bootstrapVersion': 3,
       'importBootstrapFont': true,
       'importBootstrapCSS': true
+    },
+    // Don't fingerprint the service worker — its URL must stay stable
+    // because navigator.serviceWorker.register('/service-worker.js')
+    // expects it at exactly that path.
+    fingerprint: {
+      exclude: ['service-worker.js']
     }
   });
 
