@@ -1,0 +1,5 @@
+<svg class="bt__connectors" width={{boxW}} height={{boxH}} viewBox="0 0 {{boxW}} {{boxH}}" aria-hidden="true">
+    {{#each paths key="id" as |p|}}
+        <path d={{p.d}} class="bt__line {{if p.decided 'bt__line--decided'}}" fill="none"></path>
+    {{/each}}
+</svg>

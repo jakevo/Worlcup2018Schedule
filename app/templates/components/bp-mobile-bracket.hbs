@@ -1,0 +1,131 @@
+<div class="mh {{if champion 'mh--crowned'}} {{if hoveredTeamCode 'mh--hovering'}}">
+    {{bp-confetti active=champion}}
+
+    <div class="mh__head">
+        <div class="mh__head-row">
+            <span class="mh__side mh__side--{{currentPanel.side}}">
+                {{#if (eq currentPanel.side 'left')}}{{t 'bracket.left_half'}}{{/if}}
+                {{#if (eq currentPanel.side 'right')}}{{t 'bracket.right_half'}}{{/if}}
+                {{#if (eq currentPanel.side 'final')}}{{t 'bracket.side_final'}}{{/if}}
+            </span>
+            <div class="mh__head-titles">
+                <div class="mh__rname">{{t (concat 'bracket.round.' currentPanel.round)}}</div>
+                <div class="mh__rdate">{{t (concat 'bracket.dates.' currentPanel.round)}}</div>
+            </div>
+            <span class="mh__pos">{{inc activePanel}}<span>/{{panelCount}}</span></span>
+        </div>
+        <div class="mh__dots" role="tablist" aria-label={{t 'bracket.round.r32'}}>
+            {{#each panels key="id" as |p i|}}
+                <button type="button"
+                        class="mh__dot {{if (eq i activePanel) 'is-active'}} {{if (eq p.side 'final') 'mh__dot--final'}}"
+                        onclick={{action "goTo" i}}
+                        role="tab"
+                        aria-selected={{eq i activePanel}}
+                        aria-label={{p.id}}></button>
+            {{/each}}
+        </div>
+    </div>
+
+    <div class="mh__scroller">
+        {{#each panels key="id" as |p i|}}
+            <section class="mh__panel mh__panel--{{p.side}} {{if (eq i activePanel) 'is-active'}}"
+                     data-round={{p.round}}
+                     data-panel={{p.id}}>
+
+                {{#if (eq p.side 'final')}}
+                    <div class="mh__final-trophy" aria-hidden="true">
+                        <svg viewBox="0 0 80 100" width="100%" height="100%">
+                            <defs>
+                                <linearGradient id="mh-trophy-grad-{{p.id}}" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" stop-color="#fff3c2"/>
+                                    <stop offset="40%" stop-color="#ffd561"/>
+                                    <stop offset="100%" stop-color="#c7870d"/>
+                                </linearGradient>
+                                <radialGradient id="mh-trophy-glow-{{p.id}}" cx="50%" cy="50%">
+                                    <stop offset="0%" stop-color="#ffd561" stop-opacity="0.55"/>
+                                    <stop offset="100%" stop-color="#ffd561" stop-opacity="0"/>
+                                </radialGradient>
+                            </defs>
+                            <circle cx="40" cy="40" r="40" fill="url(#mh-trophy-glow-{{p.id}})" class="bt__trophy-aura"/>
+                            <path d="M24 8h32v18a16 16 0 0 1-32 0V8z" fill="url(#mh-trophy-grad-{{p.id}})" stroke="#7a4a00" stroke-width="1"/>
+                            <path d="M24 14H10v8a10 10 0 0 0 10 10" fill="none" stroke="url(#mh-trophy-grad-{{p.id}})" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M56 14h14v8a10 10 0 0 1-10 10" fill="none" stroke="url(#mh-trophy-grad-{{p.id}})" stroke-width="3" stroke-linecap="round"/>
+                            <rect x="32" y="44" width="16" height="8" fill="url(#mh-trophy-grad-{{p.id}})" stroke="#7a4a00" stroke-width="0.8"/>
+                            <rect x="24" y="52" width="32" height="8" rx="1" fill="url(#mh-trophy-grad-{{p.id}})" stroke="#7a4a00" stroke-width="0.8"/>
+                            <rect x="18" y="60" width="44" height="10" rx="2" fill="url(#mh-trophy-grad-{{p.id}})" stroke="#7a4a00" stroke-width="0.8"/>
+                        </svg>
+                    </div>
+                {{/if}}
+
+                <div class="mh__matches" data-count={{p.matches.length}}>
+                    {{#each p.matches key="id" as |m|}}
+                        {{bp-tree-match
+                            match=m
+                            isFinal=(eq p.side 'final')
+                            big=(eq p.side 'final')
+                            highlightedMatchIds=highlightedMatchIds
+                            hoveredTeamCode=hoveredTeamCode
+                            focusedEmptyId=focusedEmptyId
+                            focusedFeeders=focusedFeeders
+                            predictMode=predictMode
+                            onHoverTeam=onHoverTeam
+                            onPick=onPick
+                            onFocusEmpty=onFocusEmpty}}
+                    {{/each}}
+                </div>
+
+                {{#if (eq p.side 'final')}}
+                    {{#if champion}}
+                        <div class="bt__champion mh__champion">
+                            <div class="bt__champion-rays" aria-hidden="true">
+                                <span style="transform: rotate(0deg)"></span>
+                                <span style="transform: rotate(30deg)"></span>
+                                <span style="transform: rotate(60deg)"></span>
+                                <span style="transform: rotate(90deg)"></span>
+                                <span style="transform: rotate(120deg)"></span>
+                                <span style="transform: rotate(150deg)"></span>
+                                <span style="transform: rotate(180deg)"></span>
+                                <span style="transform: rotate(210deg)"></span>
+                                <span style="transform: rotate(240deg)"></span>
+                                <span style="transform: rotate(270deg)"></span>
+                                <span style="transform: rotate(300deg)"></span>
+                                <span style="transform: rotate(330deg)"></span>
+                            </div>
+                            <div class="bt__champion-label">{{t 'bracket.champion_label'}}</div>
+                            <div class="bt__champion-flag"><img src={{champion.flag}} alt={{champion.name}}></div>
+                            <div class="bt__champion-name">{{champion.name}}</div>
+                            <div class="bt__champion-sub">{{t 'bracket.champion_sub'}}</div>
+                        </div>
+                    {{/if}}
+                {{/if}}
+            </section>
+        {{/each}}
+    </div>
+
+    <button type="button" class="mh__nav mh__nav--prev"
+            onclick={{action "prev"}}
+            disabled={{atFirst}}
+            aria-label={{t 'bracket.prev_round'}}>
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+    </button>
+    <button type="button" class="mh__nav mh__nav--next"
+            onclick={{action "next"}}
+            disabled={{atLast}}
+            aria-label={{t 'bracket.next_round'}}>
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+    </button>
+
+    {{#if focusedEmptyId}}
+        <div class="mh__focus-hint">
+            {{#if feedersOnThisPanel}}
+                {{#if predictMode}}
+                    {{t 'bracket.tap_to_advance'}}
+                {{else}}
+                    {{t 'bracket.feeders_hint'}}
+                {{/if}}
+            {{else}}
+                {{t 'bracket.feeders_offscreen'}}
+            {{/if}}
+        </div>
+    {{/if}}
+</div>

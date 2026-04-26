@@ -1,61 +1,49 @@
-{{#if hasTeams}}
-    <div class="wc-bp-tree-match__pair">
-        <div class="wc-bp-tree-match__side"
-             {{action "hoverTopTeam" match.top.team.fifaCode on="mouseEnter"}}
-             {{action "hoverTopTeam" null on="mouseLeave"}}>
-            {{#if match.top.team.flag}}
-                <span class="wc-bp-tree-match__flag" title={{match.top.team.name}}><img src={{match.top.team.flag}} alt={{match.top.team.name}}></span>
-            {{else}}
-                <span class="wc-bp-tree-match__flag wc-bp-tree-match__flag--empty" title="Team TBD"></span>
-            {{/if}}
-            <span class="wc-bp-tree-match__seed">{{topSeed}}</span>
-        </div>
-        <span class="wc-bp-tree-match__v">v</span>
-        <div class="wc-bp-tree-match__side"
-             {{action "hoverTopTeam" match.bot.team.fifaCode on="mouseEnter"}}
-             {{action "hoverTopTeam" null on="mouseLeave"}}>
-            {{#if match.bot.team.flag}}
-                <span class="wc-bp-tree-match__flag" title={{match.bot.team.name}}><img src={{match.bot.team.flag}} alt={{match.bot.team.name}}></span>
-            {{else}}
-                <span class="wc-bp-tree-match__flag wc-bp-tree-match__flag--empty" title="Team TBD"></span>
-            {{/if}}
-            <span class="wc-bp-tree-match__seed">{{botSeed}}</span>
-        </div>
-    </div>
-{{else}}
-    <div class="wc-bp-tree-match__solo">
-        <span class="wc-bp-tree-match__solo-id">{{match.id}}</span>
-    </div>
-{{/if}}
-{{#if isExpanded}}
-    <div class="wc-bp-tree-match__details">
-        <p class="wc-bp-tree-match__details-teams">
-            <span>
-                {{#if match.top.team.name}}
-                    {{match.top.team.name}}
-                {{else}}
-                    3rd-placed team
-                {{/if}}
-                <small>({{match.top.label}})</small>
-            </span>
-            <span class="wc-bp-tree-match__details-vs">vs</span>
-            <span>
-                {{#if match.bot.team.name}}
-                    {{match.bot.team.name}}
-                {{else}}
-                    3rd-placed team
-                {{/if}}
-                <small>({{match.bot.label}})</small>
-            </span>
-        </p>
-        {{#if match.fixture}}
-            <p>
-                <strong>{{weekday match.fixture.date}}</strong>
-                {{short-date match.fixture.date}} · {{format-time match.fixture.time}}
-            </p>
-            {{#if match.fixture.venue}}
-                <p class="wc-bp-tree-match__venue">📍 {{match.fixture.venue}}</p>
-            {{/if}}
+<div class="mc__id">{{match.id}}</div>
+
+<button type="button"
+        class="mc__row {{if topActive 'is-winner'}} {{if topLost 'is-loser'}}"
+        title={{topTeam.name}}
+        onmouseenter={{action "hover" topTeam.fifaCode}}
+        onmouseleave={{action "clearHover"}}
+        onclick={{action "pick" "TOP"}}
+        aria-disabled={{topDisabled}}>
+    <span class="mc__flag">
+        {{#if topTeam.flag}}
+            <img src={{topTeam.flag}} alt="">
+        {{else}}
+            <span class="mc__flag--empty"></span>
         {{/if}}
-    </div>
-{{/if}}
+    </span>
+    <span class="mc__name">
+        {{#if topTeam.name}}
+            {{topTeam.name}}
+        {{else}}
+            <span class="mc__placeholder">{{topPlaceholder}}</span>
+        {{/if}}
+    </span>
+    {{#if topActive}}<span class="mc__check" aria-hidden="true">✓</span>{{/if}}
+</button>
+
+<button type="button"
+        class="mc__row {{if botActive 'is-winner'}} {{if botLost 'is-loser'}}"
+        title={{botTeam.name}}
+        onmouseenter={{action "hover" botTeam.fifaCode}}
+        onmouseleave={{action "clearHover"}}
+        onclick={{action "pick" "BOT"}}
+        aria-disabled={{botDisabled}}>
+    <span class="mc__flag">
+        {{#if botTeam.flag}}
+            <img src={{botTeam.flag}} alt="">
+        {{else}}
+            <span class="mc__flag--empty"></span>
+        {{/if}}
+    </span>
+    <span class="mc__name">
+        {{#if botTeam.name}}
+            {{botTeam.name}}
+        {{else}}
+            <span class="mc__placeholder">{{botPlaceholder}}</span>
+        {{/if}}
+    </span>
+    {{#if botActive}}<span class="mc__check" aria-hidden="true">✓</span>{{/if}}
+</button>

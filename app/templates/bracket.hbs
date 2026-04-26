@@ -1,218 +1,262 @@
-<section class="wc-page-head">
-    <div>
-        <h1>{{t 'bracket.title'}}</h1>
-        <p>{{t 'bracket.subtitle'}}</p>
-        <p class="wc-bracket__legend">{{t 'bracket.legend'}}</p>
-    </div>
-</section>
-
-<div class="wc-bp2">
-    <div class="wc-bp2__tabs" role="tablist">
-        {{#each model.rounds as |round idx|}}
-            <button class="wc-bp2__tab {{if (eq idx activeRoundIndex) 'is-active'}}"
-                    onclick={{action "selectRound" idx}}
-                    role="tab"
-                    aria-selected={{eq idx activeRoundIndex}}>
-                {{t (concat 'bracket.round.' round.key)}}
+<header class="wc-bracket-head">
+    <div class="wc-bracket-head__inner">
+        <div>
+            <h1>{{t 'bracket.title'}}</h1>
+            <p>{{t 'bracket.subtitle'}}</p>
+            <p class="wc-bracket-head__legend">{{t 'bracket.legend'}}</p>
+        </div>
+        <div class="wc-bracket-toolbar">
+            <button type="button"
+                    class="wc-bracket-toolbar__btn wc-bracket-toolbar__btn--predict {{if predictMode 'is-on is-active'}}"
+                    onclick={{action "togglePredict"}}>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M3 12l5 5L21 4"/></svg>
+                {{t 'bracket.predict_mode'}}
             </button>
-        {{/each}}
-    </div>
-
-    {{#bp-rounds rounds=model.rounds activeIndex=activeRoundIndex onActivate=(action "selectRound") as |round|}}
-        <p class="wc-bp2__round-dates">{{t (concat 'bracket.dates.' round.key)}}</p>
-        <div class="wc-bp2__matches">
-            {{#each round.matches as |match|}}
-                <article class="wc-bp2-match">
-                    <div class="wc-bp2-match__when">
-                        {{#if match.fixture}}
-                            {{weekday match.fixture.date}} {{short-date match.fixture.date}} · {{format-time match.fixture.time}}
-                        {{else}}
-                            <span class="wc-bp2-match__id">{{match.id}}</span>
-                        {{/if}}
-                    </div>
-
-                    <div class="wc-bp2-match__row">
-                        {{#if match.top.team.flag}}
-                            <span class="wc-bp2-match__flag"><img src={{match.top.team.flag}} alt=""></span>
-                        {{else}}
-                            <span class="wc-bp2-match__flag wc-bp2-match__flag--empty"></span>
-                        {{/if}}
-                        <span class="wc-bp2-match__name">
-                            {{#if match.top.team.name}}
-                                {{match.top.team.name}}
-                            {{else if match.top.winnerOf}}
-                                {{t 'bracket.winner'}} {{match.top.winnerOf}}
-                            {{else}}
-                                {{match.top.label}}
-                            {{/if}}
-                        </span>
-                        <span class="wc-bp2-match__seed">{{match.top.label}}</span>
-                    </div>
-
-                    <div class="wc-bp2-match__row">
-                        {{#if match.bot.team.flag}}
-                            <span class="wc-bp2-match__flag"><img src={{match.bot.team.flag}} alt=""></span>
-                        {{else}}
-                            <span class="wc-bp2-match__flag wc-bp2-match__flag--empty"></span>
-                        {{/if}}
-                        <span class="wc-bp2-match__name">
-                            {{#if match.bot.team.name}}
-                                {{match.bot.team.name}}
-                            {{else if match.bot.winnerOf}}
-                                {{t 'bracket.winner'}} {{match.bot.winnerOf}}
-                            {{else}}
-                                {{match.bot.label}}
-                            {{/if}}
-                        </span>
-                        <span class="wc-bp2-match__seed">{{match.bot.label}}</span>
-                    </div>
-                </article>
-            {{/each}}
         </div>
-    {{/bp-rounds}}
+    </div>
+</header>
 
-    <div class="wc-bp2__hint">
-        <span aria-hidden="true">←</span>
-        {{t 'bracket.swipeHint'}}
-        <span aria-hidden="true">→</span>
-    </div>
-</div>
-
-{{!-- Desktop full-tree (hidden on small screens via CSS) --}}
-<div class="wc-bp-tree {{if hoveredTeamCode 'is-hovering'}}">
-    <div class="wc-bp-tree__bg" aria-hidden="true"></div>
-
-    <div class="wc-bp-tree__col wc-bp-tree__col--left wc-bp-tree__col--r32">
-        <h3 class="wc-bp-tree__col-title">{{t 'bracket.round.r32'}}</h3>
-        {{#each r32LeftPairs as |pair|}}
-            <div class="wc-bp-tree-pair">
-                {{#each pair as |m|}}
-                    {{bp-tree-match match=m
-                                    highlightedMatchIds=highlightedMatchIds
-                                    expandedMatchId=expandedMatchId
-                                    onHoverTeam=(action "hoverTeam")
-                                    onToggle=(action "toggleMatch")}}
-                {{/each}}
-            </div>
-        {{/each}}
-    </div>
-    <div class="wc-bp-tree__col wc-bp-tree__col--left wc-bp-tree__col--r16">
-        <h3 class="wc-bp-tree__col-title">{{t 'bracket.round.r16'}}</h3>
-        {{#each r16LeftPairs as |pair|}}
-            <div class="wc-bp-tree-pair">
-                {{#each pair as |m|}}
-                    {{bp-tree-match match=m
-                                    highlightedMatchIds=highlightedMatchIds
-                                    expandedMatchId=expandedMatchId
-                                    onHoverTeam=(action "hoverTeam")
-                                    onToggle=(action "toggleMatch")}}
-                {{/each}}
-            </div>
-        {{/each}}
-    </div>
-    <div class="wc-bp-tree__col wc-bp-tree__col--left wc-bp-tree__col--qf">
-        <h3 class="wc-bp-tree__col-title">{{t 'bracket.round.qf'}}</h3>
-        {{#each qfLeftPairs as |pair|}}
-            <div class="wc-bp-tree-pair">
-                {{#each pair as |m|}}
-                    {{bp-tree-match match=m
-                                    highlightedMatchIds=highlightedMatchIds
-                                    expandedMatchId=expandedMatchId
-                                    onHoverTeam=(action "hoverTeam")
-                                    onToggle=(action "toggleMatch")}}
-                {{/each}}
-            </div>
-        {{/each}}
-    </div>
-    <div class="wc-bp-tree__col wc-bp-tree__col--left wc-bp-tree__col--sf">
-        <h3 class="wc-bp-tree__col-title">{{t 'bracket.round.sf'}}</h3>
-        {{#each sfLeft as |m|}}
-            {{bp-tree-match match=m
-                            highlightedMatchIds=highlightedMatchIds
-                            expandedMatchId=expandedMatchId
-                            onHoverTeam=(action "hoverTeam")
-                            onToggle=(action "toggleMatch")}}
-        {{/each}}
-    </div>
-
-    <div class="wc-bp-tree__col wc-bp-tree__col--final">
-        <div class="wc-bp-tree__trophy" aria-hidden="true">
-            <svg viewBox="0 0 64 64" width="56" height="56" fill="none">
-                <defs>
-                    <linearGradient id="wc-bp-tree-gold" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stop-color="#ffe27a"/>
-                        <stop offset="100%" stop-color="#c89200"/>
-                    </linearGradient>
-                </defs>
-                <path d="M20 8h24v14a12 12 0 0 1-24 0V8z" fill="url(#wc-bp-tree-gold)" stroke="#8a6500" stroke-width="1.4"/>
-                <path d="M20 12H10v6a8 8 0 0 0 8 8" fill="none" stroke="url(#wc-bp-tree-gold)" stroke-width="2.4" stroke-linecap="round"/>
-                <path d="M44 12h10v6a8 8 0 0 1-8 8" fill="none" stroke="url(#wc-bp-tree-gold)" stroke-width="2.4" stroke-linecap="round"/>
-                <rect x="26" y="36" width="12" height="6" fill="url(#wc-bp-tree-gold)" stroke="#8a6500"/>
-                <rect x="20" y="42" width="24" height="6" rx="2" fill="url(#wc-bp-tree-gold)" stroke="#8a6500"/>
-                <rect x="16" y="48" width="32" height="6" rx="2" fill="url(#wc-bp-tree-gold)" stroke="#8a6500"/>
-            </svg>
+<main class="bracket-page">
+    {{#if predictMode}}
+        <div class="predict-banner">
+            <span class="predict-banner__pulse"></span>
+            <span><strong>{{t 'bracket.predict_mode'}}</strong> — {{t 'bracket.predict_hint'}}</span>
+            {{#if hasPicks}}
+                <button type="button" class="predict-banner__btn" onclick={{action "resetPicks"}}>
+                    {{t 'bracket.reset_picks'}}
+                </button>
+            {{/if}}
         </div>
-        <h3 class="wc-bp-tree__col-title wc-bp-tree__col-title--final">{{t 'bracket.round.final'}}</h3>
-        {{#if finalMatch}}
-            {{bp-tree-match match=finalMatch
-                            highlightedMatchIds=highlightedMatchIds
-                            expandedMatchId=expandedMatchId
-                            onHoverTeam=(action "hoverTeam")
-                            onToggle=(action "toggleMatch")}}
-        {{/if}}
-        <p class="wc-bp-tree__final-date">{{t 'bracket.dates.final'}}</p>
-    </div>
+    {{/if}}
 
-    <div class="wc-bp-tree__col wc-bp-tree__col--right wc-bp-tree__col--sf">
-        <h3 class="wc-bp-tree__col-title">{{t 'bracket.round.sf'}}</h3>
-        {{#each sfRight as |m|}}
-            {{bp-tree-match match=m
-                            highlightedMatchIds=highlightedMatchIds
-                            expandedMatchId=expandedMatchId
-                            onHoverTeam=(action "hoverTeam")
-                            onToggle=(action "toggleMatch")}}
-        {{/each}}
-    </div>
-    <div class="wc-bp-tree__col wc-bp-tree__col--right wc-bp-tree__col--qf">
-        <h3 class="wc-bp-tree__col-title">{{t 'bracket.round.qf'}}</h3>
-        {{#each qfRightPairs as |pair|}}
-            <div class="wc-bp-tree-pair">
-                {{#each pair as |m|}}
-                    {{bp-tree-match match=m
+    <div class="bracket-shell">
+        {{!-- Desktop full tree --}}
+        <div class="bracket-desktop-only">
+            <div class="bt {{if hoveredTeamCode 'bt--hovering'}} {{if champion 'bt--crowned'}}">
+                {{bp-confetti active=champion}}
+
+                <div class="bt__rounds">
+                    <div class="bt__rcell">{{t 'bracket.round.r32'}}</div>
+                    <div class="bt__rcell">{{t 'bracket.round.r16'}}</div>
+                    <div class="bt__rcell">{{t 'bracket.round.qf'}}</div>
+                    <div class="bt__rcell">{{t 'bracket.round.sf'}}</div>
+                    <div class="bt__rcell bt__rcell--final">{{t 'bracket.round.final'}}</div>
+                    <div class="bt__rcell">{{t 'bracket.round.sf'}}</div>
+                    <div class="bt__rcell">{{t 'bracket.round.qf'}}</div>
+                    <div class="bt__rcell">{{t 'bracket.round.r16'}}</div>
+                    <div class="bt__rcell">{{t 'bracket.round.r32'}}</div>
+                </div>
+                <div class="bt__dates">
+                    <div class="bt__dcell">{{t 'bracket.dates.r32'}}</div>
+                    <div class="bt__dcell">{{t 'bracket.dates.r16'}}</div>
+                    <div class="bt__dcell">{{t 'bracket.dates.qf'}}</div>
+                    <div class="bt__dcell">{{t 'bracket.dates.sf'}}</div>
+                    <div class="bt__dcell bt__dcell--final">{{t 'bracket.dates.final_short'}}</div>
+                    <div class="bt__dcell">{{t 'bracket.dates.sf'}}</div>
+                    <div class="bt__dcell">{{t 'bracket.dates.qf'}}</div>
+                    <div class="bt__dcell">{{t 'bracket.dates.r16'}}</div>
+                    <div class="bt__dcell">{{t 'bracket.dates.r32'}}</div>
+                </div>
+
+                <div class="bt__grid">
+                    {{bp-connector-layer rounds=rounds picks=picks}}
+
+                    <div class="bt__col bt__col--r32 bt__col--left">
+                        {{#each leftR32 key="id" as |m|}}
+                            {{bp-tree-match
+                                match=m
+                                highlightedMatchIds=highlightedMatchIds
+                                hoveredTeamCode=hoveredTeamCode
+                                focusedEmptyId=focusedEmptyId
+                                focusedFeeders=focusedFeeders
+                                predictMode=predictMode
+                                onHoverTeam=(action "hoverTeam")
+                                onPick=(action "onPick")
+                                onFocusEmpty=(action "onFocusEmpty")}}
+                        {{/each}}
+                    </div>
+                    <div class="bt__col bt__col--r16 bt__col--left">
+                        {{#each leftR16 key="id" as |m|}}
+                            {{bp-tree-match
+                                match=m
+                                highlightedMatchIds=highlightedMatchIds
+                                hoveredTeamCode=hoveredTeamCode
+                                focusedEmptyId=focusedEmptyId
+                                focusedFeeders=focusedFeeders
+                                predictMode=predictMode
+                                onHoverTeam=(action "hoverTeam")
+                                onPick=(action "onPick")
+                                onFocusEmpty=(action "onFocusEmpty")}}
+                        {{/each}}
+                    </div>
+                    <div class="bt__col bt__col--qf bt__col--left">
+                        {{#each leftQF key="id" as |m|}}
+                            {{bp-tree-match
+                                match=m
+                                highlightedMatchIds=highlightedMatchIds
+                                hoveredTeamCode=hoveredTeamCode
+                                focusedEmptyId=focusedEmptyId
+                                focusedFeeders=focusedFeeders
+                                predictMode=predictMode
+                                onHoverTeam=(action "hoverTeam")
+                                onPick=(action "onPick")
+                                onFocusEmpty=(action "onFocusEmpty")}}
+                        {{/each}}
+                    </div>
+                    <div class="bt__col bt__col--sf bt__col--left">
+                        {{#each leftSF key="id" as |m|}}
+                            {{bp-tree-match
+                                match=m
+                                highlightedMatchIds=highlightedMatchIds
+                                hoveredTeamCode=hoveredTeamCode
+                                focusedEmptyId=focusedEmptyId
+                                focusedFeeders=focusedFeeders
+                                predictMode=predictMode
+                                onHoverTeam=(action "hoverTeam")
+                                onPick=(action "onPick")
+                                onFocusEmpty=(action "onFocusEmpty")}}
+                        {{/each}}
+                    </div>
+
+                    <div class="bt__col bt__col--final">
+                        <div class="bt__trophy" aria-hidden="true">
+                            <svg viewBox="0 0 80 100" width="100%" height="100%">
+                                <defs>
+                                    <linearGradient id="bt-trophy-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%" stop-color="#fff3c2"/>
+                                        <stop offset="40%" stop-color="#ffd561"/>
+                                        <stop offset="100%" stop-color="#c7870d"/>
+                                    </linearGradient>
+                                    <radialGradient id="bt-trophy-glow" cx="50%" cy="50%">
+                                        <stop offset="0%" stop-color="#ffd561" stop-opacity="0.5"/>
+                                        <stop offset="100%" stop-color="#ffd561" stop-opacity="0"/>
+                                    </radialGradient>
+                                </defs>
+                                <circle cx="40" cy="40" r="40" fill="url(#bt-trophy-glow)" class="bt__trophy-aura"/>
+                                <path d="M24 8h32v18a16 16 0 0 1-32 0V8z" fill="url(#bt-trophy-grad)" stroke="#7a4a00" stroke-width="1"/>
+                                <path d="M24 14H10v8a10 10 0 0 0 10 10" fill="none" stroke="url(#bt-trophy-grad)" stroke-width="3" stroke-linecap="round"/>
+                                <path d="M56 14h14v8a10 10 0 0 1-10 10" fill="none" stroke="url(#bt-trophy-grad)" stroke-width="3" stroke-linecap="round"/>
+                                <rect x="32" y="44" width="16" height="8" fill="url(#bt-trophy-grad)" stroke="#7a4a00" stroke-width="0.8"/>
+                                <rect x="24" y="52" width="32" height="8" rx="1" fill="url(#bt-trophy-grad)" stroke="#7a4a00" stroke-width="0.8"/>
+                                <rect x="18" y="60" width="44" height="10" rx="2" fill="url(#bt-trophy-grad)" stroke="#7a4a00" stroke-width="0.8"/>
+                            </svg>
+                        </div>
+
+                        <div class="bt__final-wrap">
+                            {{#if finalMatch}}
+                                {{bp-tree-match
+                                    match=finalMatch
+                                    isFinal=true
+                                    big=true
                                     highlightedMatchIds=highlightedMatchIds
-                                    expandedMatchId=expandedMatchId
+                                    hoveredTeamCode=hoveredTeamCode
+                                    focusedEmptyId=focusedEmptyId
+                                    focusedFeeders=focusedFeeders
+                                    predictMode=predictMode
                                     onHoverTeam=(action "hoverTeam")
-                                    onToggle=(action "toggleMatch")}}
-                {{/each}}
+                                    onPick=(action "onPick")
+                                    onFocusEmpty=(action "onFocusEmpty")}}
+                            {{/if}}
+                        </div>
+
+                        {{#if champion}}
+                            <div class="bt__champion">
+                                <div class="bt__champion-rays" aria-hidden="true">
+                                    <span style="transform: rotate(0deg)"></span>
+                                    <span style="transform: rotate(30deg)"></span>
+                                    <span style="transform: rotate(60deg)"></span>
+                                    <span style="transform: rotate(90deg)"></span>
+                                    <span style="transform: rotate(120deg)"></span>
+                                    <span style="transform: rotate(150deg)"></span>
+                                    <span style="transform: rotate(180deg)"></span>
+                                    <span style="transform: rotate(210deg)"></span>
+                                    <span style="transform: rotate(240deg)"></span>
+                                    <span style="transform: rotate(270deg)"></span>
+                                    <span style="transform: rotate(300deg)"></span>
+                                    <span style="transform: rotate(330deg)"></span>
+                                </div>
+                                <div class="bt__champion-label">{{t 'bracket.champion_label'}}</div>
+                                <div class="bt__champion-flag"><img src={{champion.flag}} alt={{champion.name}}></div>
+                                <div class="bt__champion-name">{{champion.name}}</div>
+                                <div class="bt__champion-sub">{{t 'bracket.champion_sub'}}</div>
+                            </div>
+                        {{/if}}
+                    </div>
+
+                    <div class="bt__col bt__col--sf bt__col--right">
+                        {{#each rightSF key="id" as |m|}}
+                            {{bp-tree-match
+                                match=m
+                                highlightedMatchIds=highlightedMatchIds
+                                hoveredTeamCode=hoveredTeamCode
+                                focusedEmptyId=focusedEmptyId
+                                focusedFeeders=focusedFeeders
+                                predictMode=predictMode
+                                onHoverTeam=(action "hoverTeam")
+                                onPick=(action "onPick")
+                                onFocusEmpty=(action "onFocusEmpty")}}
+                        {{/each}}
+                    </div>
+                    <div class="bt__col bt__col--qf bt__col--right">
+                        {{#each rightQF key="id" as |m|}}
+                            {{bp-tree-match
+                                match=m
+                                highlightedMatchIds=highlightedMatchIds
+                                hoveredTeamCode=hoveredTeamCode
+                                focusedEmptyId=focusedEmptyId
+                                focusedFeeders=focusedFeeders
+                                predictMode=predictMode
+                                onHoverTeam=(action "hoverTeam")
+                                onPick=(action "onPick")
+                                onFocusEmpty=(action "onFocusEmpty")}}
+                        {{/each}}
+                    </div>
+                    <div class="bt__col bt__col--r16 bt__col--right">
+                        {{#each rightR16 key="id" as |m|}}
+                            {{bp-tree-match
+                                match=m
+                                highlightedMatchIds=highlightedMatchIds
+                                hoveredTeamCode=hoveredTeamCode
+                                focusedEmptyId=focusedEmptyId
+                                focusedFeeders=focusedFeeders
+                                predictMode=predictMode
+                                onHoverTeam=(action "hoverTeam")
+                                onPick=(action "onPick")
+                                onFocusEmpty=(action "onFocusEmpty")}}
+                        {{/each}}
+                    </div>
+                    <div class="bt__col bt__col--r32 bt__col--right">
+                        {{#each rightR32 key="id" as |m|}}
+                            {{bp-tree-match
+                                match=m
+                                highlightedMatchIds=highlightedMatchIds
+                                hoveredTeamCode=hoveredTeamCode
+                                focusedEmptyId=focusedEmptyId
+                                focusedFeeders=focusedFeeders
+                                predictMode=predictMode
+                                onHoverTeam=(action "hoverTeam")
+                                onPick=(action "onPick")
+                                onFocusEmpty=(action "onFocusEmpty")}}
+                        {{/each}}
+                    </div>
+                </div>
             </div>
-        {{/each}}
+        </div>
+
+        {{!-- Mobile horizontal swipe --}}
+        <div class="bracket-mobile-only">
+            {{bp-mobile-bracket
+                rounds=rounds
+                picks=picks
+                champion=champion
+                predictMode=predictMode
+                hoveredTeamCode=hoveredTeamCode
+                highlightedMatchIds=highlightedMatchIds
+                focusedEmptyId=focusedEmptyId
+                focusedFeeders=focusedFeeders
+                onHoverTeam=(action "hoverTeam")
+                onPick=(action "onPick")
+                onFocusEmpty=(action "onFocusEmpty")}}
+        </div>
     </div>
-    <div class="wc-bp-tree__col wc-bp-tree__col--right wc-bp-tree__col--r16">
-        <h3 class="wc-bp-tree__col-title">{{t 'bracket.round.r16'}}</h3>
-        {{#each r16RightPairs as |pair|}}
-            <div class="wc-bp-tree-pair">
-                {{#each pair as |m|}}
-                    {{bp-tree-match match=m
-                                    highlightedMatchIds=highlightedMatchIds
-                                    expandedMatchId=expandedMatchId
-                                    onHoverTeam=(action "hoverTeam")
-                                    onToggle=(action "toggleMatch")}}
-                {{/each}}
-            </div>
-        {{/each}}
-    </div>
-    <div class="wc-bp-tree__col wc-bp-tree__col--right wc-bp-tree__col--r32">
-        <h3 class="wc-bp-tree__col-title">{{t 'bracket.round.r32'}}</h3>
-        {{#each r32RightPairs as |pair|}}
-            <div class="wc-bp-tree-pair">
-                {{#each pair as |m|}}
-                    {{bp-tree-match match=m
-                                    highlightedMatchIds=highlightedMatchIds
-                                    expandedMatchId=expandedMatchId
-                                    onHoverTeam=(action "hoverTeam")
-                                    onToggle=(action "toggleMatch")}}
-                {{/each}}
-            </div>
-        {{/each}}
-    </div>
-</div>
+</main>
