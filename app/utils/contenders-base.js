@@ -39,7 +39,7 @@ export const BASE_RATING = {
     'Scotland': 44,
     'DR Congo': 44,
     'Ghana': 44,
-    'Bosnia & Herzegovina': 42,
+    'Bosnia': 42,
     'Tunisia': 42,
     'Uzbekistan': 40,
     'Czechia': 40,

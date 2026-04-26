@@ -32,7 +32,7 @@
     { "id": 4, "group": "A", "pot": 4, "name": "Czechia", "fifaCode": "CZE", "iso2": "cz", "flag": "https://flagcdn.com/w320/cz.png", "confederation": "UEFA" },
 
     { "id": 5, "group": "B", "pot": 1, "name": "Canada", "fifaCode": "CAN", "iso2": "ca", "flag": "https://flagcdn.com/w320/ca.png", "confederation": "CONCACAF" },
-    { "id": 6, "group": "B", "pot": 3, "name": "Bosnia & Herzegovina", "fifaCode": "BIH", "iso2": "ba", "flag": "https://flagcdn.com/w320/ba.png", "confederation": "UEFA" },
+    { "id": 6, "group": "B", "pot": 3, "name": "Bosnia", "fifaCode": "BIH", "iso2": "ba", "flag": "https://flagcdn.com/w320/ba.png", "confederation": "UEFA" },
     { "id": 7, "group": "B", "pot": 4, "name": "Qatar", "fifaCode": "QAT", "iso2": "qa", "flag": "https://flagcdn.com/w320/qa.png", "confederation": "AFC" },
     { "id": 8, "group": "B", "pot": 2, "name": "Switzerland", "fifaCode": "SUI", "iso2": "ch", "flag": "https://flagcdn.com/w320/ch.png", "confederation": "UEFA" },
 

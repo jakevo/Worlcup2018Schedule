@@ -1,5 +1,5 @@
 import Controller from '@ember/controller';
-import { computed } from '@ember/object';
+import { computed, observer } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { getOwner } from '@ember/application';
 import { invalidateTournamentCache } from '../utils/tournament-data';
@@ -12,8 +12,28 @@ export default Controller.extend({
     selectedDate: null,
     _dateInitialized: false,
 
+    init() {
+        this._super(...arguments);
+        // Touch searchQuery so the _resetGroupOnSearch observer activates
+        // (Ember 3.1 classic observers don't fire until the property has
+        // been read at least once).
+        this.get('searchQuery');
+    },
+
     allGroups: computed('model.groups.[]', function () {
         return (this.get('model.groups') || []).map(g => g.letter);
+    }),
+
+    // Searching by team/city/venue should span all groups — if the user
+    // types into search while a group chip is active, the chip filter
+    // hides matches from other groups (e.g. searching "brazil" while
+    // Group L is active returns 0 results because Brazil is in another
+    // group). Reset to 'all' as soon as the query becomes non-empty.
+    _resetGroupOnSearch: observer('searchQuery', function () {
+        const q = (this.get('searchQuery') || '').trim();
+        if (q && this.get('groupFilter') !== 'all') {
+            this.set('groupFilter', 'all');
+        }
     }),
 
     allDays: computed('model.matchesByDate.[]', 'groupFilter', 'searchQuery', 'showPlayedOnly', function () {

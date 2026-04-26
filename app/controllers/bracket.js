@@ -1,6 +1,8 @@
 import Controller from '@ember/controller';
 import { computed } from '@ember/object';
 import { decorateRounds, feedersFor, cascadeClear, pathFor } from '../utils/bracket-predict';
+import { buildBracket } from '../utils/bracket';
+import { applyGroupPicksToGroups } from '../utils/predict-input';
 
 const PICKS_KEY = 'wc2026.bracket.picks.v1';
 
@@ -11,6 +13,23 @@ function loadPicks() {
     } catch (e) { return {}; }
 }
 
+// Random per-group ordering: top-of-list = 1st place, etc. Saved to
+// the same wc-predict-groups key so a simulation persists across
+// page reloads (and would survive a future "let user manually edit"
+// path landing on the same store).
+function generateRandomPicks(groups) {
+    const out = {};
+    for (const g of (groups || [])) {
+        const codes = (g.teams || []).map(t => t.fifaCode);
+        for (let i = codes.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            const tmp = codes[i]; codes[i] = codes[j]; codes[j] = tmp;
+        }
+        out[g.letter] = codes;
+    }
+    return out;
+}
+
 export default Controller.extend({
     activeRoundIndex: 0,
     hoveredTeamCode: null,
@@ -18,11 +37,17 @@ export default Controller.extend({
 
     predictMode: false,
     picks: null,
+    simulatedPicks: null,
     focusedEmptyId: null,
 
     init() {
         this._super(...arguments);
         this.set('picks', loadPicks());
+        // Intentionally NOT loading any saved simulation — toggling
+        // predict mode shouldn't auto-fill the bracket. The user has
+        // to explicitly click "Generate simulated standings". Keeps
+        // the predict-mode entry honest about what's real vs imagined.
+        this.set('simulatedPicks', {});
         // Global key + click handlers to dismiss focused empty slot.
         // Controllers in Ember Classic are singletons but the handlers
         // no-op when focusedEmptyId is null, so leaving them attached
@@ -60,10 +85,52 @@ export default Controller.extend({
         } catch (e) { /* ignore */ }
     },
 
+    // True once every group's three round-robin matches are in. Until
+    // then the bracket can't show real matchups (the standings sort
+    // ties everything alphabetically pre-tournament), so predict mode
+    // surfaces a "simulate standings" banner instead.
+    hasRealStandings: computed('model.groups.[]', function () {
+        const groups = this.get('model.groups') || [];
+        if (groups.length < 12) return false;
+        return groups.every(g => (g.teams || []).every(t => t.mp >= 3));
+    }),
+
+    hasSimulation: computed('simulatedPicks', function () {
+        const sim = this.get('simulatedPicks') || {};
+        return Object.keys(sim).length > 0;
+    }),
+
+    // Show the "Generate simulated standings" banner only when the
+    // user has opted into predict mode AND we'd otherwise have nothing
+    // to predict on (no real standings, no simulation yet).
+    showSimulateBanner: computed('predictMode', 'hasRealStandings', 'hasSimulation', function () {
+        return this.get('predictMode') && !this.get('hasRealStandings') && !this.get('hasSimulation');
+    }),
+
+    showSimulationActive: computed('predictMode', 'hasRealStandings', 'hasSimulation', function () {
+        return this.get('predictMode') && !this.get('hasRealStandings') && this.get('hasSimulation');
+    }),
+
     // Decorated rounds — downstream slots filled in from picks, every
-    // match has a `winner` field. Used by every view + helper below.
-    rounds: computed('model.rounds', 'picks', function () {
-        return decorateRounds(this.get('model.rounds') || [], this.get('picks') || {});
+    // match has a `winner` field. Real groups → real bracket; no real
+    // groups but a simulation is set → bracket rebuilt from simulated
+    // standings (with forceResolved so the seed labels actually map
+    // to teams); otherwise → original placeholder bracket from route.
+    rounds: computed('model.rounds', 'model.groups.[]', 'model.matches.[]', 'picks', 'simulatedPicks', 'hasRealStandings', 'hasSimulation', function () {
+        const picks = this.get('picks') || {};
+        if (this.get('hasRealStandings') || !this.get('hasSimulation')) {
+            return decorateRounds(this.get('model.rounds') || [], picks);
+        }
+        const simGroups = applyGroupPicksToGroups(
+            this.get('model.groups') || [],
+            this.get('simulatedPicks') || {}
+        );
+        const simRounds = buildBracket(
+            simGroups,
+            this.get('model.matches') || [],
+            { forceResolved: true }
+        );
+        return decorateRounds(simRounds, picks);
     }),
 
     hasPicks: computed('picks', function () {
@@ -167,6 +234,27 @@ export default Controller.extend({
 
         resetPicks() {
             this.set('picks', {});
+            this._persistPicks();
+        },
+
+        // Generate plausible standings for every group from the actual
+        // 4 teams in each group. The seed labels then map to real
+        // teams ("1E" picks Group E's randomized 1st-place finisher,
+        // "3 A/B/C/D/F" → 3rd-place team from group A per simSeed).
+        // Reset existing KO picks since the bracket changed underneath.
+        // The simulation lives in memory only; reload starts fresh.
+        simulateStandings() {
+            const sim = generateRandomPicks(this.get('model.groups') || []);
+            this.set('simulatedPicks', sim);
+            this.set('picks', {});
+            this.set('focusedEmptyId', null);
+            this._persistPicks();
+        },
+
+        clearSimulation() {
+            this.set('simulatedPicks', {});
+            this.set('picks', {});
+            this.set('focusedEmptyId', null);
             this._persistPicks();
         },
 

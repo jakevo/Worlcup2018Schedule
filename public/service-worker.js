@@ -7,7 +7,7 @@
 // Bump SW_VERSION on any release that ships JS/template changes which
 // might otherwise be served from a cached hashed bundle. Any byte change
 // in this file triggers the install→activate cycle on next navigation.
-const SW_VERSION = '2026-04-25-25';
+const SW_VERSION = '2026-04-25-47';
 
 // Set during install: true if a previous SW was already active (i.e.
 // this is an upgrade), false on the very first install. Drives whether

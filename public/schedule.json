@@ -4,7 +4,7 @@
     { "date": "2026-06-11", "time": "15:00", "group": "A", "team1": "Mexico", "team2": "South Africa", "venue": "Estadio Azteca", "city": "Mexico City" },
     { "date": "2026-06-11", "time": "22:00", "group": "A", "team1": "South Korea", "team2": "Czechia", "venue": "Estadio Akron", "city": "Guadalajara" },
 
-    { "date": "2026-06-12", "time": "15:00", "group": "B", "team1": "Canada", "team2": "Bosnia & Herzegovina", "venue": "BMO Field", "city": "Toronto" },
+    { "date": "2026-06-12", "time": "15:00", "group": "B", "team1": "Canada", "team2": "Bosnia", "venue": "BMO Field", "city": "Toronto" },
     { "date": "2026-06-12", "time": "21:00", "group": "D", "team1": "USA", "team2": "Paraguay", "venue": "SoFi Stadium", "city": "Inglewood" },
 
     { "date": "2026-06-13", "time": "15:00", "group": "B", "team1": "Qatar", "team2": "Switzerland", "venue": "Levi's Stadium", "city": "Santa Clara" },
@@ -33,7 +33,7 @@
     { "date": "2026-06-17", "time": "22:00", "group": "K", "team1": "Uzbekistan", "team2": "Colombia", "venue": "Estadio Azteca", "city": "Mexico City" },
 
     { "date": "2026-06-18", "time": "12:00", "group": "A", "team1": "Czechia", "team2": "South Africa", "venue": "Mercedes-Benz Stadium", "city": "Atlanta" },
-    { "date": "2026-06-18", "time": "15:00", "group": "B", "team1": "Switzerland", "team2": "Bosnia & Herzegovina", "venue": "SoFi Stadium", "city": "Inglewood" },
+    { "date": "2026-06-18", "time": "15:00", "group": "B", "team1": "Switzerland", "team2": "Bosnia", "venue": "SoFi Stadium", "city": "Inglewood" },
     { "date": "2026-06-18", "time": "18:00", "group": "B", "team1": "Canada", "team2": "Qatar", "venue": "BC Place", "city": "Vancouver" },
     { "date": "2026-06-18", "time": "23:00", "group": "A", "team1": "Mexico", "team2": "South Korea", "venue": "Estadio BBVA", "city": "Monterrey" },
 
@@ -63,7 +63,7 @@
     { "date": "2026-06-23", "time": "22:00", "group": "K", "team1": "Colombia", "team2": "DR Congo", "venue": "Estadio Akron", "city": "Guadalajara" },
 
     { "date": "2026-06-24", "time": "15:00", "group": "B", "team1": "Switzerland", "team2": "Canada", "venue": "BC Place", "city": "Vancouver" },
-    { "date": "2026-06-24", "time": "15:00", "group": "B", "team1": "Bosnia & Herzegovina", "team2": "Qatar", "venue": "Lumen Field", "city": "Seattle" },
+    { "date": "2026-06-24", "time": "15:00", "group": "B", "team1": "Bosnia", "team2": "Qatar", "venue": "Lumen Field", "city": "Seattle" },
     { "date": "2026-06-24", "time": "18:00", "group": "C", "team1": "Scotland", "team2": "Brazil", "venue": "Hard Rock Stadium", "city": "Miami Gardens" },
     { "date": "2026-06-24", "time": "18:00", "group": "C", "team1": "Morocco", "team2": "Haiti", "venue": "Mercedes-Benz Stadium", "city": "Atlanta" },
     { "date": "2026-06-24", "time": "21:00", "group": "A", "team1": "Czechia", "team2": "Mexico", "venue": "Estadio Azteca", "city": "Mexico City" },

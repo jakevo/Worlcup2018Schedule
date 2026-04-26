@@ -29,7 +29,11 @@ export default Component.extend({
 
     didInsertElement() {
         this._super(...arguments);
-        this._gridEl = this.element && this.element.closest('.bt__grid');
+        // The connector host now sits as a SIBLING of .bt__grid inside
+        // .bt__grid-wrap; .closest() won't find the grid (it goes up,
+        // not sideways). Find it via the parent wrapper.
+        const parent = this.element && this.element.parentElement;
+        this._gridEl = parent && parent.querySelector('.bt__grid');
         this._onResize = this._recompute.bind(this);
         window.addEventListener('resize', this._onResize);
         if (typeof ResizeObserver !== 'undefined' && this._gridEl) {
@@ -37,7 +41,6 @@ export default Component.extend({
             this._ro.observe(this._gridEl);
         }
         this._recompute();
-        // Re-measure after fonts settle, then again after flag images load.
         this._t1 = setTimeout(this._onResize, 100);
         this._t2 = setTimeout(this._onResize, 600);
     },

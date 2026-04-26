@@ -29,6 +29,26 @@
         </div>
     {{/if}}
 
+    {{#if showSimulateBanner}}
+        <div class="sim-banner">
+            <div class="sim-banner__text">
+                <strong>{{t 'bracket.simulate.title'}}</strong>
+                <span>{{t 'bracket.simulate.body'}}</span>
+            </div>
+            <button type="button" class="sim-banner__btn sim-banner__btn--primary" onclick={{action "simulateStandings"}}>{{t 'bracket.simulate.cta'}}</button>
+        </div>
+    {{/if}}
+    {{#if showSimulationActive}}
+        <div class="sim-banner sim-banner--active">
+            <div class="sim-banner__text">
+                <strong>{{t 'bracket.simulate.activeTitle'}}</strong>
+                <span>{{t 'bracket.simulate.activeBody'}}</span>
+            </div>
+            <button type="button" class="sim-banner__btn" onclick={{action "simulateStandings"}}>{{t 'bracket.simulate.regenerate'}}</button>
+            <button type="button" class="sim-banner__btn sim-banner__btn--ghost" onclick={{action "clearSimulation"}}>{{t 'bracket.simulate.clear'}}</button>
+        </div>
+    {{/if}}
+
     <div class="bracket-shell">
         {{!-- Desktop full tree --}}
         <div class="bracket-desktop-only">
@@ -58,8 +78,9 @@
                     <div class="bt__dcell">{{t 'bracket.dates.r32'}}</div>
                 </div>
 
-                <div class="bt__grid">
+                <div class="bt__grid-wrap">
                     {{bp-connector-layer rounds=rounds picks=picks}}
+                    <div class="bt__grid">
 
                     <div class="bt__col bt__col--r32 bt__col--left">
                         {{#each leftR32 key="id" as |m|}}
@@ -177,7 +198,7 @@
                                 </div>
                                 <div class="bt__champion-label">{{t 'bracket.champion_label'}}</div>
                                 <div class="bt__champion-flag"><img src={{champion.flag}} alt={{champion.name}}></div>
-                                <div class="bt__champion-name">{{champion.name}}</div>
+                                <div class="bt__champion-name">{{champion.fifaCode}}</div>
                                 <div class="bt__champion-sub">{{t 'bracket.champion_sub'}}</div>
                             </div>
                         {{/if}}
@@ -238,6 +259,7 @@
                                 onPick=(action "onPick")
                                 onFocusEmpty=(action "onFocusEmpty")}}
                         {{/each}}
+                    </div>
                     </div>
                 </div>
             </div>
