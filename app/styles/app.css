@@ -4463,7 +4463,7 @@ a.wc-bracket-match__slot:hover { background: var(--accent-soft); }
 .wc-to-top {
     position: fixed;
     right: 16px;
-    bottom: 80px;
+    bottom: calc(72px + env(safe-area-inset-bottom));
     width: 44px;
     height: 44px;
     border-radius: 50%;
